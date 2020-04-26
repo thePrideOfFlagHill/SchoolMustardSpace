@@ -1,4 +1,4 @@
-package com.springboot.serviceImpl;
+package com.springboot.service.impl;
 
 import com.springboot.domain.MessageProperties;
 import com.springboot.service.FileUpAndDownService;

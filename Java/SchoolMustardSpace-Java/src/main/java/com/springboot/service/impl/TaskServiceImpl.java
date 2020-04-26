@@ -1,4 +1,4 @@
-package com.springboot.serviceImpl;
+package com.springboot.service.impl;
 
 import com.springboot.mapper.TaskMapper;
 import com.springboot.service.TaskService;
@@ -6,17 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * TaskServiceImpl
- * TODO
- * @description TaskServiceImpl 服务实现层
- * @author 221701412_theTuring
- * @version v 1.0.0
- * @since
+ * @author 会飞的大野鸡
+ * @create 2020/4/26
+ * TODO:
  */
+
 @Service
 public class TaskServiceImpl implements TaskService {
 
     @Autowired
     private TaskMapper taskMapper;
 }
-    
