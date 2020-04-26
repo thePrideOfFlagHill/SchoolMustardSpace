@@ -28,4 +28,8 @@ public class UserController {
         return userService.login(accountNumber,password);
     }
 
+    @RequestMapping(value = "/api/user/register", method = RequestMethod.POST)
+    public String register(@RequestParam(value = "accountNumber") String accountNumber, @RequestParam(value = "password")String password){
+        return userService.register(accountNumber,password);
+    }
 }

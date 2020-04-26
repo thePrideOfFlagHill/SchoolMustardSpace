@@ -12,4 +12,5 @@ import org.springframework.stereotype.Component;
  */
 public interface UserService {
     String login(String accountNumber,String password);
+    String register(String accountNumber,String password);
 }

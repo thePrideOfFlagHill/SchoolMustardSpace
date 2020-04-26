@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
  * UserServiceImpl
  * TODO
@@ -18,13 +20,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
     @Override
     public String login(String accountNumber, String password) {
         int count = userMapper.selectUserByIdAndPassword(accountNumber,password);//查询user表中账号密码相同的记录数
         if(count == 1){
+            return "succeed";
+        }
+        return "fail";
+    }
+
+    @Override
+    public String register(String accountNumber, String password) {
+        int result = userMapper.insertUser(accountNumber,password);
+        if(result == 1){
             return "succeed";
         }
         return "fail";
