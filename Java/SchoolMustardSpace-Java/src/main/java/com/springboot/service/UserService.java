@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
  * @since 2020/4/26
  */
 public interface UserService {
-    String login(String accountNumber,String password);
-    String register(String accountNumber,String password);
+    String login(String accountNumber, String password);
+    String register(String accountNumber, String password);
+    String findPassword(String accountNumber, String newPassword);
+    String changePassword(String accountNumber, String password, String newPassword);
 }
