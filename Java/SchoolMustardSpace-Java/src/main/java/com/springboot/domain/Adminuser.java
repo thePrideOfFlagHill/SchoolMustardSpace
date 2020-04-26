@@ -6,7 +6,7 @@ package com.springboot.domain;
  * @description Adminuser对应的实体类
  * @author 221701419_黄晓东
  * @version v 1.0.0
- * @since
+ * @since 2020/4/26
  */
 public class Adminuser {
     private int id;
