@@ -1,11 +1,10 @@
 package com.springboot.controller;
 
+import com.springboot.domain.User;
 import com.springboot.service.UserService;
+import com.springboot.utils.jsontool.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -24,27 +23,43 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/api/user/login", method = RequestMethod.POST)
-    public String login(@RequestParam(value = "accountNumber") String accountNumber,
+    public JsonResult login(@RequestParam(value = "accountNumber") String accountNumber,
                         @RequestParam(value = "password") String password){
-        return userService.login(accountNumber, password);
+        String msg = userService.login(accountNumber,password);
+        if(msg.equals("succeed")){
+            return JsonResult.build(200,msg,null);
+        }
+        else return JsonResult.errorMsg(msg);
     }
 
+    @ResponseBody
     @RequestMapping(value = "/api/user/register", method = RequestMethod.POST)
-    public String register(@RequestParam(value = "accountNumber") String accountNumber,
-                           @RequestParam(value = "password") String password){
-        return userService.register(accountNumber, password);
+    public JsonResult register(@RequestBody User user){
+        String msg = userService.register(user);
+        if(msg.equals("succeed")){
+            return JsonResult.build(200,msg,null);
+        }
+        else return JsonResult.errorMsg(msg);
     }
 
     @RequestMapping(value = "/api/user/find/password", method = RequestMethod.POST)
-    public String findPassword(@RequestParam(value = "accountNumber") String accountNumber,
+    public JsonResult findPassword(@RequestParam(value = "accountNumber") String accountNumber,
                                @RequestParam(value = "newPassword") String newPassword){
-        return userService.findPassword(accountNumber, newPassword);
+        String msg = userService.findPassword(accountNumber, newPassword);
+        if(msg.equals("succeed")){
+            return JsonResult.build(200,msg,null);
+        }
+        else return JsonResult.errorMsg(msg);
     }
 
     @RequestMapping(value = "/api/user/update/password", method = RequestMethod.POST)
-    public String changePassword(@RequestParam(value = "accountNumber") String accountNumber,
+    public JsonResult changePassword(@RequestParam(value = "accountNumber") String accountNumber,
                                  @RequestParam(value = "password") String password,
                                  @RequestParam(value = "newPassword") String newPassword){
-        return userService.changePassword(accountNumber, password, newPassword);
+        String msg = userService.changePassword(accountNumber, password, newPassword);
+        if(msg.equals("succeed")){
+            return JsonResult.build(200,msg,null);
+        }
+        else return JsonResult.errorMsg(msg);
     }
 }

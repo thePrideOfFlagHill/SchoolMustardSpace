@@ -26,28 +26,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public String login(String accountNumber, String password) {
         int count = userMapper.selectUserByIdAndPassword(accountNumber, password);//查询user表中账号密码相同的记录数
-        if(count == 1){
-            return "succeed";
-        }
-        return "fail";
+        return count == 1 ? "succeed" : "fail";
     }
 
     @Override
-    public String register(String accountNumber, String password) {
-        int result = userMapper.insertUser(accountNumber, password);
-        if(result == 1){
-            return "succeed";
-        }
-        return "fail";
+    public String register(User user){
+        int result = userMapper.insertUser(user);
+        return result == 1 ? "succeed" : "fail";
     }
 
     @Override
     public String findPassword(String accountNumber, String newPassword) {
         int result = userMapper.updateUserPassword(accountNumber, newPassword);
-        if(result == 1){
-            return "succeed";
-        }
-        return "fail";
+        return result == 1 ? "succeed" : "fail";
     }
 
     @Override
