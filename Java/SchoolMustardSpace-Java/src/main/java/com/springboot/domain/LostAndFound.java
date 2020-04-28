@@ -7,19 +7,19 @@ package com.springboot.domain;
  */
 
 public class LostAndFound {
-    private String id;          //标识码
-    private int userId;         //用户id
-    private String title;       //文章标题
-    private String content;     //文章内容
-    private String image;       //图片地址
-    private String label;       //标签
-    private String location;    //定位地点
-    private int isDone;         //是否做完
-    private String time;        //时间
-    private int isLost;         //为丢失还是招领
-    private int thumbUp;        //点赞数
-    private int collect;        //收藏数
-    private int comment;        //评论数
+    private String id;              //标识码
+    private int userId;             //用户id
+    private String title;           //文章标题
+    private String content;         //文章内容
+    private String image = null;    //图片地址
+    private String label;           //标签
+    private String location;        //定位地点
+    private int isDone = 0;         //是否做完
+    private String time;            //时间
+    private int isLost;             //为丢失还是招领.0为丢失，1为招领
+    private int thumbUp = 0;        //点赞数
+    private int collect = 0;        //收藏数
+    private int comment = 0;        //评论数
 
     public String getId() {
         return id;
