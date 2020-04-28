@@ -52,4 +52,17 @@ public class UserServiceImpl implements UserService {
         }
         return "fail";
     }
+
+    @Override
+    public String updateUserMessage(User user) {
+        int result = userMapper.updateUser(user);
+        return result == 1 ? "succeed" : "fail";
+    }
+
+    @Override
+    public String deleteUser(String accountNumber) {
+        int result = userMapper.deleteUserByAccountNumber(accountNumber);
+        return result == 1 ? "succeed" : "fail";
+    }
+
 }

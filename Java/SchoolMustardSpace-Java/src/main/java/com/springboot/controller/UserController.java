@@ -62,4 +62,22 @@ public class UserController {
         }
         else return JsonResult.errorMsg(msg);
     }
+
+    @RequestMapping(value = "/api/user/update", method = RequestMethod.POST)
+    public JsonResult updateUserMessage(@RequestBody User user){
+        String msg = userService.updateUserMessage(user);
+        if(msg.equals("succeed")){
+            return JsonResult.build(200,msg,null);
+        }
+        else return JsonResult.errorMsg(msg);
+    }
+
+    @RequestMapping(value = "/api/user/delete", method = RequestMethod.POST)
+    public JsonResult deleteUser(@RequestParam(value = "accountNumber") String accountNumber){
+        String msg = userService.deleteUser(accountNumber);
+        if(msg.equals("succeed")){
+            return JsonResult.build(200,msg,null);
+        }
+        else return JsonResult.errorMsg(msg);
+    }
 }

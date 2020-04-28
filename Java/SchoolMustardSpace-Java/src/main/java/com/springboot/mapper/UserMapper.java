@@ -23,7 +23,6 @@ public interface UserMapper {
     插入一条用户记录，字段只包含account_number和password
     数据库如果不存在相同的account_number则插入记录
      */
-
     @Insert("insert into user(account_number, password, sex, name, phone_number, head, address, info) " +
             "select #{accountNumber}, #{password}, #{sex}, #{name}, #{phoneNumber}, " +
             "#{head}, #{address}, #{info} where not exists " +
@@ -31,10 +30,22 @@ public interface UserMapper {
     int insertUser(User user);
 
     /*
-    更新字段accountNumber符合条件的记录的password
+    更新字段account_number符合条件的记录的password
      */
     @Update("update user set password = #{password} where account_number = #{accountNumber}")
     int updateUserPassword(@Param("accountNumber") String accountNumber, @Param("password") String password);
 
+    /*
+    更新用户记录
+     */
+    @Update("update user set account_number = #{accountNumber}, password = #{password}, sex = #{sex}," +
+            "name = #{name}, phone_number = #{phoneNumber}, head = {head}, address = #{address}, info = #{info}" +
+            "where account_number = #{accountNumber}")
+    int updateUser(User user);
 
+    /*
+    删除字段account_number符合条件的记录
+     */
+    @Delete("delete from user where account_number = #{accountNumber}")
+    int deleteUserByAccountNumber(@Param("accountNumber") String accountNumber);
 }
