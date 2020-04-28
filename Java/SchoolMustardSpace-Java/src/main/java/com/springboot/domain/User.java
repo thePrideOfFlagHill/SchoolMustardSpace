@@ -1,5 +1,7 @@
 package com.springboot.domain;
 
+import javax.persistence.Column;
+
 /**
  * User
  * TODO
@@ -10,13 +12,21 @@ package com.springboot.domain;
  */
 public class User {
     private int id;
+
     private String accountNumber;//用户账号
+
     private String password;//用户密码
+
     private int sex;//性别
+
     private String name;//姓名
+
     private String phoneNumber;//手机号
+
     private String head;//头像
+
     private String address;//地址
+
     private String info;//详细信息
 
     public int getId() {

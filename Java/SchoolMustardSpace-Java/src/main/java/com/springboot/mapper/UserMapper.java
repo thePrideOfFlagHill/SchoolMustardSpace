@@ -41,7 +41,7 @@ public interface UserMapper {
     更新用户记录
      */
     @Update("update user set account_number = #{accountNumber}, password = #{password}, sex = #{sex}," +
-            "name = #{name}, phone_number = #{phoneNumber}, head = {head}, address = #{address}, info = #{info}" +
+            " name = #{name}, phone_number = #{phoneNumber}, head = #{head}, address = #{address}, info = #{info} " +
             "where account_number = #{accountNumber}")
     int updateUser(User user);
 
@@ -54,6 +54,20 @@ public interface UserMapper {
     /*
     查询user表中全部的用户信息
      */
-    @Select("select * from user")
+    @Select("select id, account_number, password, sex, name, phone_number, head, address, info from user")
+    @Results(value = {
+            @Result(column = "account_number", property = "accountNumber"),
+            @Result(column = "phone_number", property = "phoneNumber")
+    })
     ArrayList<User> selectAllUser();
+
+    /*
+    查询user表中指定account_number的记录
+     */
+    @Select("select * from user where account_number = #{accountNumber}")
+    @Results(value = {
+            @Result(column = "account_number", property = "accountNumber"),
+            @Result(column = "phone_number", property = "phoneNumber")
+    })
+    User selectUserByAccountNumber(@Param("accountNumber") String accountNumber);
 }

@@ -85,7 +85,16 @@ public class UserController {
     @RequestMapping(value = "/query/all", method = RequestMethod.GET)
     public JsonResult queryAllUser(){
         Object data = userService.queryAllUser();
-        if(userService.queryAllUser() != null){
+        if(data != null){
+            return JsonResult.build(200,"succeed", data);
+        }
+        else return JsonResult.errorMsg("fail");
+    }
+
+    @RequestMapping(value = "/query/accountNumber/{accountNumber}", method = RequestMethod.GET)
+    public JsonResult queryOneUser(@PathVariable(value = "accountNumber") String accountNumber){
+        Object data = userService.queryOneUser(accountNumber);
+        if(data != null){
             return JsonResult.build(200,"succeed", data);
         }
         else return JsonResult.errorMsg("fail");

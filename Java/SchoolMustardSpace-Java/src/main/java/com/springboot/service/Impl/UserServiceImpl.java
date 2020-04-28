@@ -71,4 +71,9 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectAllUser();
     }
 
+    @Override
+    public User queryOneUser(String accountNumber) {
+        return userMapper.selectUserByAccountNumber(accountNumber);
+    }
+
 }

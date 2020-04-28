@@ -21,4 +21,5 @@ public interface UserService {
     String updateUserMessage(User user);
     String deleteUser(String accountNumber);
     ArrayList<User> queryAllUser();
+    User queryOneUser(String accountNumber);
 }
