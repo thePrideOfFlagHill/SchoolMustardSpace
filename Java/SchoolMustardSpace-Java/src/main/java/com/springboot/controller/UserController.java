@@ -81,4 +81,13 @@ public class UserController {
         }
         else return JsonResult.errorMsg(msg);
     }
+
+    @RequestMapping(value = "/query/all", method = RequestMethod.GET)
+    public JsonResult queryAllUser(){
+        Object data = userService.queryAllUser();
+        if(userService.queryAllUser() != null){
+            return JsonResult.build(200,"succeed", data);
+        }
+        else return JsonResult.errorMsg("fail");
+    }
 }

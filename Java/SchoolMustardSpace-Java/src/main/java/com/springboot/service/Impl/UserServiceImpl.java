@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 
 /**
  * UserServiceImpl
@@ -63,6 +64,11 @@ public class UserServiceImpl implements UserService {
     public String deleteUser(String accountNumber) {
         int result = userMapper.deleteUserByAccountNumber(accountNumber);
         return result == 1 ? "succeed" : "fail";
+    }
+
+    @Override
+    public ArrayList<User> queryAllUser() {
+        return userMapper.selectAllUser();
     }
 
 }

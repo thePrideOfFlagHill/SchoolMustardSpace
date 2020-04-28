@@ -3,6 +3,8 @@ package com.springboot.mapper;
 import com.springboot.domain.User;
 import org.apache.ibatis.annotations.*;
 
+import java.util.ArrayList;
+
 /**
  * UserMapper
  * TODO
@@ -48,4 +50,10 @@ public interface UserMapper {
      */
     @Delete("delete from user where account_number = #{accountNumber}")
     int deleteUserByAccountNumber(@Param("accountNumber") String accountNumber);
+
+    /*
+    查询user表中全部的用户信息
+     */
+    @Select("select * from user")
+    ArrayList<User> selectAllUser();
 }

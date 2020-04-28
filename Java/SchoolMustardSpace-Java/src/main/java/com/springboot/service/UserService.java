@@ -3,6 +3,8 @@ package com.springboot.service;
 import com.springboot.domain.User;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+
 /**
  * TaskService
  * TODO
@@ -18,4 +20,5 @@ public interface UserService {
     String changePassword(String accountNumber, String password, String newPassword);
     String updateUserMessage(User user);
     String deleteUser(String accountNumber);
+    ArrayList<User> queryAllUser();
 }
