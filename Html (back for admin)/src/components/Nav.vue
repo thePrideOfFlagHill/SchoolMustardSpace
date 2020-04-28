@@ -1,35 +1,38 @@
 <template>
-  <nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-    <div class="navbar-header pull-left">
-        <a class="navbar-brand" href="#">后台</a>
-    </div>
-    <div class="pull-right">
-        <ul class="nav navbar-nav">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <label id='user'>用户</label>
-                    <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">jmeter</a></li>
-                    <li><a href="#">EJB</a></li>
-                    <li><a href="#">Jasper Report</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">分离的链接</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">另一个分离的链接</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    </div>
-  </nav>
+  <div>
+    <el-menu
+      class="el-menu-demo"
+      mode="horizontal"
+      background-color="#545c64"
+      text-color="#fff"
+      active-text-color="#ffd04b"
+    >
+      <el-menu-item index="1">处理中心</el-menu-item>
+      <el-menu-item index="2">
+        <a href="https://www.ele.me" target="_blank">订单管理</a>
+      </el-menu-item>
+      <el-menu-item index="3" style="float:right;" disabled>消息中心</el-menu-item>
+      <el-submenu index="4" style="float:right;">
+        <template slot="title">用户</template>
+        <el-menu-item index="4-1">选项1</el-menu-item>
+        <el-menu-item index="4-2">选项2</el-menu-item>
+        <el-menu-item index="4-3">选项3</el-menu-item>
+        <el-submenu index="4-4">
+          <template slot="title">选项4</template>
+          <el-menu-item index="4-4-1">选项1</el-menu-item>
+          <el-menu-item index="4-4-2">选项2</el-menu-item>
+          <el-menu-item index="4-4-3">选项3</el-menu-item>
+        </el-submenu>
+      </el-submenu>
+    </el-menu>
+  </div>
 </template>
 
 <script>
-
 export default {
   name: 'Nav'
 }
 </script>
+
+<style scoped>
+</style>

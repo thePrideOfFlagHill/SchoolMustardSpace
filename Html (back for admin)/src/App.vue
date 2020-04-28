@@ -1,30 +1,51 @@
 <template>
-  <div id="app">
-    <Nav></Nav>
-    <div id="slide" class="col-xs-2">
-      <ul id="slideNav" class="nav">
-        <li><router-link to="/overview">概览</router-link></li>
-        <hr/>
-        <li><router-link to="/manageTask">任务管理</router-link></li>
-      </ul>
-    </div>
-    <div class="col-xs-1"></div>
-    <router-view class="col-xs-8" />
-  </div>
+  <el-container id="app">
+    <el-header>
+      <Nav></Nav>
+    </el-header>
+    <el-container>
+      <el-aside style="height:100%;overflow:hidden;">
+        <slideNav></slideNav>
+      </el-aside>
+      <el-main style="padding:0;">
+        <el-container>
+          <el-header class="bread">
+            <crumb></crumb>
+          </el-header>
+          <el-main>
+            <router-view />
+          </el-main>
+        </el-container>
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 
 <script>
 import Nav from '@/components/Nav.vue'
+import crumb from '@/components/crumb.vue'
 
 export default {
   name: 'main',
   components: {
-    Nav
+    Nav,
+    crumb,
+    slideNav: () => import('./components/slideNav.vue')
   }
 }
 </script>
 
 <style>
+body {
+  margin: 0;
+}
+.el-header {
+  padding: 0 !important;
+}
+.bread{
+  border: 1px solid black;
+  margin: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -47,20 +68,19 @@ export default {
   color: #42b983;
 }
 
-#slideNav{
+#slideNav {
   margin: 0;
   background-color: white;
 }
 
-hr{
+hr {
   -moz-border-bottom-colors: none;
   -moz-border-left-colors: none;
   -moz-border-right-colors: none;
   -moz-border-top-colors: none;
-  border-color: #EEEEEE -moz-use-text-color #FFFFFF;
+  border-color: #eeeeee -moz-use-text-color #ffffff;
   border-style: solid none;
   border-width: 1px 0;
   margin: 0px 0;
 }
-
 </style>

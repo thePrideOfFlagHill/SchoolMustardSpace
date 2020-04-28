@@ -10,11 +10,14 @@ const routes = [
   {
     path: '/overview',
     name: 'overview',
+    meta: { title: '概览' },
     component: overview
   },
   {
     path: '/manageTask',
     name: 'manageTask',
+    redirect: '/manageTask/itemPage',
+    meta: { title: '任务管理' },
     component: () => import('../views/manageTask.vue'),
     children: sonTask
   }
