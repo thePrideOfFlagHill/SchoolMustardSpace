@@ -18,11 +18,12 @@ import javax.annotation.Resource;
  * @since 2020.4.26
  */
 @RestController
+@RequestMapping(value = "/api/user")
 public class UserController {
     @Resource
     private UserService userService;
 
-    @RequestMapping(value = "/api/user/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public JsonResult login(@RequestParam(value = "accountNumber") String accountNumber,
                         @RequestParam(value = "password") String password){
         String msg = userService.login(accountNumber,password);
@@ -33,7 +34,7 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/api/user/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public JsonResult register(@RequestBody User user){
         String msg = userService.register(user);
         if(msg.equals("succeed")){
@@ -42,7 +43,7 @@ public class UserController {
         else return JsonResult.errorMsg(msg);
     }
 
-    @RequestMapping(value = "/api/user/find/password", method = RequestMethod.POST)
+    @RequestMapping(value = "/find/password", method = RequestMethod.POST)
     public JsonResult findPassword(@RequestParam(value = "accountNumber") String accountNumber,
                                @RequestParam(value = "newPassword") String newPassword){
         String msg = userService.findPassword(accountNumber, newPassword);
@@ -52,7 +53,7 @@ public class UserController {
         else return JsonResult.errorMsg(msg);
     }
 
-    @RequestMapping(value = "/api/user/update/password", method = RequestMethod.POST)
+    @RequestMapping(value = "/update/password", method = RequestMethod.POST)
     public JsonResult changePassword(@RequestParam(value = "accountNumber") String accountNumber,
                                  @RequestParam(value = "password") String password,
                                  @RequestParam(value = "newPassword") String newPassword){
@@ -63,7 +64,7 @@ public class UserController {
         else return JsonResult.errorMsg(msg);
     }
 
-    @RequestMapping(value = "/api/user/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public JsonResult updateUserMessage(@RequestBody User user){
         String msg = userService.updateUserMessage(user);
         if(msg.equals("succeed")){
@@ -72,7 +73,7 @@ public class UserController {
         else return JsonResult.errorMsg(msg);
     }
 
-    @RequestMapping(value = "/api/user/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public JsonResult deleteUser(@RequestParam(value = "accountNumber") String accountNumber){
         String msg = userService.deleteUser(accountNumber);
         if(msg.equals("succeed")){
