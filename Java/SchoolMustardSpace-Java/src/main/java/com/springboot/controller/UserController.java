@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 /**
  * UserController
  * TODO
- * @description
+ * @description 所有有关用户操作的接口
  *
  * @author 221701429_黄晓东
  * @version v 1.0.0
