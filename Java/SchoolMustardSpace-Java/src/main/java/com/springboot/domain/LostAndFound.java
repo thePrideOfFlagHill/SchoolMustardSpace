@@ -21,6 +21,25 @@ public class LostAndFound {
     private int collect = 0;        //收藏数
     private int comment = 0;        //评论数
 
+    @Override
+    public String toString() {
+        return "LostAndFound{" +
+                "id='" + id + '\'' +
+                ", userId=" + userId +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", image='" + image + '\'' +
+                ", label='" + label + '\'' +
+                ", location='" + location + '\'' +
+                ", isDone=" + isDone +
+                ", time='" + time + '\'' +
+                ", isLost=" + isLost +
+                ", thumbUp=" + thumbUp +
+                ", collect=" + collect +
+                ", comment=" + comment +
+                '}';
+    }
+
     public String getId() {
         return id;
     }
