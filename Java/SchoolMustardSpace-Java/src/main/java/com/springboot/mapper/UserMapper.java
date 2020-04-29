@@ -22,8 +22,7 @@ public interface UserMapper {
     int selectUserByIdAndPassword(@Param("accountNumber") String accountNumber, @Param("password") String password );
 
     /*
-    插入一条用户记录，字段只包含account_number和password
-    数据库如果不存在相同的account_number则插入记录
+    插入一条用户记录，数据库如果不存在相同的account_number则插入记录
      */
     @Insert("insert into user(account_number, password, sex, name, phone_number, head, address, info) " +
             "select #{accountNumber}, #{password}, #{sex}, #{name}, #{phoneNumber}, " +
