@@ -19,14 +19,14 @@ public interface AdminuserMapper {
     查询数据库中是否存在与account_number和password一致的记录
      */
     @Select("select COUNT(*) from adminuser where account_number = #{accountNumber} and password = #{password}")
-    int selectAdminuserByIdAndPassword(@Param("accountNumber") String accountNumber, @Param("password") String password);
+    int selectAdminuserByAccountNumberAndPassword(@Param("accountNumber") String accountNumber, @Param("password") String password);
 
     /*
     插入一条管理员记录,数据库如果不存在相同的account_number则插入记录
      */
     @Insert("insert into adminuser(account_number, password, authority) " +
             "select #{accountNumber}, #{password}, #{authority}" +
-            " where not exists (select * from user where account_number = #{accountNumber})")
+            " where not exists (select * from adminuser where account_number = #{accountNumber})")
     int insertAdminuser(Adminuser adminuser);
 
     /*
@@ -38,7 +38,7 @@ public interface AdminuserMapper {
     /*
     更新管理员记录
      */
-    @Update("update adminuser set account_number = #{accountNumber}, password = #{password}, authority = #{authority}," +
+    @Update("update adminuser set account_number = #{accountNumber}, password = #{password}, authority = #{authority} " +
             "where account_number = #{accountNumber}")
     int updateAdminuser(Adminuser adminuser);
 

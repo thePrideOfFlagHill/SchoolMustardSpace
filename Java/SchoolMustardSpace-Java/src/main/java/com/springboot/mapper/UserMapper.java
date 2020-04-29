@@ -19,7 +19,7 @@ public interface UserMapper {
     查询数据库中是否存在与account_number和password一致的记录
      */
     @Select("select COUNT(*) from user where account_number = #{accountNumber} and password = #{password}")
-    int selectUserByIdAndPassword(@Param("accountNumber") String accountNumber, @Param("password") String password );
+    int selectUserByAccountNumberAndPassword(@Param("accountNumber") String accountNumber, @Param("password") String password );
 
     /*
     插入一条用户记录，数据库如果不存在相同的account_number则插入记录

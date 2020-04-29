@@ -33,7 +33,6 @@ public class UserController {
         else return JsonResult.errorMsg(msg);
     }
 
-    @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public JsonResult register(@RequestBody User user){
         String msg = userService.register(user);

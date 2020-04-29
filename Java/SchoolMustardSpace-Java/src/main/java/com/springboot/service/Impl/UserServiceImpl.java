@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String login(String accountNumber, String password) {
-        int count = userMapper.selectUserByIdAndPassword(accountNumber, password);//查询user表中账号密码相同的记录数
+        int count = userMapper.selectUserByAccountNumberAndPassword(accountNumber, password);//查询user表中账号密码相同的记录数
         return count == 1 ? "succeed" : "fail";
     }
 
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String changePassword(String accountNumber, String password, String newPassword) {
-        int count = userMapper.selectUserByIdAndPassword(accountNumber, password);
+        int count = userMapper.selectUserByAccountNumberAndPassword(accountNumber, password);
         if(count == 1){
             int result = userMapper.updateUserPassword(accountNumber, newPassword);
             if(result == 1){
