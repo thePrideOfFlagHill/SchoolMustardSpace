@@ -52,10 +52,16 @@ public interface LostAndFoundMapper {
     //=================================== 查 ======================================
     @Select("select * from lost_and_found")
     List<LostAndFound> getAllLostAndFound();
+
+    @Select("select * from lost_and_found where id = #{id}")
+    LostAndFound getLostAndFoundById(@Param("id")String id);
+
+    @Select("select * from lost_and_found where userId = #{userId}")
+    LostAndFound getListAndFoundByUserId(@Param("userId")int userId);
     //=================================== 查 ======================================
 
     //=================================== 删 ======================================
     @Delete("delete from lost_and_found where id = #{id}")
-    public int deleteById(@Param("id") int id);
+    public int deleteById(@Param("id") String id);
     //=================================== 删 ======================================
 }

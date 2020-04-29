@@ -6,6 +6,8 @@ import com.springboot.service.LostAndFoundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author 会飞的大野鸡
  * @create 2020/4/26
@@ -33,6 +35,24 @@ public class LostAndFoundServiceImpl implements LostAndFoundService {
         }
         if (choice == 4){
             return lostAndFoundMapper.updateComment(uuid) == 1 ? "succeed" : "fail";
+        }
+        return null;
+    }
+
+    public String deleteById(String id){
+        return lostAndFoundMapper.deleteById(id) == 1 ? "succeed" : "fail";
+    }
+
+    public List<LostAndFound> selectAll(){
+        return lostAndFoundMapper.getAllLostAndFound();
+    }
+
+    public LostAndFound selectByReason(int choice , String id , int userId){
+        if (choice == 1){
+            return lostAndFoundMapper.getLostAndFoundById(id);
+        }
+        if (choice == 2){
+            return lostAndFoundMapper.getListAndFoundByUserId(userId);
         }
         return null;
     }

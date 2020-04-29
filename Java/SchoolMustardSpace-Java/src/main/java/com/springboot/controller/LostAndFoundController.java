@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -108,23 +110,32 @@ public class LostAndFoundController {
     }
 
     @PostMapping("/delete")
-    public JsonResult delete(){
-        return null;
+    public JsonResult delete(@Param("id")String id){
+        String msg = lostAndFoundService.deleteById(id);
+
+        if(msg.equals("succeed")){
+            return JsonResult.build(200,msg,null);
+        }
+        else return JsonResult.errorMsg(msg);
     }
 
     @GetMapping("/query/all")
     public JsonResult queryAll(){
-        return null;
+        List<LostAndFound> lostAndFoundList = new LinkedList<LostAndFound>();
+        lostAndFoundList = lostAndFoundService.selectAll();
+        return JsonResult.build(200 , "succeed" , lostAndFoundList);
     }
 
     @GetMapping("/query/id")
-    public JsonResult queryId(){
-        return null;
+    public JsonResult queryId(@Param("id")String id){
+        LostAndFound lostAndFound = lostAndFoundService.selectByReason(1 , id , 0);
+        return JsonResult.build(200 , "succeed" , lostAndFound);
     }
 
     @GetMapping("/query/userId")
-    public JsonResult queryUserId(){
-        return null;
+    public JsonResult queryUserId(@Param("id")int userId){
+        LostAndFound lostAndFound = lostAndFoundService.selectByReason(1 , null , userId);
+        return JsonResult.build(200 , "succeed" , lostAndFound);
     }
 
 
