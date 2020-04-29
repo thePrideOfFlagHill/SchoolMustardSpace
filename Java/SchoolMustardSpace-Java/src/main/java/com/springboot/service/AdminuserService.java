@@ -1,5 +1,8 @@
 package com.springboot.service;
 
+import com.springboot.domain.Adminuser;
+import java.util.ArrayList;
+
 /**
  * AdminuserService
  * TODO
@@ -9,4 +12,12 @@ package com.springboot.service;
  * @since 2020/4/29
  */
 public interface AdminuserService {
+    String login(String accountNumber, String password);
+    String register(Adminuser adminuser);
+    String findPassword(String accountNumber, String newPassword);
+    String changePassword(String accountNumber, String password, String newPassword);
+    String updateUserMessage(Adminuser adminuser);
+    String deleteAdminuser(String accountNumber);
+    ArrayList<Adminuser> queryAllAdminuser();
+    Adminuser queryOneAdminuser(String accountNumber);
 }

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 @Mapper
 public interface UserMapper {
     /*
-    查询数据库中是否存在与id和password一致的记录
+    查询数据库中是否存在与account_number和password一致的记录
      */
     @Select("select COUNT(*) from user where account_number = #{accountNumber} and password = #{password}")
     int selectUserByIdAndPassword(@Param("accountNumber") String accountNumber, @Param("password") String password );

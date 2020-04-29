@@ -1,8 +1,6 @@
 package com.springboot.service;
 
 import com.springboot.domain.User;
-import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 
 /**
