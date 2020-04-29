@@ -16,7 +16,7 @@
         <i class="el-icon-document"></i>
         <span slot="title">任务管理</span>
       </el-menu-item>
-      <el-menu-item index="/index/PayList">
+      <el-menu-item index="/manageLease/itemPage">
         <i class="el-icon-document"></i>
         <span slot="title">租赁管理</span>
       </el-menu-item>
@@ -28,7 +28,7 @@
         <i class="el-icon-document"></i>
         <span slot="title">用户列表</span>
       </el-menu-item>
-      <el-menu-item index="/test">
+      <el-menu-item index="/manageAdmin/itemPage">
         <i class="el-icon-star-on"></i>
         <span slot="title">管理员</span>
       </el-menu-item>
@@ -43,5 +43,14 @@ export default {
 </script>
 
 <style scoped>
-
+.el-aside {
+  width: 20px;
+  height: 100%;
+}
+.el-aside > div {
+  height: 100%;
+}
+.el-menu {
+  height: 100%;
+}
 </style>

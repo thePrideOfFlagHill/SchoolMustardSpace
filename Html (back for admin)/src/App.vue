@@ -4,7 +4,7 @@
       <Nav></Nav>
     </el-header>
     <el-container>
-      <el-aside style="height:100%;overflow:hidden;">
+      <el-aside style="overflow:hidden;" width="200px">
         <slideNav></slideNav>
       </el-aside>
       <el-main style="padding:0;">
@@ -36,14 +36,17 @@ export default {
 </script>
 
 <style>
+html {
+  height: 100%;
+}
 body {
   margin: 0;
+  height: 100%;
 }
 .el-header {
   padding: 0 !important;
 }
-.bread{
-  border: 1px solid black;
+.bread {
   margin: 0;
 }
 #app {
@@ -52,6 +55,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height: 100%;
 }
 
 #slide {

@@ -41,6 +41,8 @@ export default {
   display: flex;
   align-items: center;
   height: 100%;
+  width: 100%;
   margin: 0;
+  border-bottom:1px solid gray ;
 }
 </style>

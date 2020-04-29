@@ -37,16 +37,6 @@
         </el-table-column>
       </el-table>
     </el-main>
-    <el-footer>
-      <el-pagination
-       background
-      layout="prev, pager, next"
-      :total='totalPage'
-      :current-page='currentPage'
-      :page-size='10'
-      @prev-click='prev'
-      @next-click='next'></el-pagination>
-    </el-footer>
   </el-container>
 </template>
 
@@ -54,8 +44,6 @@
 export default {
   data () {
     return {
-      currentPage: 3, // 当前页数
-      totalPage: 1000, // 总页数
       tableData: [
         {
           name: '名字',
@@ -83,19 +71,11 @@ export default {
     // 点击跳转到详细页面（带id参数）
     goDetail (id) {
       this.$router.push({
-        path: '/manageTask/detail',
+        path: '/manageAdmin/detail',
         query: {
           id: id
         }
       })
-    },
-    // 翻到上一页
-    prev () {
-
-    },
-    // 翻到下一页
-    next () {
-
     }
   },
   watch: {
@@ -111,4 +91,7 @@ export default {
 </script>
 
 <style scoped>
+.el-table {
+  margin-top: 20px;
+}
 </style>
