@@ -4,10 +4,7 @@ import com.springboot.domain.Task;
 import com.springboot.service.TaskService;
 import com.springboot.utils.jsontool.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,7 +36,7 @@ public class GetController {
      * @version v 1.0.0
      * @since 2020.4.27
      */
-    @RequestMapping("task/query/all")
+    @RequestMapping(value = "task/query/all", method = RequestMethod.GET)
     public JsonResult queryTaskAll() {
 
         List<Task> list = this.taskService.getAllTask();
@@ -56,7 +53,7 @@ public class GetController {
      * @version v 1.0.0
      * @since 2020.4.27
      */
-    @RequestMapping("query/task/id/{id}")
+    @RequestMapping(value = "query/task/id/{id}", method = RequestMethod.GET)
     public JsonResult queryTaskById(@PathVariable String id) {
 
         Task task = this.taskService.queryTaskById(id);
@@ -73,7 +70,7 @@ public class GetController {
      * @version v 1.0.0
      * @since 2020.4.27
      */
-    @RequestMapping("query/user_id/{user_id}")
+    @RequestMapping(value = "query/user_id/{user_id}", method = RequestMethod.GET)
     public JsonResult queryTaskByUserId(@PathVariable String user_id) {
 
         List<Task> list = this.taskService.queryTaskByUserId(user_id);

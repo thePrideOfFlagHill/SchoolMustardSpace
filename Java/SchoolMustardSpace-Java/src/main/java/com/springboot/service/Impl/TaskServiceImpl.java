@@ -3,6 +3,7 @@ package com.springboot.service.Impl;
 import com.springboot.domain.Task;
 import com.springboot.mapper.TaskMapper;
 import com.springboot.service.TaskService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +48,62 @@ public class TaskServiceImpl implements TaskService {
         return list;
     }
 
+    @Override
+    public int insertTask(Task task){
 
+        int temp = this.taskMapper.insertTask(task);
+
+        return temp;
+
+    }
+
+    @Override
+    public int updateTask(Task task){
+
+        int temp = this.taskMapper.updateTask(task);
+
+        return temp;
+    }
+
+    @Override
+    public int updateTaskIs_done(@Param("is_done") int is_done, @Param("id") String id){
+
+        int temp = this.taskMapper.updateTaskIs_done(is_done,id);
+
+        return temp;
+    }
+
+    @Override
+    public int updateTaskThumb(String id){
+
+        int temp = this.taskMapper.updateTaskThumb(id);
+
+        return temp;
+    }
+
+    @Override
+    public int updateTaskCollect(String id){
+
+        int temp = this.taskMapper.updateTaskCollect(id);
+
+        return temp;
+    }
+
+    @Override
+    public int updateTaskComment(String id){
+
+        int temp = this.taskMapper.updateTaskComment(id);
+
+        return temp;
+    }
+
+    @Override
+    public int deleteTask(String id){
+
+        int temp = this.taskMapper.deleteTask(id);
+
+        return temp;
+    }
 
 }
     

@@ -1,6 +1,7 @@
 package com.springboot.service;
 
 import com.springboot.domain.Task;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,5 +20,19 @@ public interface TaskService {
     Task queryTaskById(String id);
 
     List<Task> queryTaskByUserId(String user_id);
+
+    int insertTask(Task task);
+
+    int updateTask(Task task);
+
+    int updateTaskIs_done(@Param("is_done") int is_done, @Param("id") String id);
+
+    int updateTaskThumb(String id);
+
+    int updateTaskCollect(String id);
+
+    int updateTaskComment(String id);
+
+    int deleteTask(String id);
 
 }

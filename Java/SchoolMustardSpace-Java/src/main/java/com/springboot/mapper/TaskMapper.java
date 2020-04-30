@@ -1,8 +1,7 @@
 package com.springboot.mapper;
 
 import com.springboot.domain.Task;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -28,5 +27,49 @@ public interface TaskMapper {
     //按上传者的owner_id查询具体任务
     @Select("SELECT * FROM task WHERE user_id =#{user_id}")
     List<Task> queryTaskByUserId(String user_id);
+
+    //发布插入任务
+    @Insert("INSERT INTO task (id, user_id, title, content, image, label, location, is_done, reword, start_time, end_time, thumb_up, collect, comment) "
+            + "VALUES (#{id}, #{user_id}, #{title}, #{content}, #{image}, #{label}, #{location}, #{is_done}, #{reword}, #{start_time}, #{end_time}, #{thumb_up}, #{collect}, #{comment})")
+    int insertTask(Task task);
+
+    //更新任务信息
+    @Update("UPDATE task SET " +
+            "user_id=#{user_id}, " +
+            "title=#{title}, " +
+            "content=#{content}, " +
+            "image=#{image}, " +
+            "label=#{label}, " +
+            "location=#{location}, " +
+            "is_done=#{is_done}, " +
+            "reword=#{reword}, " +
+            "start_time=#{start_time}, " +
+            "end_time=#{end_time}, " +
+            "thumb_up=#{thumb_up}, " +
+            "collect=#{collect}, " +
+            "comment=#{comment} " +
+            "WHERE id=#{id}")
+    int updateTask(Task task);
+
+    //更新任务解决状态
+    @Update("UPDATE task SET `is_done`=#{is_done} WHERE id=#{id}")
+    int updateTaskIs_done(@Param("is_done") int is_done, @Param("id") String id);
+
+    //更新任务 点赞数+1
+    @Update("UPDATE task SET thumb_up = thumb_up + 1 WHERE id=#{id}")
+    int updateTaskThumb(String id);
+
+    //更新任务 收藏数+1
+    @Update("UPDATE task SET collect = collect + 1 WHERE id=#{id}")
+    int updateTaskCollect(String id);
+
+    //更新任务 评论数+1
+    @Update("UPDATE task SET comment = comment + 1 WHERE id=#{id}")
+    int updateTaskComment(String id);
+
+    //删除任务
+    @Delete("delete from task where id = #{id}")
+    int deleteTask(String id);
+
 }
     

@@ -44,13 +44,13 @@ public class Task {
     private String end_time;
 
     //点赞数
-    private String thumb_up;
+    private int thumb_up;
 
     //收藏数
-    private String collect;
+    private int collect;
 
     //评论数
-    private String comment;
+    private int comment;
 
     public String getId() {
         return id;
@@ -140,27 +140,27 @@ public class Task {
         this.end_time = end_time;
     }
 
-    public String getThumb_up() {
+    public int getThumb_up() {
         return thumb_up;
     }
 
-    public void setThumb_up(String thumb_up) {
+    public void setThumb_up(int thumb_up) {
         this.thumb_up = thumb_up;
     }
 
-    public String getCollect() {
+    public int getCollect() {
         return collect;
     }
 
-    public void setCollect(String collect) {
+    public void setCollect(int collect) {
         this.collect = collect;
     }
 
-    public String getComment() {
+    public int getComment() {
         return comment;
     }
 
-    public void setComment(String comment) {
+    public void setComment(int comment) {
         this.comment = comment;
     }
 }
