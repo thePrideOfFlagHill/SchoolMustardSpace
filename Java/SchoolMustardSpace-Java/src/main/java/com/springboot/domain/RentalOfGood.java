@@ -3,7 +3,8 @@ package com.springboot.domain;
 /**
  * @author 会飞的大野鸡
  * @create 2020/4/26
- * TODO:物品租赁的pojo类
+ * @description:物品租赁的pojo类
+ * TODO:
  */
 
 public class RentalOfGood {

@@ -15,6 +15,7 @@ import java.util.UUID;
 /**
  * @author 会飞的大野鸡
  * @create 2020/4/29
+ * @description:失物招领类控制层
  * TODO:
  */
 
@@ -36,12 +37,9 @@ public class LostAndFoundController {
         lostAndFound.setImage(a.get("image").toString());
         lostAndFound.setLabel(a.get("label").toString());
         lostAndFound.setLocation(a.get("location").toString());
-        lostAndFound.setIsDone(Integer.parseInt(a.get("isDone")));
+
         lostAndFound.setTime(a.get("time").toString());
         lostAndFound.setIsLost(Integer.parseInt(a.get("isLost")));
-        lostAndFound.setThumbUp(Integer.parseInt(a.get("thumbUp")));
-        lostAndFound.setCollect(Integer.parseInt(a.get("collect")));
-        lostAndFound.setComment(Integer.parseInt(a.get("comment")));
 
         String msg = lostAndFoundService.insertLostAndFound(lostAndFound);
         if(msg.equals("succeed")){

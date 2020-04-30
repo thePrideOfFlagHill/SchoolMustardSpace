@@ -1,14 +1,73 @@
 package com.springboot.service.impl;
 
+import com.springboot.domain.LostAndFound;
+import com.springboot.domain.RentalOfGood;
+import com.springboot.mapper.RentalOfGoodMapper;
+import com.springboot.service.RentalOfGoodService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author 会飞的大野鸡
  * @create 2020/4/26
+ * @description:物品租赁impl层
  * TODO:
  */
 
 @Service
-public class RentalOfGoodServiceImpl {
+public class RentalOfGoodServiceImpl implements RentalOfGoodService {
+    @Autowired
+    private RentalOfGoodMapper rentalOfGoodMapper;
 
+    public String insertRentalOfGood(RentalOfGood rentalOfGood){
+        return rentalOfGoodMapper.insertInfo(rentalOfGood) == 1 ? "succeed" : "fail";
+    }
+
+    public String updateSome(int choice , String id){
+        if (choice == 1){
+            return rentalOfGoodMapper.updateDone(id) == 1 ? "succeed" : "fail";
+        }
+        if (choice == 2){
+            return rentalOfGoodMapper.updateThumbUp(id) == 1 ? "succeed" : "fail";
+        }
+        if (choice == 3){
+            return rentalOfGoodMapper.updateCollect(id) == 1 ? "succeed" : "fail";
+        }
+        if (choice == 4){
+            return rentalOfGoodMapper.updateComment(id) == 1 ? "succeed" : "fail";
+        }
+        return null;
+    }
+
+    public String deleteById(String id){
+        return rentalOfGoodMapper.deleteById(id) == 1 ? "succeed" : "fail";
+    }
+
+    public List<RentalOfGood> selectList(int choice , int userId){
+        if (choice == 1) {
+            return rentalOfGoodMapper.getAllRental();
+        }else
+            return rentalOfGoodMapper.getRentalByUserId(userId);
+
+    }
+
+    public RentalOfGood selectOne(String id){
+        return rentalOfGoodMapper.getRentalById(id);
+    }
+
+    public List<RentalOfGood> selectLike(int choice , String text){
+
+        if (choice == 1)
+            return rentalOfGoodMapper.getLikeTitle(text);
+
+        if (choice == 2)
+            return rentalOfGoodMapper.getLikeContent(text);
+
+        if (choice == 3)
+            return rentalOfGoodMapper.getLikeLabel(text);
+
+        return null;
+    }
 }

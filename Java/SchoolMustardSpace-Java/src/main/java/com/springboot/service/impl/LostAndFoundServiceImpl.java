@@ -11,6 +11,7 @@ import java.util.List;
 /**
  * @author 会飞的大野鸡
  * @create 2020/4/26
+ * @description:失物招领impl层
  * TODO:
  */
 
@@ -47,7 +48,7 @@ public class LostAndFoundServiceImpl implements LostAndFoundService {
         if (choice == 1) {
             return lostAndFoundMapper.getAllLostAndFound();
         }else
-            return lostAndFoundMapper.getListAndFoundByUserId(userId);
+            return lostAndFoundMapper.getLostAndFoundByUserId(userId);
 
     }
 

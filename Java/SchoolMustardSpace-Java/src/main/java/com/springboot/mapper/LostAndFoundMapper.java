@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * @author 会飞的大野鸡
  * @create 2020/4/26
+ * @description:失物招领dao层
  * TODO:
  */
 
@@ -59,7 +60,7 @@ public interface LostAndFoundMapper {
     LostAndFound getLostAndFoundById(@Param("id")String id);
 
     @Select("select * from lost_and_found where user_id = #{userId}")
-    List<LostAndFound> getListAndFoundByUserId(@Param("userId")int userId);
+    List<LostAndFound> getLostAndFoundByUserId(@Param("userId")int userId);
 
     @Select("select * from lost_and_found where content like concat('%' , #{text} , '%')")
     List<LostAndFound> getLikeContent(@Param("text")String text);

@@ -3,7 +3,8 @@ package com.springboot.domain;
 /**
  * @author 会飞的大野鸡
  * @create 2020/4/26
- * TODO:失物招领的pojo类
+ * @description:失物招领pojo类
+ * TODO:
  */
 
 public class LostAndFound {
