@@ -29,15 +29,15 @@ public interface LostAndFoundMapper {
     public int updateImg(@Param("image") String image , @Param("id") String id);
 
     //    用户点赞
-    @Update("update lost_and_found set thumb_up + 1 where id = #{id}")
+    @Update("update lost_and_found set thumb_up = thumb_up + 1 where id = #{id}")
     public int updateThumbUp(@Param("id")String id);
 
     //    用户收藏
-    @Update("update lost_and_found set collect + 1 where id = #{id}")
+    @Update("update lost_and_found set collect = collect + 1 where id = #{id}")
     public int updateCollect(@Param("id")String id);
 
     //    用户评论
-    @Update("update lost_and_found set comment + 1 where id = #{id}")
+    @Update("update lost_and_found set comment = comment + 1 where id = #{id}")
     public int updateComment(@Param("id")String id);
 
     //    更新完成情况
@@ -49,6 +49,8 @@ public interface LostAndFoundMapper {
     //=================================== 改 ======================================
 
 
+
+
     //=================================== 查 ======================================
     @Select("select * from lost_and_found")
     List<LostAndFound> getAllLostAndFound();
@@ -56,9 +58,22 @@ public interface LostAndFoundMapper {
     @Select("select * from lost_and_found where id = #{id}")
     LostAndFound getLostAndFoundById(@Param("id")String id);
 
-    @Select("select * from lost_and_found where userId = #{userId}")
-    LostAndFound getListAndFoundByUserId(@Param("userId")int userId);
+    @Select("select * from lost_and_found where user_id = #{userId}")
+    List<LostAndFound> getListAndFoundByUserId(@Param("userId")int userId);
+
+    @Select("select * from lost_and_found where content like concat('%' , #{text} , '%')")
+    List<LostAndFound> getLikeContent(@Param("text")String text);
+
+    @Select("select * from lost_and_found where title like concat('%' , #{text} , '%')")
+    List<LostAndFound> getLikeTitle(@Param("text")String text);
+
+    @Select("select * from lost_and_found where label like concat('%' , #{text} , '%')")
+    List<LostAndFound> getLikeLabel(@Param("text")String text);
+
     //=================================== 查 ======================================
+
+
+
 
     //=================================== 删 ======================================
     @Delete("delete from lost_and_found where id = #{id}")

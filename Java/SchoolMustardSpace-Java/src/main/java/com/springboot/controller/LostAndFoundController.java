@@ -119,24 +119,48 @@ public class LostAndFoundController {
         else return JsonResult.errorMsg(msg);
     }
 
+
+    /**
+     * /query接口：beta版本加敏感词模块，敏感词版块使用tried树实现
+     * @return
+     */
     @GetMapping("/query/all")
     public JsonResult queryAll(){
         List<LostAndFound> lostAndFoundList = new LinkedList<LostAndFound>();
-        lostAndFoundList = lostAndFoundService.selectAll();
+        lostAndFoundList = lostAndFoundService.selectList(1 , 0);
         return JsonResult.build(200 , "succeed" , lostAndFoundList);
     }
 
     @GetMapping("/query/id")
     public JsonResult queryId(@Param("id")String id){
-        LostAndFound lostAndFound = lostAndFoundService.selectByReason(1 , id , 0);
+        LostAndFound lostAndFound = lostAndFoundService.selectOne( id );
         return JsonResult.build(200 , "succeed" , lostAndFound);
     }
 
     @GetMapping("/query/userId")
-    public JsonResult queryUserId(@Param("id")int userId){
-        LostAndFound lostAndFound = lostAndFoundService.selectByReason(1 , null , userId);
+    public JsonResult queryUserId(@Param("userId")int userId){
+        List<LostAndFound> lostAndFound = lostAndFoundService.selectList(2 , userId);
         return JsonResult.build(200 , "succeed" , lostAndFound);
     }
 
+    /**
+     * 模糊查询beta版本运用tried树实现
+     */
+    @GetMapping("query/like/title")
+    public JsonResult queryLikeTitle(@Param("text")String text){
+        List<LostAndFound> lostAndFounds = lostAndFoundService.selectLike(1 , text);
+        return JsonResult.build(200 , "succeed" , lostAndFounds);
+    }
 
+    @GetMapping("query/like/content")
+    public JsonResult queryLikeContent(@Param("text")String text){
+        List<LostAndFound> lostAndFounds = lostAndFoundService.selectLike(2 , text);
+        return JsonResult.build(200 , "succeed" , lostAndFounds);
+    }
+
+    @GetMapping("query/like/label")
+    public JsonResult queryLikeLabel(@Param("text")String text){
+        List<LostAndFound> lostAndFounds = lostAndFoundService.selectLike(3 , text);
+        return JsonResult.build(200 , "succeed" , lostAndFounds);
+    }
 }

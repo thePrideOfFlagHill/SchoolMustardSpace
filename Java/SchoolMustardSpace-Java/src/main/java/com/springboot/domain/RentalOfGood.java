@@ -14,14 +14,35 @@ public class RentalOfGood {
     private String image;           //图片地址
     private String label;           //标签
     private String location;        //定位地点
-    private int isDone;             //是否做完
+    private int isDone = 0;             //是否做完
     private String unitPrice;       //价格
     private String startTime;       //开始时间
     private String endTime;         //结束时间
     private int newDegree;          //新旧程度
-    private int thumbUp;            //点赞数
-    private int collect;            //收藏数
-    private int comment;            //评论数
+    private int thumbUp = 0;            //点赞数
+    private int collect = 0;            //收藏数
+    private int comment = 0;            //评论数
+
+    @Override
+    public String toString() {
+        return "RentalOfGood{" +
+                "id='" + id + '\'' +
+                ", userId=" + userId +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", image='" + image + '\'' +
+                ", label='" + label + '\'' +
+                ", location='" + location + '\'' +
+                ", isDone=" + isDone +
+                ", unitPrice='" + unitPrice + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", newDegree=" + newDegree +
+                ", thumbUp=" + thumbUp +
+                ", collect=" + collect +
+                ", comment=" + comment +
+                '}';
+    }
 
     public String getId() {
         return id;

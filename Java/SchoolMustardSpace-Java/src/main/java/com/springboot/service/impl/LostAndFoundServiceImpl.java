@@ -43,18 +43,29 @@ public class LostAndFoundServiceImpl implements LostAndFoundService {
         return lostAndFoundMapper.deleteById(id) == 1 ? "succeed" : "fail";
     }
 
-    public List<LostAndFound> selectAll(){
-        return lostAndFoundMapper.getAllLostAndFound();
+    public List<LostAndFound> selectList(int choice , int userId){
+        if (choice == 1) {
+            return lostAndFoundMapper.getAllLostAndFound();
+        }else
+            return lostAndFoundMapper.getListAndFoundByUserId(userId);
+
     }
 
-    public LostAndFound selectByReason(int choice , String id , int userId){
-        if (choice == 1){
-            return lostAndFoundMapper.getLostAndFoundById(id);
-        }
-        if (choice == 2){
-            return lostAndFoundMapper.getListAndFoundByUserId(userId);
-        }
+    public LostAndFound selectOne(String id){
+        return lostAndFoundMapper.getLostAndFoundById(id);
+    }
+
+    public List<LostAndFound> selectLike(int choice , String text){
+
+        if (choice == 1)
+            return lostAndFoundMapper.getLikeTitle(text);
+
+        if (choice == 2)
+            return lostAndFoundMapper.getLikeContent(text);
+
+        if (choice == 3)
+            return lostAndFoundMapper.getLikeLabel(text);
+
         return null;
     }
-
 }

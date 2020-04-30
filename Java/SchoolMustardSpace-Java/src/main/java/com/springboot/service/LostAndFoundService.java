@@ -17,7 +17,9 @@ public interface LostAndFoundService {
 
     String deleteById(String id);
 
-    List<LostAndFound> selectAll();
+    List<LostAndFound> selectList(int choice , int userId);
 
-    LostAndFound selectByReason(int choice , String id , int userId);
+    LostAndFound selectOne(String id);
+
+    List<LostAndFound> selectLike(int choice , String text);
 }
