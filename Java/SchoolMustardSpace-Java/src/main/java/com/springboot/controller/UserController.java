@@ -4,7 +4,6 @@ import com.springboot.domain.User;
 import com.springboot.service.UserService;
 import com.springboot.utils.encryptiontool.DesEncryption;
 import com.springboot.utils.jsontool.JsonResult;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -89,7 +88,6 @@ public class UserController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public JsonResult deleteUser(@RequestParam(value = "accountNumber") String accountNumber){
-
         String msg = userService.deleteUser(accountNumber);
         if(msg.equals("succeed")){
             return JsonResult.build(200,msg,null);

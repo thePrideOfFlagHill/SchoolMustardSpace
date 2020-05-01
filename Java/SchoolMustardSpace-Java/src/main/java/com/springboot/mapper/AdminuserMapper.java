@@ -6,9 +6,9 @@ import org.apache.ibatis.annotations.*;
 import java.util.ArrayList;
 
 /**
- * AdminserMapper
+ * AdminuserMapper
  * TODO
- * @description AdminserMapper
+ * @description AdminuserMapper
  * @author 221701429_黄晓东
  * @version v 1.0.0
  * @since 2020/4/29
@@ -45,7 +45,7 @@ public interface AdminuserMapper {
     /*
     删除字段account_number符合条件的记录
      */
-    @Delete("delete from adminiuser where account_number = #{accountNumber}")
+    @Delete("delete from adminuser where account_number = #{accountNumber}")
     int deleteAdminuserByAccountNumber(@Param("accountNumber") String accountNumber);
 
     /*
