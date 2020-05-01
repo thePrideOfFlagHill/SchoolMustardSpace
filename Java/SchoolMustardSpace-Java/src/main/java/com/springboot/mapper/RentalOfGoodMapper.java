@@ -49,6 +49,12 @@ public interface RentalOfGoodMapper {
     //    更新完成情况
     @Update("update rental_of_goods set is_done = 1 where id = #{id}")
     public int updateDone(@Param("id") String id);
+
+    @Update("update rental_of_goods set start_time = #{startTime} where id = #{id}")
+    public int insertStartTime(@Param("startTime")String time , @Param("id") String id);
+
+    @Insert("update rental_of_goods set end_time = #{endTime} where id = #{id}")
+    public int insertEndTime(@Param("endTime")String time , @Param("id") String id);
     //=================================== 改 ======================================
 
 

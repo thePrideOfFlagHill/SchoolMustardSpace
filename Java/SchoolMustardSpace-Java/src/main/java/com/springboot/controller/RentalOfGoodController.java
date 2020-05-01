@@ -3,6 +3,7 @@ package com.springboot.controller;
 import com.springboot.domain.LostAndFound;
 import com.springboot.domain.RentalOfGood;
 import com.springboot.service.RentalOfGoodService;
+import com.springboot.utils.datetool.DateResult;
 import com.springboot.utils.jsontool.JsonResult;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ public class RentalOfGoodController {
     public JsonResult insertInfo(@RequestBody Map<String , String> resMap) {
         String uuid = UUID.randomUUID().toString();
         RentalOfGood rentalOfGood = new RentalOfGood();
+        rentalOfGood.setId(uuid);
         rentalOfGood.setUserId(Integer.parseInt(resMap.get("userId")));
         rentalOfGood.setTitle(resMap.get("title").toString());
         rentalOfGood.setContent(resMap.get("content".toString()));
@@ -38,8 +40,8 @@ public class RentalOfGoodController {
         rentalOfGood.setLabel(resMap.get("label").toString());
         rentalOfGood.setLocation(resMap.get("location").toString());
         rentalOfGood.setUnitPrice(resMap.get("unitPrice").toString());
-        rentalOfGood.setStartTime(resMap.get("startTime").toString());
-        rentalOfGood.setEndTime(resMap.get("endTime").toString());
+//        rentalOfGood.setStartTime(resMap.get("startTime").toString());
+//        rentalOfGood.setEndTime(resMap.get("endTime").toString());
         rentalOfGood.setNewDegree(Integer.parseInt(resMap.get("newDegree")));
 
         String msg = rentalOfGoodService.insertRentalOfGood(rentalOfGood);
@@ -67,11 +69,21 @@ public class RentalOfGoodController {
         return null;
     }
 
+    @GetMapping("/rent")
+    public JsonResult rent(@Param("id") String id){
+        String msg = rentalOfGoodService.insertTime(1 , id);
+        if(msg.equals("succeed")){
+            return JsonResult.build(200,msg,null);
+        }
+        else return JsonResult.errorMsg(msg);
+    }
+
     @GetMapping("/update/isDone")
     public JsonResult updateIsDone(@Param("id")String id){
         String msg = rentalOfGoodService.updateSome(1 , id);
+        String msg2 = rentalOfGoodService.insertTime(2 , id);
 
-        if(msg.equals("succeed")){
+        if(msg.equals("succeed") && msg2.equals("succeed")){
             return JsonResult.build(200,msg,null);
         }
         else return JsonResult.errorMsg(msg);

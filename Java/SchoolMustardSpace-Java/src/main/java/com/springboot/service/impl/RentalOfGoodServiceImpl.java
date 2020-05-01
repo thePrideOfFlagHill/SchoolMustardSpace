@@ -4,6 +4,7 @@ import com.springboot.domain.LostAndFound;
 import com.springboot.domain.RentalOfGood;
 import com.springboot.mapper.RentalOfGoodMapper;
 import com.springboot.service.RentalOfGoodService;
+import com.springboot.utils.datetool.DateResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,15 @@ public class RentalOfGoodServiceImpl implements RentalOfGoodService {
 
     public String insertRentalOfGood(RentalOfGood rentalOfGood){
         return rentalOfGoodMapper.insertInfo(rentalOfGood) == 1 ? "succeed" : "fail";
+    }
+
+    public String insertTime(int c , String id){
+        String time = new DateResult().getCurrentTime();
+        if (c == 1)
+            return rentalOfGoodMapper.insertStartTime(time , id) == 1 ? "succeed" : "fail";
+        if (c == 2)
+            return rentalOfGoodMapper.insertEndTime(time , id) == 1 ? "succeed" : "fail";
+        return null;
     }
 
     public String updateSome(int choice , String id){

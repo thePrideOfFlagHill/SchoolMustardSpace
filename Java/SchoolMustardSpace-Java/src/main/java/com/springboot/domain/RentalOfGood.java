@@ -17,8 +17,8 @@ public class RentalOfGood {
     private String location;        //定位地点
     private int isDone = 0;             //是否做完
     private String unitPrice;       //价格
-    private String startTime;       //开始时间
-    private String endTime;         //结束时间
+    private String startTime = "0";       //开始时间
+    private String endTime = "0";         //结束时间
     private int newDegree;          //新旧程度
     private int thumbUp = 0;            //点赞数
     private int collect = 0;            //收藏数

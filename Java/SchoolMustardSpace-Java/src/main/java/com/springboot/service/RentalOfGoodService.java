@@ -15,6 +15,8 @@ import java.util.List;
 public interface RentalOfGoodService {
     String insertRentalOfGood(RentalOfGood rentalOfGood);
 
+    String insertTime(int c , String id);
+
     String updateSome(int choice , String id);
 
     String deleteById(String id);
