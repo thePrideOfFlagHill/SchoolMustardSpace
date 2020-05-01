@@ -91,7 +91,5 @@ export default {
 </script>
 
 <style scoped>
-.el-table {
-  margin-top: 20px;
-}
+
 </style>

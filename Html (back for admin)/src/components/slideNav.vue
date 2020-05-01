@@ -44,7 +44,6 @@ export default {
 
 <style scoped>
 .el-aside {
-  width: 20px;
   height: 100%;
 }
 .el-aside > div {

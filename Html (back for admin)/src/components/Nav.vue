@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-menu
-      class="el-menu-demo"
+      class="Nav"
       mode="horizontal"
       background-color="#545c64"
       text-color="#fff"
@@ -35,4 +35,5 @@ export default {
 </script>
 
 <style scoped>
+
 </style>

@@ -3,13 +3,13 @@
     <el-header>
       <search></search>
     </el-header>
-    <el-main>
+    <el-main class="shadow">
       <el-table
         :data="tableData"
         style="width: 100%"
         :default-sort="{prop: 'date', order: 'descending'}"
       >
-        <el-table-column prop="id" label="简述" sortable width="500">
+        <el-table-column prop="id" label="简述"  width="500">
           <template slot-scope="scope">
             <el-row :gutter="20">
               <el-col :span="10">
@@ -54,8 +54,8 @@
 export default {
   data () {
     return {
-      currentPage: 3, // 当前页数
-      totalPage: 1000, // 总页数
+      currentPage: 1, // 当前页数
+      totalPage: 10, // 总页数
       tableData: [
         {
           name: '名字',
@@ -66,6 +66,16 @@ export default {
           address: '上海市普陀区金沙江路 1518 弄',
           user: '王小虎',
           status: '未完成'
+        },
+        {
+          name: '名字',
+          url:
+            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586064043299&di=936d37ebfc418579e3debf6d674edc82&imgtype=0&src=http%3A%2F%2Fa0.att.hudong.com%2F64%2F76%2F20300001349415131407760417677.jpg',
+          id: '222333',
+          date: '2016-05-04',
+          address: '上海市普陀区金沙江路 1518 弄',
+          user: '程小虎',
+          status: '完成'
         }
       ]
     }
@@ -111,4 +121,8 @@ export default {
 </script>
 
 <style scoped>
+.shadow {
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  background: white;
+}
 </style>

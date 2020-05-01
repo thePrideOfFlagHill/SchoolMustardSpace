@@ -1,10 +1,10 @@
 <template>
   <el-container>
-    <el-header style="border:1px solid black;height:200px;">
+    <el-header style="height:200px;">
       <el-row style="height:100%;">
         <el-col :span="5" class="picture">
           <div>
-            <img :src="url" width="80%" />
+            <el-image style="width: 70%; " :src="url" :fit="fit"></el-image>
           </div>
         </el-col>
         <el-col :span="10" class="task">
@@ -12,7 +12,7 @@
             <div>
               <p>{{name}}</p>
             </div>
-            <div>
+            <div style="margin-left:10px;">
               <el-tag>{{status}}</el-tag>
             </div>
           </div>
@@ -31,11 +31,13 @@
         </el-col>
       </el-row>
     </el-header>
-    <el-main style="border:1px solid black;padding:0;">
+    <hr />
+    <el-main>
       <el-row>
         <el-col :span="2">
           <div>
-            <el-divider direction="vertical"></el-divider>任务详情
+            <el-divider direction="vertical"></el-divider>
+            <label>任务详情</label>
           </div>
         </el-col>
         <el-col :span="10" class="textDecoration">
@@ -64,7 +66,8 @@
         <el-col :span="10">
           <el-col :span="2">
             <div>
-              <el-divider direction="vertical"></el-divider>地图
+              <el-divider direction="vertical"></el-divider>
+              <label>地图</label>
             </div>
           </el-col>
         </el-col>
@@ -131,5 +134,9 @@ export default {
 .btns {
   display: flex;
   justify-content: flex-end;
+}
+.el-container {
+  background: white;
+  border: 1px solid gainsboro;
 }
 </style>
