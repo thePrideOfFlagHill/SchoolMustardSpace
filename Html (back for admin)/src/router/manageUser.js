@@ -5,6 +5,7 @@ export default [
     component: () => import('../components/manageUser/itemPage.vue')
   },
   {
+    name: 'userDetail',
     path: 'detail',
     meta: { title: '详细信息' },
     component: () => import('../components/manageUser/detail.vue')

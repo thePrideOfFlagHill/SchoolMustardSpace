@@ -1,9 +1,9 @@
 <template>
-  <el-row :gutter="0">
-    <el-col :span="3">
-      <el-input v-model="infos.id" placeholder="输入任务编号" class="width"></el-input>
+  <el-row :gutter="20">
+    <el-col :span="4">
+      <el-input v-model="infos.id" placeholder="输入管理员编号" class="width"></el-input>
     </el-col>
-    <el-col :span="1">
+    <el-col :span="3">
       <el-popover placement="bottom" width>
         <div style="text-align: right; margin: 0">
           <div class="inline">
@@ -40,8 +40,10 @@
         <el-button slot="reference">详细条件</el-button>
       </el-popover>
     </el-col>
-    <el-col :span="6">
+    <el-col :span="3">
       <el-button type="primary" icon="el-icon-search" @click="sendInfo()">搜索</el-button>
+    </el-col>
+    <el-col :span="3" :offset="10">
       <el-button type="primary" icon="el-icon-edit" @click="increaseAdmin()">新增管理员</el-button>
     </el-col>
   </el-row>
@@ -106,6 +108,6 @@ export default {
   justify-content: space-around;
 }
 .width {
-  width: 60%;
+  width: 80%;
 }
 </style>

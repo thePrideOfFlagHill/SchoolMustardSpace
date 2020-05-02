@@ -8,6 +8,7 @@ import sonLease from './manageLease.js'
 import sonAdmin from './manageAdmin.js'
 import sonComment from './manageComment.js'
 import sonUser from './manageUser.js'
+import sonLost from './manageLost.js'
 
 Vue.use(VueRouter)
 
@@ -71,6 +72,14 @@ const routes = [
         meta: { title: '用户管理' },
         component: () => import('../views/Middle.vue'),
         children: sonUser
+      },
+      {
+        path: 'manageLost',
+        name: 'manageLost',
+        redirect: '/outer/manageLost/itemPage',
+        meta: { title: '失物管理' },
+        component: () => import('../views/Middle.vue'),
+        children: sonLost
       }
     ]
   }

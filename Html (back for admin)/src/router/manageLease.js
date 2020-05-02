@@ -1,8 +1,7 @@
 export default [
   {
     path: 'itemPage',
-    meta: { title: '总览' },
-    component: () => import('../components/manageLease/table.vue')
+    component: () => import('../components/manageLease/itemPage.vue')
   },
   {
     path: 'detail',

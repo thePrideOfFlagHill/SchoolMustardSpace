@@ -1,8 +1,8 @@
 <template>
   <div class="shadow box">
     <el-form ref="form" :model="form" label-width="80px">
-       <el-form-item label="账号：">
-        <el-input v-model="form.id" disabled=""></el-input>
+      <el-form-item label="账号：">
+        <el-input v-model="form.id" disabled></el-input>
       </el-form-item>
       <el-form-item label="名称：">
         <el-input v-model="form.name"></el-input>
@@ -19,7 +19,7 @@
         </el-col>
         <el-col class="line" :span="2">-</el-col>
         <el-col :span="11">
-          <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
+          <el-date-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-date-picker>
         </el-col>
       </el-form-item>
       <el-form-item label="起效">
@@ -70,7 +70,16 @@ export default {
   },
   methods: {
     onSubmit () {
-      console.log('submit!')
+      // 成功后返回账号
+      this.$alert('账号', '注册成功', {
+        confirmButtonText: '确定',
+        callback: action => {
+          this.$message({
+            type: 'info',
+            message: `action: ${action}`
+          })
+        }
+      })
     }
   },
   // 初始化函数
@@ -86,7 +95,7 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   background: white;
 }
-.box{
+.box {
   padding: 10px;
   width: 50%;
   display: flex;

@@ -7,7 +7,7 @@
       <el-aside width="200px">
         <slideNav></slideNav>
       </el-aside>
-      <el-main style="padding-left:0;padding-top:0;">
+      <el-main style="padding-left:0;padding-top:0; min-width:1400px;">
         <el-container>
           <el-header class="bread">
             <crumb></crumb>

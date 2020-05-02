@@ -2,49 +2,96 @@
   <el-container>
     <el-main class="longInfo shadow">
       <el-row>
-        <el-col :span="12" class="box">
+        <el-col :span="12">
           <div>
-            <label class="leftTitle">用户详情</label>
+            <el-row :gutter="20">
+              <el-col :span="4">
+                <div class="textDecoration">头像：</div>
+              </el-col>
+              <el-col :span="15">
+                <el-image style="width: 70%; " :src="url" fit="fill"></el-image>
+              </el-col>
+            </el-row>
           </div>
           <div>
-
-          </div>
-          <div class="textDecoration" style="margin-top:80px;">
-            <label>头像：</label>
+            <el-row :gutter="20">
+              <el-col :span="5">
+                <div class="textDecoration">用户名：</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">{{name}}</div>
+              </el-col>
+            </el-row>
           </div>
           <div>
-            <el-image style="width: 70%; " :src="url" fit="fill"></el-image>
+            <el-row :gutter="20">
+              <el-col :span="5">
+                <div class="textDecoration">创建时间</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">{{name}}</div>
+              </el-col>
+            </el-row>
           </div>
-          <div class="textDecoration">
-            <label>用户名：</label>
+          <div>
+            <el-row :gutter="20">
+              <el-col :span="5">
+                <div class="textDecoration">用户签名：</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">{{name}}</div>
+              </el-col>
+            </el-row>
           </div>
-          <div class="textDecoration">
-            <label>创建时间:</label>
+          <div>
+            <el-row :gutter="20">
+              <el-col :span="5">
+                <div class="textDecoration">标签：</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">{{name}}</div>
+              </el-col>
+            </el-row>
           </div>
-          <div class="textDecoration">
-            <label>用户签名：</label>
+          <div>
+            <el-row :gutter="20">
+              <el-col :span="5">
+                <div class="textDecoration">联系方式：</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">{{name}}</div>
+              </el-col>
+            </el-row>
           </div>
-          <div class="textDecoration">
-            <label>标签：</label>
+          <div>
+            <el-row :gutter="20">
+              <el-col :span="5">
+                <div class="textDecoration">点赞数</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">{{name}}</div>
+              </el-col>
+            </el-row>
           </div>
-          <div class="textDecoration">
-            <label>联系方式：</label>
-          </div>
-          <div class="textDecoration">
-            <label>点赞数:</label>
-          </div>
-          <div class="textDecoration">
-            <el-button @click="seeComment()">查看发布的评论</el-button>
-          </div>
-          <div class="textDecoration">
-            <el-button @click="seeComment()">查看发布任务</el-button>
-            <el-button @click="seeComment()">查看发布租赁</el-button>
-            <el-button @click="seeComment()">查看发布失物</el-button>
-          </div>
-          <div class="textDecoration">
-            <el-button @click="seeComment()">查看接受任务</el-button>
-            <el-button @click="seeComment()">查看接受租赁</el-button>
-            <el-button @click="seeComment()">查看接受失物</el-button>
+          <div style="  margin: 20px;">
+            <el-popover placement="right" width="500" trigger="click">
+              <div class="exBtns">
+                <el-button-group>
+                  <el-button @click="seeComment()">查看发布的评论</el-button>
+                </el-button-group>
+                <el-button-group>
+                  <el-button @click="seeComment()">查看发布任务</el-button>
+                  <el-button @click="seeComment()">查看发布租赁</el-button>
+                  <el-button @click="seeComment()">查看发布失物</el-button>
+                </el-button-group>
+                <el-button-group>
+                  <el-button @click="seeComment()">查看接受任务</el-button>
+                  <el-button @click="seeComment()">查看接受租赁</el-button>
+                  <el-button @click="seeComment()">查看接受失物</el-button>
+                </el-button-group>
+              </div>
+              <el-button slot="reference">更多相关信息</el-button>
+            </el-popover>
           </div>
         </el-col>
         <el-col :span="12" class="box"></el-col>
@@ -108,7 +155,7 @@ export default {
   },
   // 初始化函数
   created: function () {
-    // console.log(this.$route.query.id)
+    console.log(this.$route.query.id)
     // 根据id访问接口获取数据
   },
   components: {}
@@ -164,5 +211,8 @@ export default {
 .longInfo {
   border-bottom: 0;
   padding: 0;
+}
+.exBtns button {
+  margin: 10px;
 }
 </style>

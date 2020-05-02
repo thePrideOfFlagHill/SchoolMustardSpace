@@ -20,7 +20,7 @@
         <i class="el-icon-document"></i>
         <span slot="title">租赁管理</span>
       </el-menu-item>
-      <el-menu-item index="/outer/index/PayList">
+      <el-menu-item index="/outer/manageLost/itemPage">
         <i class="el-icon-document"></i>
         <span slot="title">失物管理</span>
       </el-menu-item>

@@ -1,6 +1,13 @@
 <template>
-  <div class="Overview">
-    <div id="myChart" :style="{width: '300px', height: '300px'}" class="shadow"></div>
+  <div>
+    <el-row :gutter="20">
+      <el-col :span="12">
+        <div id="myChartA" :style="{height: '500px'}" class="shadow"></div>
+      </el-col>
+      <el-col :span="12">
+        <div id="myChartB" :style="{ height: '500px'}" class="shadow"></div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -13,76 +20,127 @@ export default {
     }
   },
   mounted () {
-    this.drawLine()
+    this.drawA()
+    this.drawB()
   },
   methods: {
-    drawLine () {
+    drawA () {
       // 基于准备好的dom，初始化echarts实例
-      const myChart = this.$echarts.init(document.getElementById('myChart'))
+      const myChart = this.$echarts.init(document.getElementById('myChartA'))
       // 绘制图表
       myChart.setOption({
-        backgroundColor: '#2c343c',
-
         title: {
-          text: 'Customized Pie',
-          left: 'center',
-          top: 20,
-          textStyle: {
-            color: '#ccc'
-          }
+          text: '项目类型',
+          subtext: '纯属虚构',
+          left: 'center'
         },
-
         tooltip: {
           trigger: 'item',
           formatter: '{a} <br/>{b} : {c} ({d}%)'
         },
-
-        visualMap: {
-          show: false,
-          min: 80,
-          max: 600,
-          inRange: {
-            colorLightness: [0, 1]
-          }
+        legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: ['任务', '租赁', '失物']
         },
         series: [
           {
-            name: '访问来源',
+            name: '项目占比',
             type: 'pie',
             radius: '55%',
-            center: ['50%', '50%'],
+            center: ['50%', '60%'],
             data: [
-              { value: 335, name: '直接访问' },
-              { value: 310, name: '邮件营销' },
-              { value: 274, name: '联盟广告' },
-              { value: 235, name: '视频广告' },
-              { value: 400, name: '搜索引擎' }
-            ].sort(function (a, b) {
-              return a.value - b.value
-            }),
-            roseType: 'radius',
-            label: {
-              color: 'rgba(255, 255, 255, 0.3)'
-            },
-            labelLine: {
-              lineStyle: {
-                color: 'rgba(255, 255, 255, 0.3)'
-              },
-              smooth: 0.2,
-              length: 10,
-              length2: 20
-            },
-            itemStyle: {
-              color: '#c23531',
-              shadowBlur: 200,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
-            },
-
-            animationType: 'scale',
-            animationEasing: 'elasticOut',
-            animationDelay: function (idx) {
-              return Math.random() * 200
+              { value: 335, name: '任务' },
+              { value: 310, name: '租赁' },
+              { value: 234, name: '失物' }
+            ],
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
             }
+          }
+        ]
+      })
+    },
+    drawB () {
+      // 基于准备好的dom，初始化echarts实例
+      const myChart = this.$echarts.init(document.getElementById('myChartB'))
+      // 绘制图表
+      myChart.setOption({
+        title: {
+          text: '近日项目存量'
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross',
+            label: {
+              backgroundColor: '#6a7985'
+            }
+          }
+        },
+        legend: {
+          data: ['任务', '租赁', '失物']
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: [
+          {
+            type: 'category',
+            boundaryGap: false,
+            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ],
+        series: [
+          {
+            name: '任务',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {},
+            data: [120, 132, 101, 134, 90, 230, 210]
+          },
+          {
+            name: '租赁',
+            type: 'line',
+            stack: '总量',
+            label: {
+              normal: {
+                show: true,
+                position: 'top'
+              }
+            },
+            areaStyle: {},
+            data: [820, 932, 901, 934, 1290, 1330, 1320]
+          },
+          {
+            name: '失物',
+            type: 'line',
+            stack: '总量',
+            label: {
+              normal: {
+                show: true,
+                position: 'top'
+              }
+            },
+            areaStyle: {},
+            data: [820, 932, 901, 934, 1290, 1330, 1320]
           }
         ]
       })

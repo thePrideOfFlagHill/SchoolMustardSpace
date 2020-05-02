@@ -2,7 +2,7 @@
   <el-container>
     <el-header style="height:200px;margin-bottom:10px;" class="shadow">
       <el-row style="height:100%;">
-        <el-col :span="5" class="picture">
+        <el-col :span="4" class="picture">
           <div>
             <el-image style="width: 70%; " :src="url" fit="fill"></el-image>
           </div>
@@ -20,57 +20,121 @@
             <p>编号:{{id}}</p>
           </div>
           <div class="taskId">
-            <p>申请人:{{user}}</p>
+            申请人:
+            <el-link type="info" @click="seeUser" :underline="false">
+              {{user}}
+              <i class="el-icon-view el-icon--right"></i>
+            </el-link>
           </div>
         </el-col>
-        <el-col :span="9" class="btns">
-          <el-button-group>
+        <el-col :span="4" class="btns">
+          <el-button-group class="btns">
             <el-button type="primary" icon="el-icon-edit" @click="examine()">审核</el-button>
             <el-button type="primary" icon="el-icon-delete" @click="deleted()">删除</el-button>
           </el-button-group>
         </el-col>
       </el-row>
     </el-header>
-    <el-main class="longInfo shadow">
+    <el-main class="shadow">
       <el-row>
-        <el-col :span="12" class="box">
+        <el-col :span="12" class="marginBottom">
           <div>
-            <label class="leftTitle">任务详情</label>
+            <el-row :gutter="20">
+              <el-col :span="4">
+                <div class="textDecoration">标题：</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">{{name}}</div>
+              </el-col>
+            </el-row>
           </div>
-          <div style="margin:40px 0;">
-            <div class="textDecoration" >
-              <label>标题：</label>
-            </div>
-            <div class="textDecoration">
-              <label>起止时间:</label>
-            </div>
-            <div class="textDecoration">
-              <label>任务描述：</label>
-            </div>
-            <div class="textDecoration">
-              <label>标签：</label>
-            </div>
-            <div class="textDecoration">
-              <label>酬劳：</label>
-            </div>
-            <div class="textDecoration">
-              <label>联系方式：</label>
-            </div>
-            <div class="textDecoration">
-              <label>点赞数:</label>
-            </div>
-            <div class="textDecoration">
-              <label>接收人编号:</label>
-            </div>
-            <div class="textDecoration">
-              <el-button @click="seeComment()">查看评论</el-button>
-            </div>
+          <div>
+            <el-row :gutter="20">
+              <el-col :span="4">
+                <div class="textDecoration">起止时间：</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">{{startDate}}</div>
+              </el-col>
+            </el-row>
+          </div>
+          <div>
+            <el-row :gutter="20">
+              <el-col :span="4">
+                <div class="textDecoration">任务描述：</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">{{decoration}}</div>
+              </el-col>
+            </el-row>
+          </div>
+          <div>
+            <el-row :gutter="20">
+              <el-col :span="4">
+                <div class="textDecoration">标签：</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">标签：</div>
+              </el-col>
+            </el-row>
+          </div>
+          <div>
+            <el-row :gutter="20">
+              <el-col :span="4">
+                <div class="textDecoration">酬劳：</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">酬劳：</div>
+              </el-col>
+            </el-row>
+          </div>
+          <div>
+            <el-row :gutter="20">
+              <el-col :span="4">
+                <div class="textDecoration">联系方式：</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">联系方式：</div>
+              </el-col>
+            </el-row>
+          </div>
+          <div>
+            <el-row :gutter="20">
+              <el-col :span="4">
+                <div class="textDecoration">点赞数</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">点赞数</div>
+              </el-col>
+            </el-row>
+          </div>
+          <div>
+            <el-row :gutter="20">
+              <el-col :span="4">
+                <div class="textDecoration">接收人编号</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">
+                  <el-link type="info" @click="seeAccept" :underline="false">
+                    {{user}}
+                    <i class="el-icon-view el-icon--right"></i>
+                  </el-link>
+                </div>
+              </el-col>
+            </el-row>
+          </div>
+          <div>
+            <el-row :gutter="20">
+              <el-col :span="4">
+                <div class="textDecoration">评论</div>
+              </el-col>
+              <el-col :span="15">
+                <el-button @click="seeComment()">查看评论</el-button>
+              </el-col>
+            </el-row>
           </div>
         </el-col>
-        <el-col :span="12" class="box">
-          <div style="margin-top:30px;">
-            <label class="leftTitle">地图</label>
-          </div>
+        <el-col :span="12">
           <div style="width:90%;margin:5%;" class="shadow">
             <Map></Map>
           </div>
@@ -90,7 +154,10 @@ export default {
       name: '任务标题1231513513',
       status: '未完成',
       id: '123',
-      user: 'wang'
+      user: 'wang',
+      startDate: '1900-01-03',
+      endDate: '2020-04-05',
+      decoration: '这是一项艰巨的任务'
     }
   },
   methods: {
@@ -124,9 +191,28 @@ export default {
           })
         })
     },
+    // 查看相关评论
     seeComment () {
       this.$router.push({
         name: 'commentPage',
+        params: {
+          id: this.id
+        }
+      })
+    },
+    // 查看用户信息
+    seeUser () {
+      this.$router.push({
+        name: 'userDetail',
+        params: {
+          id: this.id
+        }
+      })
+    },
+    // 查看接收者信息
+    seeAccept () {
+      this.$router.push({
+        name: 'userDetail',
         params: {
           id: this.id
         }
@@ -164,34 +250,19 @@ export default {
   display: flex;
   align-items: center;
 }
-.box {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: relative;
-}
+
 .shadow {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   background: white;
 }
 .btns {
-  display: flex;
-  justify-content: flex-end;
+  float: right;
 }
 .textDecoration {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-  margin-top: 25px;
-  margin-left: 40px;
   padding: 10px;
 }
-.leftTitle {
-  border-left: 3px solid gainsboro;
-  position: absolute;
-  top: 0px;
-  padding: 10px;
-}
-.longInfo {
-  border-bottom: 0;
-  padding: 0;
+.marginBottom > div {
+  margin-bottom: 20px;
 }
 </style>

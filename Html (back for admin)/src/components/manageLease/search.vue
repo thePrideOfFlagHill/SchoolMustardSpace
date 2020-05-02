@@ -1,14 +1,13 @@
 <template>
-  <el-row :gutter="0">
-    <el-col :span="3">
-      <el-input v-model="infos.id" placeholder="输入任务编号" class="width"></el-input>
+  <el-row :gutter="20">
+    <el-col :span="4">
+      <el-input v-model="infos.id" placeholder="输入租赁编号" class="width"></el-input>
     </el-col>
-    <el-col :span="1">
-      <el-popover placement="bottom" width >
+    <el-col :span="3">
+      <el-popover placement="bottom" width>
         <div style="text-align: right; margin: 0">
           <div class="inline">
-            <p>任务状态：</p>
-            <el-select v-model="value" placeholder="请选择" class="width">
+            <el-select v-model="value" placeholder="任务状态" class="width">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -18,8 +17,7 @@
             </el-select>
           </div>
           <div class="inline">
-            <p>用户种类：</p>
-            <el-select v-model="infos.type" placeholder="请选择" class="width">
+            <el-select v-model="infos.type" placeholder="用户种类" class="width">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -29,31 +27,28 @@
             </el-select>
           </div>
           <div class="inline">
-            <p>用户姓名：</p>
-            <el-input v-model="infos.user" placeholder="请输入内容" class="width"></el-input>
+            <el-input v-model="infos.user" placeholder="用户姓名" class="width"></el-input>
           </div>
           <div class="inline">
-            <p>选择日期：</p>
-            <el-date-picker v-model="infos.date" type="date" placeholder="选择日期" class="width"></el-date-picker>
+            <el-date-picker v-model="infos.date" type="date" placeholder="起始时间" class="width"></el-date-picker>
           </div>
         </div>
         <el-button slot="reference">详细条件</el-button>
       </el-popover>
     </el-col>
-    <el-col :span="6">
+    <el-col :span="3">
       <el-button type="primary" icon="el-icon-search" @click="sendInfo()">搜索</el-button>
     </el-col>
   </el-row>
 </template>
 
 <script>
-
 export default {
   name: 'serachBox',
   data () {
     return {
       infos: {
-        date: 'date',
+        date: '',
         type: '',
         user: '',
         id: ''
@@ -88,6 +83,14 @@ export default {
     sendInfo () {
       this.$store.commit('setOption', this.infos)
     }
+  },
+  watch: {
+    infos: {
+      handler: function () {
+        this.sendInfo()
+      },
+      deep: true
+    }
   }
 }
 </script>
@@ -103,6 +106,6 @@ export default {
   justify-content: space-around;
 }
 .width {
-  width: 60%;
+  width: 80%;
 }
 </style>

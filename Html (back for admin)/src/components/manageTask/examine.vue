@@ -8,6 +8,12 @@
         <el-col :span="3">
           <p>状态：{{status}}</p>
         </el-col>
+        <el-col :span="4" class="btns">
+          <el-button-group class="btns">
+            <el-button type="primary" icon="el-icon-edit" @click="pass">通过</el-button>
+            <el-button type="primary" icon="el-icon-delete" @click="refuse">拒绝</el-button>
+          </el-button-group>
+        </el-col>
       </el-row>
       <div>
         <el-row>
@@ -17,45 +23,75 @@
           <el-col :span="3">
             <p>{{date}}</p>
           </el-col>
-          <el-col :span="18" class="btns">
-            <el-button-group>
-              <el-button type="primary" icon="el-icon-edit" @click="pass">通过</el-button>
-              <el-button type="primary" icon="el-icon-delete" @click="refuse">拒绝</el-button>
-            </el-button-group>
-          </el-col>
         </el-row>
       </div>
     </el-header>
-    <el-main class="longInfo shadow">
+    <el-main class="shadow">
       <el-row>
-        <el-col :span="12" class="box">
+        <el-col :span="12" class="marginBottom">
           <div>
-            <label class="leftTitle">任务详情</label>
+            <el-row :gutter="20">
+              <el-col :span="4">
+                <div class="textDecoration">标题：</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">{{name}}</div>
+              </el-col>
+            </el-row>
           </div>
-          <div class="textDecoration" style="margin-top:80px;">
-            <label>标题：</label>
+          <div>
+            <el-row :gutter="20">
+              <el-col :span="4">
+                <div class="textDecoration">起止时间：</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">{{startDate}}</div>
+              </el-col>
+            </el-row>
           </div>
-          <div class="textDecoration">
-            <label>起止时间:</label>
+          <div>
+            <el-row :gutter="20">
+              <el-col :span="4">
+                <div class="textDecoration">任务描述：</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">{{decoration}}</div>
+              </el-col>
+            </el-row>
           </div>
-          <div class="textDecoration">
-            <label>任务描述：</label>
+          <div>
+            <el-row :gutter="20">
+              <el-col :span="4">
+                <div class="textDecoration">标签：</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">标签：</div>
+              </el-col>
+            </el-row>
           </div>
-          <div class="textDecoration">
-            <label>标签：</label>
+          <div>
+            <el-row :gutter="20">
+              <el-col :span="4">
+                <div class="textDecoration">酬劳：</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">酬劳：</div>
+              </el-col>
+            </el-row>
           </div>
-          <div class="textDecoration">
-            <label>酬劳：</label>
-          </div>
-          <div class="textDecoration">
-            <label>联系方式：</label>
+          <div>
+            <el-row :gutter="20">
+              <el-col :span="4">
+                <div class="textDecoration">联系方式：</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">联系方式：</div>
+              </el-col>
+            </el-row>
           </div>
         </el-col>
         <el-col :span="12" class="box">
-          <div style="margin-top:30px;">
-            <label class="leftTitle">地图</label>
-          </div>
-          <div style="width:90%;margin:5%;;" class="shadow">
+          <div style="width:90%;" class="shadow">
             <Map></Map>
           </div>
         </el-col>
@@ -140,24 +176,15 @@ export default {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   background: white;
 }
-.leftTitle {
-  border-left: 3px solid gainsboro;
-  position: absolute;
-  top: 0px;
-  padding: 10px;
-}
+
 .shortInfo {
   background: lightblue;
   color: white;
   margin-bottom: 10px;
 }
-.longInfo {
-  border-bottom: 0;
-  padding: 0;
-}
 .btns {
-  display: flex;
-  justify-content: flex-end;
+  float: right;
+  height: 100%;
 }
 p {
   text-align: left;
@@ -165,8 +192,11 @@ p {
 }
 .textDecoration {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-  margin-top: 30px;
-  margin-left: 40px;
+
   padding: 10px;
+}
+.marginBottom > div {
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 </style>

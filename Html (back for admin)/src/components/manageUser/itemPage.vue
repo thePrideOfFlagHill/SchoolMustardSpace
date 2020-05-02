@@ -5,7 +5,7 @@
     </el-header>
     <el-main class="shadow">
       <el-table
-        :data="tableData"
+        :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
         style="width: 100%"
         :default-sort="{prop: 'date', order: 'descending'}"
       >
@@ -35,11 +35,10 @@
       <el-pagination
         background
         layout="prev, pager, next"
-        :total="totalPage"
+        :total="dataLength"
         :current-page="currentPage"
-        :page-size="10"
-        @prev-click="prev"
-        @next-click="next"
+        :page-size="pageSize"
+        @current-change="pageChange"
       ></el-pagination>
     </el-footer>
   </el-container>
@@ -49,8 +48,8 @@
 export default {
   data () {
     return {
+      pageSize: 1, // 每个页面显示多少个项目
       currentPage: 1, // 当前页数
-      totalPage: 10, // 总页数
       tableData: [
         {
           name: '名字',
@@ -79,6 +78,10 @@ export default {
     // 表格搜索条件
     option () {
       return this.$store.state.option
+    },
+    // 返回数组长度
+    dataLength () {
+      return this.tableData.length
     }
   },
   methods: {
@@ -102,10 +105,10 @@ export default {
         }
       })
     },
-    // 翻到上一页
-    prev () {},
-    // 翻到下一页
-    next () {}
+    // 翻页
+    pageChange (currentPage) {
+      this.currentPage = currentPage
+    }
   },
   watch: {
     // 监听条件数据的变化

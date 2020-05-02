@@ -20,7 +20,11 @@
             <p>编号:{{id}}</p>
           </div>
           <div class="taskId">
-            <p>发布人:{{user}}</p>
+            申请人:
+            <el-link type="info" @click="seeUser" :underline="false">
+              {{user}}
+              <i class="el-icon-view el-icon--right"></i>
+            </el-link>
           </div>
         </el-col>
         <el-col :span="9" class="btns">
@@ -30,7 +34,7 @@
         </el-col>
       </el-row>
     </el-header>
-    <el-main class="longInfo shadow">
+    <el-main class="longInfo shadow" style="margin-top:20px;">
       <el-row>
         <el-col :span="12" class="box">
           <div>
@@ -52,7 +56,6 @@
             <label>联系方式：</label>
           </div>
         </el-col>
-
       </el-row>
     </el-main>
   </el-container>
@@ -101,6 +104,15 @@ export default {
             message: '已取消删除'
           })
         })
+    },
+    // 查看发布人信息
+    seeUser () {
+      this.$router.push({
+        name: 'userDetail',
+        params: {
+          id: this.id
+        }
+      })
     }
   },
   // 初始化函数
@@ -108,8 +120,7 @@ export default {
     // console.log(this.$route.query.id)
     // 根据id访问接口获取数据
   },
-  components: {
-  }
+  components: {}
 }
 </script>
 
