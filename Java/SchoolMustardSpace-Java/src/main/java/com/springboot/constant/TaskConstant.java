@@ -27,5 +27,9 @@ public interface TaskConstant {
 
     //失败的返回
     String MSG_FAIL = "FAIL";
+
+    //成功的返回
+    String MSG_SUCCEED = "succeed";
+    int STATUS_SUCCEED = 200;
 }
     
