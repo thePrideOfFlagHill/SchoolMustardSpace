@@ -1,80 +1,53 @@
 <template>
   <el-container>
-    <el-header style="height:200px;margin-bottom:10px;" class="shadow">
-      <el-row style="height:100%;">
-        <el-col :span="5" class="picture">
-          <div>
-            <el-image style="width: 70%; " :src="url" fit="fill"></el-image>
-          </div>
-        </el-col>
-        <el-col :span="10" class="task">
-          <div class="taskId">
-            <div>
-              <p>{{name}}</p>
-            </div>
-            <div style="margin-left:10px;">
-              <el-tag>{{status}}</el-tag>
-            </div>
-          </div>
-          <div class="taskId">
-            <p>编号:{{id}}</p>
-          </div>
-          <div class="taskId">
-            <p>申请人:{{user}}</p>
-          </div>
-        </el-col>
-        <el-col :span="9" class="btns">
-          <el-button-group>
-            <el-button type="primary" icon="el-icon-edit" @click="examine()">审核</el-button>
-            <el-button type="primary" icon="el-icon-delete" @click="deleted()">删除</el-button>
-          </el-button-group>
-        </el-col>
-      </el-row>
-    </el-header>
     <el-main class="longInfo shadow">
       <el-row>
         <el-col :span="12" class="box">
           <div>
-            <label class="leftTitle">任务详情</label>
+            <label class="leftTitle">用户详情</label>
           </div>
-          <div style="margin:40px 0;">
-            <div class="textDecoration" >
-              <label>标题：</label>
-            </div>
-            <div class="textDecoration">
-              <label>起止时间:</label>
-            </div>
-            <div class="textDecoration">
-              <label>任务描述：</label>
-            </div>
-            <div class="textDecoration">
-              <label>标签：</label>
-            </div>
-            <div class="textDecoration">
-              <label>酬劳：</label>
-            </div>
-            <div class="textDecoration">
-              <label>联系方式：</label>
-            </div>
-            <div class="textDecoration">
-              <label>点赞数:</label>
-            </div>
-            <div class="textDecoration">
-              <label>接收人编号:</label>
-            </div>
-            <div class="textDecoration">
-              <el-button @click="seeComment()">查看评论</el-button>
-            </div>
+          <div>
+
+          </div>
+          <div class="textDecoration" style="margin-top:80px;">
+            <label>头像：</label>
+          </div>
+          <div>
+            <el-image style="width: 70%; " :src="url" fit="fill"></el-image>
+          </div>
+          <div class="textDecoration">
+            <label>用户名：</label>
+          </div>
+          <div class="textDecoration">
+            <label>创建时间:</label>
+          </div>
+          <div class="textDecoration">
+            <label>用户签名：</label>
+          </div>
+          <div class="textDecoration">
+            <label>标签：</label>
+          </div>
+          <div class="textDecoration">
+            <label>联系方式：</label>
+          </div>
+          <div class="textDecoration">
+            <label>点赞数:</label>
+          </div>
+          <div class="textDecoration">
+            <el-button @click="seeComment()">查看发布的评论</el-button>
+          </div>
+          <div class="textDecoration">
+            <el-button @click="seeComment()">查看发布任务</el-button>
+            <el-button @click="seeComment()">查看发布租赁</el-button>
+            <el-button @click="seeComment()">查看发布失物</el-button>
+          </div>
+          <div class="textDecoration">
+            <el-button @click="seeComment()">查看接受任务</el-button>
+            <el-button @click="seeComment()">查看接受租赁</el-button>
+            <el-button @click="seeComment()">查看接受失物</el-button>
           </div>
         </el-col>
-        <el-col :span="12" class="box">
-          <div style="margin-top:30px;">
-            <label class="leftTitle">地图</label>
-          </div>
-          <div style="width:90%;margin:5%;" class="shadow">
-            <Map></Map>
-          </div>
-        </el-col>
+        <el-col :span="12" class="box"></el-col>
       </el-row>
     </el-main>
   </el-container>
@@ -138,9 +111,7 @@ export default {
     // console.log(this.$route.query.id)
     // 根据id访问接口获取数据
   },
-  components: {
-    Map: () => import('../map.vue')
-  }
+  components: {}
 }
 </script>
 

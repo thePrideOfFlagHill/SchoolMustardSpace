@@ -1,38 +1,10 @@
 <template>
-  <el-container id="app">
-    <el-header>
-      <Nav></Nav>
-    </el-header>
-    <el-container>
-      <el-aside style="overflow:hidden;" width="200px">
-        <slideNav></slideNav>
-      </el-aside>
-      <el-main style="padding:0;">
-        <el-container>
-          <el-header class="bread">
-            <crumb></crumb>
-          </el-header>
-          <el-main>
-            <router-view />
-          </el-main>
-        </el-container>
-      </el-main>
-    </el-container>
-  </el-container>
+  <div id="app">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-import Nav from '@/components/Nav.vue'
-import crumb from '@/components/crumb.vue'
-
-export default {
-  name: 'main',
-  components: {
-    Nav,
-    crumb,
-    slideNav: () => import('./components/slideNav.vue')
-  }
-}
 </script>
 
 <style>
@@ -43,12 +15,6 @@ body {
   margin: 0;
   height: 100%;
 }
-.el-header {
-  padding: 0 !important;
-}
-.bread {
-  margin: 0;
-}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -58,33 +24,4 @@ body {
   height: 100%;
 }
 
-#slide {
-  margin: 0;
-  padding: 0;
-}
-
-#slide a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#slide a.router-link-exact-active {
-  color: #42b983;
-}
-
-#slideNav {
-  margin: 0;
-  background-color: white;
-}
-
-hr {
-  -moz-border-bottom-colors: none;
-  -moz-border-left-colors: none;
-  -moz-border-right-colors: none;
-  -moz-border-top-colors: none;
-  border-color: #eeeeee -moz-use-text-color #ffffff;
-  border-style: solid none;
-  border-width: 1px 0;
-  margin: 0px 0;
-}
 </style>

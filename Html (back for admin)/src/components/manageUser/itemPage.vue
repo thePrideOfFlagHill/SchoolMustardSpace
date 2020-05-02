@@ -9,33 +9,24 @@
         style="width: 100%"
         :default-sort="{prop: 'date', order: 'descending'}"
       >
-        <el-table-column prop="id" label="简述" width="500">
+        <el-table-column prop="id" label="头像">
           <template slot-scope="scope">
             <el-row :gutter="20">
-              <el-col :span="10">
+              <el-col :span="18">
                 <img :src="scope.row['url']" width="100%" />
-              </el-col>
-              <el-col :span="10">
-                <div>{{scope.row['name']}}</div>
-                <div>
-                  <label>编号</label>
-                  <div>{{scope.row['id']}}</div>
-                </div>
               </el-col>
             </el-row>
           </template>
         </el-table-column>
-        <el-table-column prop="date" label="起始时间" sortable></el-table-column>
-        <el-table-column prop="address" label="地址" :formatter="formatter"></el-table-column>
+        <el-table-column prop="date" label="创建时间" sortable></el-table-column>
+        <el-table-column prop="address" label="最后登录时间" :formatter="formatter"></el-table-column>
         <el-table-column prop="user" label="发布人" sortable></el-table-column>
         <el-table-column prop="status" label="状态" sortable></el-table-column>
         <el-table-column prop="status" label="分类" sortable></el-table-column>
-        <el-table-column prop="status" label="访问量" sortable></el-table-column>
-        <el-table-column prop="status" label="点赞数" sortable></el-table-column>
         <el-table-column fixed="right" label="操作" width="100">
           <template slot-scope="scope">
             <el-button @click="goDetail(scope.row['id'])" type="text" size="small">查看</el-button>
-            <el-button type="text" size="small">编辑</el-button>
+            <el-button @click="goChange(scope.row['id'])" type="text" size="small">编辑</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -103,6 +94,14 @@ export default {
         }
       })
     },
+    goChange (id) {
+      this.$router.push({
+        path: 'change',
+        query: {
+          id: id
+        }
+      })
+    },
     // 翻到上一页
     prev () {},
     // 翻到下一页
@@ -117,8 +116,7 @@ export default {
   components: {
     search: () => import('./search.vue')
   },
-  created: function () {
-  }
+  created: function () {}
 }
 </script>
 

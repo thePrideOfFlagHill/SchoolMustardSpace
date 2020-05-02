@@ -8,27 +8,31 @@
       active-text-color="#ffd04b"
       router
     >
-      <el-menu-item index="/overView">
+      <el-menu-item index="/outer/overView">
         <i class="el-icon-document"></i>
         <span slot="title">概览</span>
       </el-menu-item>
-      <el-menu-item index="/manageTask/itemPage">
+      <el-menu-item index="/outer/manageTask/itemPage">
         <i class="el-icon-document"></i>
         <span slot="title">任务管理</span>
       </el-menu-item>
-      <el-menu-item index="/manageLease/itemPage">
+      <el-menu-item index="/outer/manageLease/itemPage">
         <i class="el-icon-document"></i>
         <span slot="title">租赁管理</span>
       </el-menu-item>
-      <el-menu-item index="/index/PayList">
+      <el-menu-item index="/outer/index/PayList">
         <i class="el-icon-document"></i>
         <span slot="title">失物管理</span>
       </el-menu-item>
-      <el-menu-item index="/index/PayList">
+       <el-menu-item index="/outer/manageUser/itemPage">
         <i class="el-icon-document"></i>
         <span slot="title">用户列表</span>
       </el-menu-item>
-      <el-menu-item index="/manageAdmin/itemPage">
+      <el-menu-item index="/outer/manageComment/itemPage">
+        <i class="el-icon-document"></i>
+        <span slot="title">评论管理</span>
+      </el-menu-item>
+      <el-menu-item index="/outer/manageAdmin/itemPage">
         <i class="el-icon-star-on"></i>
         <span slot="title">管理员</span>
       </el-menu-item>

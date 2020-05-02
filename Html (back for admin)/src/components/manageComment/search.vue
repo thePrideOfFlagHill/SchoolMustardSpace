@@ -4,7 +4,7 @@
       <el-input v-model="infos.id" placeholder="输入任务编号" class="width"></el-input>
     </el-col>
     <el-col :span="1">
-      <el-popover placement="bottom" width>
+      <el-popover placement="bottom" width >
         <div style="text-align: right; margin: 0">
           <div class="inline">
             <p>任务状态：</p>
@@ -42,12 +42,12 @@
     </el-col>
     <el-col :span="6">
       <el-button type="primary" icon="el-icon-search" @click="sendInfo()">搜索</el-button>
-      <el-button type="primary" icon="el-icon-edit" @click="increaseAdmin()">新增管理员</el-button>
     </el-col>
   </el-row>
 </template>
 
 <script>
+
 export default {
   name: 'serachBox',
   data () {
@@ -87,9 +87,6 @@ export default {
   methods: {
     sendInfo () {
       this.$store.commit('setOption', this.infos)
-    },
-    increaseAdmin () {
-      this.$router.push('increase')
     }
   }
 }

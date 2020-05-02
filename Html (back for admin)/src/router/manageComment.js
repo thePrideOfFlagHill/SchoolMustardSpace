@@ -2,12 +2,13 @@ export default [
   {
     path: 'itemPage',
     meta: { title: '' },
-    component: () => import('../components/manageTask/itemPage.vue')
+    name: 'commentPage',
+    component: () => import('../components/manageComment/itemPage.vue')
   },
   {
     path: 'detail',
     meta: { title: '详细信息' },
-    component: () => import('../components/manageTask/detail.vue')
+    component: () => import('../components/manageComment/detail.vue')
   },
   {
     path: 'examine',

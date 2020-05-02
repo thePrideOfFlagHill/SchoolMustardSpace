@@ -9,33 +9,15 @@
         style="width: 100%"
         :default-sort="{prop: 'date', order: 'descending'}"
       >
-        <el-table-column prop="id" label="简述" width="500">
-          <template slot-scope="scope">
-            <el-row :gutter="20">
-              <el-col :span="10">
-                <img :src="scope.row['url']" width="100%" />
-              </el-col>
-              <el-col :span="10">
-                <div>{{scope.row['name']}}</div>
-                <div>
-                  <label>编号</label>
-                  <div>{{scope.row['id']}}</div>
-                </div>
-              </el-col>
-            </el-row>
-          </template>
-        </el-table-column>
-        <el-table-column prop="date" label="起始时间" sortable></el-table-column>
-        <el-table-column prop="address" label="地址" :formatter="formatter"></el-table-column>
+        <el-table-column prop="id" label="编号"></el-table-column>
+        <el-table-column prop="date" label="发布时间" sortable></el-table-column>
+        <el-table-column prop="address" label="所属项目编号" :formatter="formatter"></el-table-column>
+        <el-table-column prop="status" label="简述"></el-table-column>
         <el-table-column prop="user" label="发布人" sortable></el-table-column>
         <el-table-column prop="status" label="状态" sortable></el-table-column>
-        <el-table-column prop="status" label="分类" sortable></el-table-column>
-        <el-table-column prop="status" label="访问量" sortable></el-table-column>
-        <el-table-column prop="status" label="点赞数" sortable></el-table-column>
         <el-table-column fixed="right" label="操作" width="100">
           <template slot-scope="scope">
             <el-button @click="goDetail(scope.row['id'])" type="text" size="small">查看</el-button>
-            <el-button type="text" size="small">编辑</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -118,6 +100,12 @@ export default {
     search: () => import('./search.vue')
   },
   created: function () {
+    console.log(this.$route.params.id)
+    if (this.$route.params.id !== undefined) {
+      // 带参数进入
+    } else {
+      // 不带参数进入
+    }
   }
 }
 </script>
