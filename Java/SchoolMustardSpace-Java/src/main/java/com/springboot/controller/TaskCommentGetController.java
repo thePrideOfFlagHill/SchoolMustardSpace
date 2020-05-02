@@ -1,9 +1,7 @@
 package com.springboot.controller;
 
-import com.springboot.domain.Task;
-import com.springboot.mapper.TaskCommentMapper;
+import com.springboot.domain.TaskComment;
 import com.springboot.service.TaskCommentService;
-import com.springboot.service.TaskService;
 import com.springboot.utils.jsontool.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * GetController
+ * TaskCommentGetController
  * TODO
  * @description 所有的get请求的接口
  * 1./api/task/comment/query/all 查询全部任评论用接口
@@ -22,6 +20,7 @@ import java.util.List;
  * @version v 1.0.0
  * @since 2020.4.30
  */
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api")
@@ -41,7 +40,7 @@ public class TaskCommentGetController {
     @RequestMapping(value = "task/comment/query/all", method = RequestMethod.GET)
     public JsonResult queryTaskCommentAll() {
 
-        List<Task> list = this.taskCommentService.getAllTaskComment();
+        List<TaskComment> list = this.taskCommentService.getAllTaskComment();
 
         return JsonResult.ok(list);
 
@@ -58,9 +57,9 @@ public class TaskCommentGetController {
     @RequestMapping(value = "query/task/comment/id/{id}", method = RequestMethod.GET)
     public JsonResult queryTaskCommentById(@PathVariable String id) {
 
-        Task task = this.taskCommentService.queryTaskCommentById(id);
+        TaskComment taskComment = this.taskCommentService.queryTaskCommentById(id);
 
-        return JsonResult.ok(task);
+        return JsonResult.ok(taskComment);
 
     }
 
@@ -75,7 +74,7 @@ public class TaskCommentGetController {
     @RequestMapping(value = "query/task/comment/user_id/{user_id}", method = RequestMethod.GET)
     public JsonResult queryTaskCommentByUserId(@PathVariable String user_id) {
 
-        List<Task> list = this.taskCommentService.queryTaskCommentByUserId(user_id);
+        List<TaskComment> list = this.taskCommentService.queryTaskCommentByUserId(user_id);
 
         return JsonResult.ok(list);
 
@@ -92,7 +91,7 @@ public class TaskCommentGetController {
     @RequestMapping(value = "query/task/comment/table_id/{table_id}", method = RequestMethod.GET)
     public JsonResult queryTaskCommentByTableId(@PathVariable String table_id) {
 
-        List<Task> list = this.taskCommentService.queryTaskCommentByTableId(table_id);
+        List<TaskComment> list = this.taskCommentService.queryTaskCommentByTableId(table_id);
 
         return JsonResult.ok(list);
 

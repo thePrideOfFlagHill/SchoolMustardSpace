@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.*;
  * @since 2020.4.25
  */
 
-
 @RestController
 @CrossOrigin
 @RequestMapping("/api")
