@@ -24,6 +24,16 @@ public interface LostAndFoundMapper {
     //=================================== 增 ======================================
 
 
+
+
+    //=================================== 删 ======================================
+    @Delete("delete from lost_and_found where id = #{id}")
+    public int deleteById(@Param("id") String id);
+    //=================================== 删 ======================================
+
+
+
+
     //=================================== 改 ======================================
     //    更新图片信息
     @Update("update lost_and_found set image = #{image} where id = #{id}")
@@ -53,31 +63,64 @@ public interface LostAndFoundMapper {
 
 
     //=================================== 查 ======================================
+
+
     @Select("select * from lost_and_found")
+    @Results(value = {
+            @Result(column = "user_id" , property = "userId"),
+            @Result(column = "is_done" , property = "isDone"),
+            @Result(column = "is_lost" , property = "isLost"),
+            @Result(column = "thumb_up" , property = "thumbUp"),
+    })
     List<LostAndFound> getAllLostAndFound();
 
     @Select("select * from lost_and_found where id = #{id}")
+    @Results(value = {
+            @Result(column = "user_id" , property = "userId"),
+            @Result(column = "is_done" , property = "isDone"),
+            @Result(column = "is_lost" , property = "isLost"),
+            @Result(column = "thumb_up" , property = "thumbUp"),
+    })
     LostAndFound getLostAndFoundById(@Param("id")String id);
 
     @Select("select * from lost_and_found where user_id = #{userId}")
+    @Results(value = {
+            @Result(column = "user_id" , property = "userId"),
+            @Result(column = "is_done" , property = "isDone"),
+            @Result(column = "is_lost" , property = "isLost"),
+            @Result(column = "thumb_up" , property = "thumbUp"),
+    })
     List<LostAndFound> getLostAndFoundByUserId(@Param("userId")int userId);
 
     @Select("select * from lost_and_found where content like concat('%' , #{text} , '%')")
+    @Results(value = {
+            @Result(column = "user_id" , property = "userId"),
+            @Result(column = "is_done" , property = "isDone"),
+            @Result(column = "is_lost" , property = "isLost"),
+            @Result(column = "thumb_up" , property = "thumbUp"),
+    })
     List<LostAndFound> getLikeContent(@Param("text")String text);
 
     @Select("select * from lost_and_found where title like concat('%' , #{text} , '%')")
+    @Results(value = {
+            @Result(column = "user_id" , property = "userId"),
+            @Result(column = "is_done" , property = "isDone"),
+            @Result(column = "is_lost" , property = "isLost"),
+            @Result(column = "thumb_up" , property = "thumbUp"),
+    })
     List<LostAndFound> getLikeTitle(@Param("text")String text);
 
     @Select("select * from lost_and_found where label like concat('%' , #{text} , '%')")
+    @Results(value = {
+            @Result(column = "user_id" , property = "userId"),
+            @Result(column = "is_done" , property = "isDone"),
+            @Result(column = "is_lost" , property = "isLost"),
+            @Result(column = "thumb_up" , property = "thumbUp"),
+    })
     List<LostAndFound> getLikeLabel(@Param("text")String text);
 
     //=================================== 查 ======================================
 
 
 
-
-    //=================================== 删 ======================================
-    @Delete("delete from lost_and_found where id = #{id}")
-    public int deleteById(@Param("id") String id);
-    //=================================== 删 ======================================
 }

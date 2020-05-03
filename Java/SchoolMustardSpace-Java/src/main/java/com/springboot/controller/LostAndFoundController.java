@@ -16,6 +16,20 @@ import java.util.UUID;
  * @author 会飞的大野鸡
  * @create 2020/4/29
  * @description:失物招领类控制层
+ * 1./api/lost_and_found/insert             增加失物招领
+ * 2./api/lost_and_found/upload/image       增加失物招领里的图片
+ * 3./api/lost_and_found/update             编辑失物招领
+ * 4./api/lost_and_found/update/isDone      更新完成状况
+ * 5./api/lost_and_found/update/thumbUp     点赞数+1
+ * 6./api/lost_and_found/update/collect     收藏数+1
+ * 7./api/lost_and_found/update/comment     评论数+1
+ * 8./api/lost_and_found/delete             删除某个失物招领
+ * 9./api/lost_and_found/query/all          获得全部失物招领的信息
+ * 10./api/lost_and_found/query/id          根据条目id查询失物招领的信息
+ * 11./api/lost_and_found/query/userId      根据userId查询食物招领的信息
+ * 12./api/lost_and_found/query/like/title  标题的模糊查找
+ * 13./api/lost_and_found/query/like/content 内容的模糊查找
+ * 14./api/lost_and_found/query/like/lebel  标签的模糊查找
  * TODO:
  */
 

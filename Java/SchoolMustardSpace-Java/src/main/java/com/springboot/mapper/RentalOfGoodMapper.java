@@ -60,22 +60,78 @@ public interface RentalOfGoodMapper {
 
 
     //=================================== 查 ======================================
+
+
     @Select("select * from rental_of_goods")
+    @Results(value = {
+            @Result(column = "user_id" , property = "userId"),
+            @Result(column = "is_done" , property = "isDone"),
+            @Result(column = "unit_price" , property = "unitPrice"),
+            @Result(column = "start_time" , property = "startTime"),
+            @Result(column = "end_time" , property = "endTime"),
+            @Result(column = "new_degree" , property = "newDegree"),
+            @Result(column = "thumb_up" , property = "thumbUp"),
+    })
     List<RentalOfGood> getAllRental();
 
     @Select("select * from rental_of_goods where id = #{id}")
+    @Results(value = {
+            @Result(column = "user_id" , property = "userId"),
+            @Result(column = "is_done" , property = "isDone"),
+            @Result(column = "unit_price" , property = "unitPrice"),
+            @Result(column = "start_time" , property = "startTime"),
+            @Result(column = "end_time" , property = "endTime"),
+            @Result(column = "new_degree" , property = "newDegree"),
+            @Result(column = "thumb_up" , property = "thumbUp"),
+    })
     RentalOfGood getRentalById(@Param("id")String id);
 
     @Select("select * from rental_of_goods where user_id = #{userId}")
+    @Results(value = {
+            @Result(column = "user_id" , property = "userId"),
+            @Result(column = "is_done" , property = "isDone"),
+            @Result(column = "unit_price" , property = "unitPrice"),
+            @Result(column = "start_time" , property = "startTime"),
+            @Result(column = "end_time" , property = "endTime"),
+            @Result(column = "new_degree" , property = "newDegree"),
+            @Result(column = "thumb_up" , property = "thumbUp"),
+    })
     List<RentalOfGood> getRentalByUserId(@Param("userId")int userId);
 
     @Select("select * from rental_of_goods where content like concat('%' , #{text} , '%')")
+    @Results(value = {
+            @Result(column = "user_id" , property = "userId"),
+            @Result(column = "is_done" , property = "isDone"),
+            @Result(column = "unit_price" , property = "unitPrice"),
+            @Result(column = "start_time" , property = "startTime"),
+            @Result(column = "end_time" , property = "endTime"),
+            @Result(column = "new_degree" , property = "newDegree"),
+            @Result(column = "thumb_up" , property = "thumbUp"),
+    })
     List<RentalOfGood> getLikeContent(@Param("text")String text);
 
     @Select("select * from rental_of_goods where title like concat('%' , #{text} , '%')")
+    @Results(value = {
+            @Result(column = "user_id" , property = "userId"),
+            @Result(column = "is_done" , property = "isDone"),
+            @Result(column = "unit_price" , property = "unitPrice"),
+            @Result(column = "start_time" , property = "startTime"),
+            @Result(column = "end_time" , property = "endTime"),
+            @Result(column = "new_degree" , property = "newDegree"),
+            @Result(column = "thumb_up" , property = "thumbUp"),
+    })
     List<RentalOfGood> getLikeTitle(@Param("text")String text);
 
     @Select("select * from rental_of_goods where label like concat('%' , #{text} , '%')")
+    @Results(value = {
+            @Result(column = "user_id" , property = "userId"),
+            @Result(column = "is_done" , property = "isDone"),
+            @Result(column = "unit_price" , property = "unitPrice"),
+            @Result(column = "start_time" , property = "startTime"),
+            @Result(column = "end_time" , property = "endTime"),
+            @Result(column = "new_degree" , property = "newDegree"),
+            @Result(column = "thumb_up" , property = "thumbUp"),
+    })
     List<RentalOfGood> getLikeLabel(@Param("text")String text);
     //=================================== 查 ======================================
 }

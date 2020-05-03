@@ -18,6 +18,21 @@ import java.util.UUID;
  * @author 会飞的大野鸡
  * @create 2020/4/30
  * @description:物品租赁类控制层
+ * 1./api/rental/insert             增加物品租赁
+ * 2./api/rental/upload/image       增加物品租赁里的图片
+ * 3./api/rental/update             编辑物品租赁
+ * 4./api/rental/rent               更新租出状态
+ * 5./api/rental/update/isDone      更新完成状况
+ * 6./api/rental/update/thumbUp     点赞数+1
+ * 7./api/rental/update/collect     收藏数+1
+ * 8./api/rental/update/comment     评论数+1
+ * 9./api/rental/delete             删除某个失物招领
+ * 10./api/rental/query/all          获得全部失物招领的信息
+ * 11./api/rental/query/id          根据条目id查询失物招领的信息
+ * 12./api/rental/query/userId      根据userId查询食物招领的信息
+ * 13./api/rental/query/like/title  标题的模糊查找
+ * 14./api/rental/query/like/content 内容的模糊查找
+ * 15./api/rental/query/like/lebel  标签的模糊查找
  * TODO:
  */
 
