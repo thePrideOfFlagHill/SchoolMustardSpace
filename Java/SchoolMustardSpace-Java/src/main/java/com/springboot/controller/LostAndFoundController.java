@@ -2,6 +2,7 @@ package com.springboot.controller;
 
 import com.springboot.domain.LostAndFound;
 import com.springboot.service.LostAndFoundService;
+import com.springboot.utils.datetool.DateResult;
 import com.springboot.utils.jsontool.JsonResult;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,7 @@ public class LostAndFoundController {
         lostAndFound.setLabel(a.get("label").toString());
         lostAndFound.setLocation(a.get("location").toString());
 
-        lostAndFound.setTime(a.get("time").toString());
+        lostAndFound.setTime(new DateResult().getCurrentTime());
         lostAndFound.setIsLost(Integer.parseInt(a.get("isLost")));
 
         String msg = lostAndFoundService.insertLostAndFound(lostAndFound);
@@ -122,8 +123,8 @@ public class LostAndFoundController {
     }
 
     @PostMapping("/delete")
-    public JsonResult delete(@Param("id")String id){
-        String msg = lostAndFoundService.deleteById(id);
+    public JsonResult delete(@RequestBody Map<String , String> resMap){
+        String msg = lostAndFoundService.deleteById(resMap.get("id").toString());
 
         if(msg.equals("succeed")){
             return JsonResult.build(200,msg,null);

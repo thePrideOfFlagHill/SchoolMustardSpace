@@ -135,8 +135,8 @@ public class RentalOfGoodController {
     }
 
     @PostMapping("/delete")
-    public JsonResult delete(@Param("id")String id){
-        String msg = rentalOfGoodService.deleteById(id);
+    public JsonResult delete(@RequestBody Map<String , String> resMap){
+        String msg = rentalOfGoodService.deleteById(resMap.get("id").toString());
 
         if(msg.equals("succeed")){
             return JsonResult.build(200,msg,null);
