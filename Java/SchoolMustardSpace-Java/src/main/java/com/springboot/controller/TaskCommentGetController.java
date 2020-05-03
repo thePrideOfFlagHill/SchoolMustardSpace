@@ -1,5 +1,6 @@
 package com.springboot.controller;
 
+import com.springboot.constant.TaskCommentConstant;
 import com.springboot.domain.TaskComment;
 import com.springboot.service.TaskCommentService;
 import com.springboot.utils.jsontool.JsonResult;
@@ -24,7 +25,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/api")
-public class TaskCommentGetController {
+public class TaskCommentGetController implements TaskCommentConstant {
 
     @Autowired
     private TaskCommentService taskCommentService;
@@ -42,7 +43,7 @@ public class TaskCommentGetController {
 
         List<TaskComment> list = this.taskCommentService.getAllTaskComment();
 
-        return JsonResult.ok(list);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
 
     }
 
@@ -59,7 +60,7 @@ public class TaskCommentGetController {
 
         TaskComment taskComment = this.taskCommentService.queryTaskCommentById(id);
 
-        return JsonResult.ok(taskComment);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,taskComment);
 
     }
 
@@ -76,7 +77,7 @@ public class TaskCommentGetController {
 
         List<TaskComment> list = this.taskCommentService.queryTaskCommentByUserId(user_id);
 
-        return JsonResult.ok(list);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
 
     }
 
@@ -93,7 +94,7 @@ public class TaskCommentGetController {
 
         List<TaskComment> list = this.taskCommentService.queryTaskCommentByTableId(table_id);
 
-        return JsonResult.ok(list);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
 
     }
 }

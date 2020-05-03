@@ -1,10 +1,7 @@
 package com.springboot.service.Impl;
 
-import com.springboot.domain.GoodComment;
 import com.springboot.domain.LostFoundComment;
-import com.springboot.mapper.GoodCommentMapper;
 import com.springboot.mapper.LostFoundCommentMapper;
-import com.springboot.service.GoodCommentService;
 import com.springboot.service.LostFoundCommentService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;

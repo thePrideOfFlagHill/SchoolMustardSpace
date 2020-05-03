@@ -1,7 +1,6 @@
 package com.springboot.controller;
 
 import com.springboot.constant.TaskCommentConstant;
-import com.springboot.domain.Task;
 import com.springboot.domain.TaskComment;
 import com.springboot.service.TaskCommentService;
 import com.springboot.utils.datetool.DateResult;
@@ -75,7 +74,7 @@ public class TaskCommentPostController implements TaskCommentConstant {
      */
     @RequestMapping(value = "task/comment/update/content", method = RequestMethod.POST)
     public JsonResult updateTaskCommentContent(@RequestParam(value = "id") String id,
-                                     @RequestParam(value = "content") String content) {
+                                               @RequestParam(value = "content") String content) {
 
 
         int temp = taskCommentService.updateTaskCommentContent(content,id);

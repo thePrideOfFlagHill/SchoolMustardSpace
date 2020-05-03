@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="402c6702-6802-4b97-9bfe-2f9c15f2348b" name="Default Changelist" comment="" />
+    <list default="true" id="8cf38bde-941c-4f28-a45d-091c7b1f97ba" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/springboot/controller/AdminuserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/springboot/controller/AdminuserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/springboot/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/springboot/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/springboot/domain/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/springboot/domain/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/springboot/mapper/TaskMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/springboot/mapper/TaskMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/springboot/service/FileUpAndDownService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/springboot/service/FileUpAndDownService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/springboot/service/Impl/TaskServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/springboot/service/Impl/TaskServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/springboot/service/TaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/springboot/service/TaskService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,55 +21,53 @@
       <executable />
     </execution>
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Interface" />
-        <option value="Class" />
-      </list>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="C:\Users\ASUS\Desktop\SchoolMustardSpace\Java\SchoolMustardSpace-Java\.idea" />
+      </set>
     </option>
   </component>
-  <component name="ProjectId" id="1b1NorTtXbMeLbdkl1sSpxgIVoY" />
+  <component name="ProjectId" id="1bO77lq1DaEdrZNAZ96Lr6nGgRO" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="RequestMappingsPanelOrder0" value="0" />
-    <property name="RequestMappingsPanelOrder1" value="1" />
-    <property name="RequestMappingsPanelOrder2" value="2" />
-    <property name="RequestMappingsPanelWidth0" value="75" />
-    <property name="RequestMappingsPanelWidth1" value="75" />
-    <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/springboot/controller" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.springboot.controller" />
-      <recent name="com.springboot.constant" />
-      <recent name="com.springboot.service.Impl" />
-      <recent name="com.springboot.service" />
-      <recent name="com.springboot.mapper" />
+      <recent name="com.springboot.utils.uuidtool" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Z&amp;C\Desktop\SchoolMustardSpace-Java\src\main\java\com\springboot\controller" />
-      <recent name="C:\Users\Z&amp;C\Desktop\SchoolMustardSpace-Java\src\main\java\com\springboot\domain" />
-      <recent name="C:\Users\Z&amp;C\Desktop\SchoolMustardSpace-Java\src\main\java\com\springboot\service" />
-      <recent name="C:\Users\Z&amp;C\Desktop\SchoolMustardSpace-Java\src\main\java\com\springboot\serviceImpl" />
-      <recent name="C:\Users\Z&amp;C\Desktop\SchoolMustardSpace-Java\src\main\resources" />
+      <recent name="C:\Users\Z&amp;C\Desktop\SchoolMustardSpace\Java\SchoolMustardSpace-Java\src\main\resources" />
+      <recent name="C:\Users\ASUS\Desktop\SchoolMustardSpace\Java\SchoolMustardSpace-Java\src\main\java\com\springboot\controller" />
+      <recent name="C:\Users\ASUS\Desktop\SchoolMustardSpace\Java\SchoolMustardSpace-Java\src\main\java\com\springboot\mapper" />
+      <recent name="C:\Users\ASUS\Desktop\SchoolMustardSpace\Java\SchoolMustardSpace-Java\src\main\java\com\springboot\service\Impl" />
+      <recent name="C:\Users\ASUS\Desktop\SchoolMustardSpace\Java\SchoolMustardSpace-Java\src\main\java\com\springboot\service" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="MustardSpaceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+    <configuration name="MustardSpaceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.springboot.MustardSpaceApplication" />
       <module name="SchoolMustardSpace-Java" />
       <extension name="coverage">
         <pattern>
@@ -68,14 +75,13 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.springboot.MustardSpaceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.MustardSpaceApplication" />
+        <item itemvalue="Application.MustardSpaceApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -96,78 +102,62 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="402c6702-6802-4b97-9bfe-2f9c15f2348b" name="Default Changelist" comment="" />
-      <created>1587795817553</created>
+      <changelist id="8cf38bde-941c-4f28-a45d-091c7b1f97ba" name="Default Changelist" comment="" />
+      <created>1588491120123</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1587795817553</updated>
-      <workItem from="1587795821189" duration="1890000" />
-      <workItem from="1587835537962" duration="1116000" />
-      <workItem from="1588168591229" duration="5638000" />
-      <workItem from="1588227941147" duration="1734000" />
-      <workItem from="1588244919509" duration="31040000" />
+      <updated>1588491120123</updated>
+      <workItem from="1588491123768" duration="1968000" />
+      <workItem from="1588493159036" duration="1480000" />
+      <workItem from="1588497044604" duration="123000" />
+      <workItem from="1588506620468" duration="5050000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
-    <state x="574" y="97" key="#com.intellij.ide.util.MemberChooser" timestamp="1588393339869">
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588491803590">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="97" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1588393339869" />
-    <state x="338" y="338" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1588171694393">
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1588491803590" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1588492666707">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="338" y="338" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1588171694393" />
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587796735967">
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1588492666707" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1588538167828">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1587796735967" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1588488452872">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588538167828" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1588538167828">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588488452872" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1588488452872">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588538167828" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1588538167827">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588488452872" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1588488452872">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588538167827" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1588538167828">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588488452872" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1588488452872">
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588538167828" />
+    <state x="249" y="0" key="SettingsEditor" timestamp="1588492032383">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588488452872" />
-    <state width="1493" height="210" key="GridCell.Tab.1.bottom" timestamp="1588488452873">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588488452873" />
-    <state width="1493" height="210" key="GridCell.Tab.1.center" timestamp="1588488452873">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1588488452873" />
-    <state width="1493" height="210" key="GridCell.Tab.1.left" timestamp="1588488452873">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1588488452873" />
-    <state width="1493" height="210" key="GridCell.Tab.1.right" timestamp="1588488452873">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1588488452873" />
-    <state x="449" y="237" key="com.intellij.ide.util.TipDialog" timestamp="1588244944603">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="449" y="237" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1588244944603" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1588246947804">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1588246947804" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1588271904269">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1588271904269" />
+    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1588492032383" />
   </component>
 </project>

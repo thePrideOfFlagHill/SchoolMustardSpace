@@ -15,12 +15,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * InfectStatisticApplication
+ * MustardSpaceApplication
  * TODO
  * @description springboot启动类
  * @author 221701412_theTuring
  * @version v 1.0.0
- * @since 2020.3.8
+ * @since 2020.5.3
  */
 
 @SpringBootApplication

@@ -1,9 +1,7 @@
 package com.springboot.controller;
 
 import com.springboot.constant.GoodCommentConstant;
-import com.springboot.domain.GoodComment;
 import com.springboot.domain.LostFoundComment;
-import com.springboot.service.GoodCommentService;
 import com.springboot.service.LostFoundCommentService;
 import com.springboot.utils.datetool.DateResult;
 import com.springboot.utils.jsontool.JsonResult;
@@ -76,7 +74,7 @@ public class LostFoundCommentPostController implements GoodCommentConstant {
      */
     @RequestMapping(value = "lostfound/comment/update/content", method = RequestMethod.POST)
     public JsonResult updateLostFoundCommentContent(@RequestParam(value = "id") String id,
-                                     @RequestParam(value = "content") String content) {
+                                                    @RequestParam(value = "content") String content) {
 
 
         int temp = lostFoundCommentService.updateLostFoundCommentContent(content,id);

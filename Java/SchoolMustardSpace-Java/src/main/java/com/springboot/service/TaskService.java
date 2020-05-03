@@ -2,6 +2,7 @@ package com.springboot.service;
 
 import com.springboot.domain.Task;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -21,6 +22,12 @@ public interface TaskService {
 
     List<Task> queryTaskByUserId(String user_id);
 
+    List<Task> getLikeContent(@Param("text") String text);
+
+    List<Task> getLikeTitle(@Param("text") String text);
+
+    List<Task> getLikeLabel(@Param("text") String text);
+
     int insertTask(Task task);
 
     int updateTask(Task task);
@@ -32,6 +39,8 @@ public interface TaskService {
     int updateTaskCollect(String id);
 
     int updateTaskComment(String id);
+
+    int updateTaskImageUrl(@Param("image") String image, @Param("id") String id);
 
     int deleteTask(String id);
 

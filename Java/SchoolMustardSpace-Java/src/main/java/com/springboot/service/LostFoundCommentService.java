@@ -1,6 +1,5 @@
 package com.springboot.service;
 
-import com.springboot.domain.GoodComment;
 import com.springboot.domain.LostFoundComment;
 import org.apache.ibatis.annotations.Param;
 

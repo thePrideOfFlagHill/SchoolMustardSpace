@@ -41,6 +41,30 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public List<Task> getLikeContent(@Param("text") String text){
+
+        List<Task> list = this.taskMapper.getLikeContent(text);
+
+        return list;
+    }
+
+    @Override
+    public List<Task> getLikeTitle(@Param("text") String text){
+
+        List<Task> list = this.taskMapper.getLikeTitle(text);
+
+        return list;
+    }
+
+    @Override
+    public List<Task> getLikeLabel(@Param("text") String text){
+
+        List<Task> list = this.taskMapper.getLikeLabel(text);
+
+        return list;
+    }
+
+    @Override
     public List<Task> queryTaskByUserId(String user_id){
 
         List<Task> list = this.taskMapper.queryTaskByUserId(user_id);
@@ -93,6 +117,14 @@ public class TaskServiceImpl implements TaskService {
     public int updateTaskComment(String id){
 
         int temp = this.taskMapper.updateTaskComment(id);
+
+        return temp;
+    }
+
+    @Override
+    public int updateTaskImageUrl(@Param("image") String image, @Param("id") String id){
+
+        int temp = this.taskMapper.updateTaskImageUrl(image,id);
 
         return temp;
     }

@@ -1,9 +1,8 @@
 package com.springboot.controller;
 
+import com.springboot.constant.GoodCommentConstant;
 import com.springboot.domain.GoodComment;
-import com.springboot.domain.TaskComment;
 import com.springboot.service.GoodCommentService;
-import com.springboot.service.TaskCommentService;
 import com.springboot.utils.jsontool.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +25,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/api")
-public class GoodCommentGetController {
+public class GoodCommentGetController implements GoodCommentConstant {
 
     @Autowired
     private GoodCommentService goodCommentService;
@@ -44,7 +43,7 @@ public class GoodCommentGetController {
 
         List<GoodComment> list = this.goodCommentService.getAllGoodComment();
 
-        return JsonResult.ok(list);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
 
     }
 
@@ -61,7 +60,7 @@ public class GoodCommentGetController {
 
         GoodComment goodComment = this.goodCommentService.queryGoodCommentById(id);
 
-        return JsonResult.ok(goodComment);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,goodComment);
 
     }
 
@@ -78,7 +77,7 @@ public class GoodCommentGetController {
 
         List<GoodComment> list = this.goodCommentService.queryGoodCommentByUserId(user_id);
 
-        return JsonResult.ok(list);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
 
     }
 
@@ -95,7 +94,7 @@ public class GoodCommentGetController {
 
         List<GoodComment> list = this.goodCommentService.queryGoodCommentByTableId(table_id);
 
-        return JsonResult.ok(list);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
 
     }
 }

@@ -1,5 +1,6 @@
 package com.springboot.mapper;
 
+import com.springboot.domain.LostAndFound;
 import com.springboot.domain.Task;
 import org.apache.ibatis.annotations.*;
 
@@ -27,6 +28,18 @@ public interface TaskMapper {
     //按上传者的owner_id查询具体任务
     @Select("SELECT * FROM task WHERE user_id =#{user_id}")
     List<Task> queryTaskByUserId(String user_id);
+
+    //模糊查询内容
+    @Select("select * from task where content like concat('%' , #{text} , '%')")
+    List<Task> getLikeContent(@Param("text") String text);
+
+    //模糊查询标题
+    @Select("select * from task where title like concat('%' , #{text} , '%')")
+    List<Task> getLikeTitle(@Param("text") String text);
+
+    //模糊查询标签
+    @Select("select * from task where label like concat('%' , #{text} , '%')")
+    List<Task> getLikeLabel(@Param("text") String text);
 
     //发布插入任务
     @Insert("INSERT INTO task (id, user_id, title, content, image, label, location, is_done, reword, start_time, end_time, thumb_up, collect, comment) "
@@ -66,6 +79,10 @@ public interface TaskMapper {
     //更新任务 评论数+1
     @Update("UPDATE task SET comment = comment + 1 WHERE id=#{id}")
     int updateTaskComment(String id);
+
+    //更新图片url地址
+    @Update("UPDATE task SET `image`=#{image} WHERE id=#{id}")
+    int updateTaskImageUrl(@Param("image") String image, @Param("id") String id);
 
     //删除任务
     @Delete("delete from task where id = #{id}")

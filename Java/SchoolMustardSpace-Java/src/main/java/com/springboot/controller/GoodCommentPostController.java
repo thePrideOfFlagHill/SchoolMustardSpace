@@ -1,11 +1,8 @@
 package com.springboot.controller;
 
 import com.springboot.constant.GoodCommentConstant;
-import com.springboot.constant.TaskCommentConstant;
 import com.springboot.domain.GoodComment;
-import com.springboot.domain.TaskComment;
 import com.springboot.service.GoodCommentService;
-import com.springboot.service.TaskCommentService;
 import com.springboot.utils.datetool.DateResult;
 import com.springboot.utils.jsontool.JsonResult;
 import com.springboot.utils.uuidtool.UuidResult;
@@ -77,7 +74,7 @@ public class GoodCommentPostController implements GoodCommentConstant {
      */
     @RequestMapping(value = "good/comment/update/content", method = RequestMethod.POST)
     public JsonResult updateGoodCommentContent(@RequestParam(value = "id") String id,
-                                     @RequestParam(value = "content") String content) {
+                                               @RequestParam(value = "content") String content) {
 
 
         int temp = goodCommentService.updateGoodCommentContent(content,id);

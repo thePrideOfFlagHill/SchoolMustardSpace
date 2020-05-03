@@ -1,6 +1,5 @@
 package com.springboot.mapper;
 
-import com.springboot.domain.Task;
 import com.springboot.domain.TaskComment;
 import org.apache.ibatis.annotations.*;
 

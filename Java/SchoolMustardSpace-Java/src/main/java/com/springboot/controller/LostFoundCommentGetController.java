@@ -1,9 +1,8 @@
 package com.springboot.controller;
 
+import com.springboot.constant.FoundCommentConstant;
 import com.springboot.domain.LostFoundComment;
-import com.springboot.domain.TaskComment;
 import com.springboot.service.LostFoundCommentService;
-import com.springboot.service.TaskCommentService;
 import com.springboot.utils.jsontool.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +25,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/api")
-public class LostFoundCommentGetController {
+public class LostFoundCommentGetController implements FoundCommentConstant {
 
     @Autowired
     private LostFoundCommentService lostFoundCommentService;
@@ -44,7 +43,7 @@ public class LostFoundCommentGetController {
 
         List<LostFoundComment> list = this.lostFoundCommentService.getAllLostFoundComment();
 
-        return JsonResult.ok(list);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
 
     }
 
@@ -61,7 +60,7 @@ public class LostFoundCommentGetController {
 
         LostFoundComment lostFoundComment = this.lostFoundCommentService.queryLostFoundCommentById(id);
 
-        return JsonResult.ok(lostFoundComment);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,lostFoundComment);
 
     }
 
@@ -78,7 +77,7 @@ public class LostFoundCommentGetController {
 
         List<LostFoundComment> list = this.lostFoundCommentService.queryLostFoundCommentByUserId(user_id);
 
-        return JsonResult.ok(list);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
 
     }
 
@@ -95,7 +94,7 @@ public class LostFoundCommentGetController {
 
         List<LostFoundComment> list = this.lostFoundCommentService.queryLostFoundCommentByTableId(table_id);
 
-        return JsonResult.ok(list);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
 
     }
 }

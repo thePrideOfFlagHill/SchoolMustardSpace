@@ -1,7 +1,6 @@
 package com.springboot.mapper;
 
 import com.springboot.domain.GoodComment;
-import com.springboot.domain.TaskComment;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

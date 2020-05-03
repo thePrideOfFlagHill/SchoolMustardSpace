@@ -1,11 +1,8 @@
 package com.springboot.service.Impl;
 
 import com.springboot.domain.GoodComment;
-import com.springboot.domain.TaskComment;
 import com.springboot.mapper.GoodCommentMapper;
-import com.springboot.mapper.TaskCommentMapper;
 import com.springboot.service.GoodCommentService;
-import com.springboot.service.TaskCommentService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

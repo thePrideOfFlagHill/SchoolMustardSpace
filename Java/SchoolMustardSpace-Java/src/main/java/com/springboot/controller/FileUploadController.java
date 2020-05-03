@@ -1,6 +1,9 @@
 package com.springboot.controller;
 
 import com.springboot.service.FileUpAndDownService;
+import com.springboot.service.LostAndFoundService;
+import com.springboot.service.RentalOfGoodService;
+import com.springboot.service.TaskService;
 import com.springboot.utils.filetool.IStatusMessage;
 import com.springboot.utils.filetool.ResponseResult;
 import com.springboot.utils.filetool.ServiceException;
@@ -34,11 +37,20 @@ public class FileUploadController {
     @Autowired
     private FileUpAndDownService fileUpAndDownService;
 
+    @Autowired
+    private TaskService taskService;
 
-    @RequestMapping(value = "/setFileUpload", method = RequestMethod.POST)
+    @Autowired
+    private RentalOfGoodService rentalOfGoodService;
+
+    @Autowired
+    private LostAndFoundService lostAndFoundService;
+
+
+    @RequestMapping(value = "/task/setFileUpload", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseResult setFileUpload(@RequestParam(value = "file") MultipartFile file,
-                                        @RequestParam(value = "id") int id) {
+    public ResponseResult setTaskFileUpload(@RequestParam(value = "file") MultipartFile file,
+                                        @RequestParam(value = "id") String id) {
 
         ResponseResult result = new ResponseResult();
         try {
@@ -49,8 +61,64 @@ public class FileUploadController {
                 return result;
             }
 
-//            //图片上传成功即更新数据库对应的图片地址
-//            evBikeService.updateEvBikeImageUrl(resultMap.get("path").toString(),id);
+            //图片上传成功即更新数据库对应的图片地址
+            taskService.updateTaskImageUrl(resultMap.get("path").toString(),id);
+
+            result.setData(resultMap);
+
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            LOGGER.error(">>>>>>图片上传异常，e={}", e.getMessage());
+            result.setCode(IStatusMessage.SystemStatus.ERROR.getCode());
+            result.setMessage(IStatusMessage.SystemStatus.ERROR.getMessage());
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/good/setFileUpload", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseResult setGoodFileUpload(@RequestParam(value = "file") MultipartFile file,
+                                        @RequestParam(value = "id") String id) {
+
+        ResponseResult result = new ResponseResult();
+        try {
+            Map<String, Object> resultMap = upload(file);
+            if (!IStatusMessage.SystemStatus.SUCCESS.getMessage().equals(resultMap.get("result"))) {
+                result.setCode(IStatusMessage.SystemStatus.PARAM.getCode());
+                result.setMessage((String) resultMap.get("msg"));
+                return result;
+            }
+
+            //图片上传成功即更新数据库对应的图片地址
+            rentalOfGoodService.updateImg(resultMap.get("path").toString(),id);
+
+            result.setData(resultMap);
+
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            LOGGER.error(">>>>>>图片上传异常，e={}", e.getMessage());
+            result.setCode(IStatusMessage.SystemStatus.ERROR.getCode());
+            result.setMessage(IStatusMessage.SystemStatus.ERROR.getMessage());
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/lostfound/setFileUpload", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseResult setLostFoundFileUpload(@RequestParam(value = "file") MultipartFile file,
+                                        @RequestParam(value = "id") String id) {
+
+        ResponseResult result = new ResponseResult();
+        try {
+            Map<String, Object> resultMap = upload(file);
+            if (!IStatusMessage.SystemStatus.SUCCESS.getMessage().equals(resultMap.get("result"))) {
+                result.setCode(IStatusMessage.SystemStatus.PARAM.getCode());
+                result.setMessage((String) resultMap.get("msg"));
+                return result;
+            }
+
+            //图片上传成功即更新数据库对应的图片地址
+            lostAndFoundService.updateImg(resultMap.get("path").toString(),id);
 
             result.setData(resultMap);
 
