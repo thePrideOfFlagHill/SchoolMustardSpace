@@ -7,9 +7,9 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 /**
- * TaskMapper
+ * TaskCommentMapper
  * TODO
- * @description TaskMapper
+ * @description TaskCommentMapper
  * @author 221701412_theTuring
  * @version v 1.0.0
  * @since 2020.4.30

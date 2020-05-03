@@ -1,23 +1,17 @@
 package com.springboot.constant;
 
 /**
- * TaskConstant
+ * TaskCommentConstant
  * TODO
- * @description 任务常量接口 TaskConstant
+ * @description 任务常量接口 TaskCommentConstant
  * @author 221701412_theTuring
  * @version v 1.0.0
  * @since 2020.4.30
  */
-public interface TaskConstant {
-
-    //初始化完成状态
-    int INIT_DONE = 0;
+public interface GoodCommentConstant {
 
     //初始化点赞
     int INIT_THUMB = 0;
-
-    //初始化收藏
-    int INIT_COLLECT = 0;
 
     //初始化评论
     int INIT_COMMENT = 0;
@@ -33,4 +27,3 @@ public interface TaskConstant {
 
     int STATUS_SUCCEED = 200;
 }
-    
