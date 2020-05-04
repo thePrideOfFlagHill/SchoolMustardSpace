@@ -56,7 +56,7 @@ public class TaskGetController implements TaskConstant {
      * @version v 1.0.0
      * @since 2020.4.27
      */
-    @RequestMapping(value = "query/task/id/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "task/query/id/{id}", method = RequestMethod.GET)
     public JsonResult queryTaskById(@PathVariable String id) {
 
         Task task = this.taskService.queryTaskById(id);
@@ -73,7 +73,7 @@ public class TaskGetController implements TaskConstant {
      * @version v 1.0.0
      * @since 2020.4.27
      */
-    @RequestMapping(value = "query/task/user_id/{user_id}", method = RequestMethod.GET)
+    @RequestMapping(value = "task/query/user_id/{user_id}", method = RequestMethod.GET)
     public JsonResult queryTaskByUserId(@PathVariable String user_id) {
 
         List<Task> list = this.taskService.queryTaskByUserId(user_id);

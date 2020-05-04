@@ -98,7 +98,7 @@ public class TaskPostController implements TaskConstant {
      */
     @RequestMapping(value = "task/update/is_done", method = RequestMethod.POST)
     public JsonResult updateTaskDone(@RequestParam(value = "id") String id,
-                                     @RequestParam(value = "id_done") int id_done) {
+                                     @RequestParam(value = "is_done") int id_done) {
 
 
         int temp = taskService.updateTaskIs_done(id_done,id);

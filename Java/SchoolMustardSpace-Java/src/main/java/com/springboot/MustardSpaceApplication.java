@@ -27,7 +27,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 //exclude表示自动配置时不包括Multipart配置
 @EnableAutoConfiguration(exclude = {MultipartAutoConfiguration.class})
 @ServletComponentScan
-public class MustardSpaceApplication extends SpringBootServletInitializer{
+public class MustardSpaceApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args){
 
