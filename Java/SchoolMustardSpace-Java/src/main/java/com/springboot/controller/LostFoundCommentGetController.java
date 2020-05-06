@@ -1,8 +1,12 @@
 package com.springboot.controller;
 
 import com.springboot.constant.FoundCommentConstant;
-import com.springboot.domain.LostFoundComment;
+//import com.springboot.domain.LostFoundComment;
+import com.springboot.domain.Comment;
+import com.springboot.domain.CommentPlus;
+import com.springboot.domain.User;
 import com.springboot.service.LostFoundCommentService;
+import com.springboot.service.UserService;
 import com.springboot.utils.jsontool.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +33,9 @@ public class LostFoundCommentGetController implements FoundCommentConstant {
 
     @Autowired
     private LostFoundCommentService lostFoundCommentService;
+    @Autowired
+    private UserService userService;
+
 
     /**
      * queryLostFoundCommentAll
@@ -41,7 +48,7 @@ public class LostFoundCommentGetController implements FoundCommentConstant {
     @RequestMapping(value = "lostfound/comment/query/all", method = RequestMethod.GET)
     public JsonResult queryLostFoundCommentAll() {
 
-        List<LostFoundComment> list = this.lostFoundCommentService.getAllLostFoundComment();
+        List<Comment> list = this.lostFoundCommentService.getAllLostFoundComment();
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
 
@@ -51,16 +58,28 @@ public class LostFoundCommentGetController implements FoundCommentConstant {
      * queryLostFoundCommentById
      * TODO
      * @description /api/lostfound/comment/query/id/{id} 根据条目id查询任务评论（单个对应）
-     * @author 221701412_theTuring
+     * @author 221701412_theTuring  会飞的大野鸡
      * @version v 1.0.0
      * @since 2020.5.1
      */
     @RequestMapping(value = "query/lostfound/comment/id/{id}", method = RequestMethod.GET)
     public JsonResult queryLostFoundCommentById(@PathVariable String id) {
 
-        LostFoundComment lostFoundComment = this.lostFoundCommentService.queryLostFoundCommentById(id);
+        Comment lostFoundComment = this.lostFoundCommentService.queryLostFoundCommentById(id);
 
-        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,lostFoundComment);
+        CommentPlus commentPlus = new CommentPlus();
+        User user = userService.queryOneUserById(id);
+
+        commentPlus.setId(lostFoundComment.getId());
+        commentPlus.setUser_id(lostFoundComment.getUser_id());
+        commentPlus.setContent(lostFoundComment.getContent());
+        commentPlus.setPublish_time(lostFoundComment.getPublish_time());
+        commentPlus.setComment(lostFoundComment.getComment());
+        commentPlus.setThumb_up(lostFoundComment.getThumb_up());
+        commentPlus.setTable_id(lostFoundComment.getTable_id());
+        commentPlus.setName(user.getName());
+
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,commentPlus);
 
     }
 
@@ -75,7 +94,7 @@ public class LostFoundCommentGetController implements FoundCommentConstant {
     @RequestMapping(value = "query/lostfound/comment/user_id/{user_id}", method = RequestMethod.GET)
     public JsonResult queryLostFoundCommentByUserId(@PathVariable String user_id) {
 
-        List<LostFoundComment> list = this.lostFoundCommentService.queryLostFoundCommentByUserId(user_id);
+        List<Comment> list = this.lostFoundCommentService.queryLostFoundCommentByUserId(user_id);
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
 
@@ -92,10 +111,9 @@ public class LostFoundCommentGetController implements FoundCommentConstant {
     @RequestMapping(value = "query/lostfound/comment/table_id/{table_id}", method = RequestMethod.GET)
     public JsonResult queryLostFoundCommentByTableId(@PathVariable String table_id) {
 
-        List<LostFoundComment> list = this.lostFoundCommentService.queryLostFoundCommentByTableId(table_id);
+        List<Comment> list = this.lostFoundCommentService.queryLostFoundCommentByTableId(table_id);
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
 
     }
 }
-    

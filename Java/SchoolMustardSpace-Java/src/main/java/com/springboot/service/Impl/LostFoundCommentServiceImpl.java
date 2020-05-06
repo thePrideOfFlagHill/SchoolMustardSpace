@@ -1,6 +1,7 @@
 package com.springboot.service.Impl;
 
-import com.springboot.domain.LostFoundComment;
+import com.springboot.domain.Comment;
+//import com.springboot.domain.LostFoundComment;
 import com.springboot.mapper.LostFoundCommentMapper;
 import com.springboot.service.LostFoundCommentService;
 import org.apache.ibatis.annotations.Param;
@@ -13,7 +14,7 @@ import java.util.List;
  * LostFoundCommentServiceImpl
  * TODO
  * @description LostFoundCommentServiceImpl 服务实现层
- * @author 221701412_theTuring
+ * @author 221701412_theTuring  会飞的大野鸡
  * @version v 1.0.0
  * @since 2020.5.1
  */
@@ -24,40 +25,40 @@ public class LostFoundCommentServiceImpl implements LostFoundCommentService {
     private LostFoundCommentMapper lostFoundCommentMapper;
 
     @Override
-    public List<LostFoundComment> getAllLostFoundComment() {
+    public List<Comment> getAllLostFoundComment() {
 
-        List<LostFoundComment> list = this.lostFoundCommentMapper.getAllLostFoundComment();
+        List<Comment> list = this.lostFoundCommentMapper.getAllLostFoundComment();
 
         return list;
 
     }
 
     @Override
-    public LostFoundComment queryLostFoundCommentById(String id){
+    public Comment queryLostFoundCommentById(String id){
 
-        LostFoundComment lostFoundComment = this.lostFoundCommentMapper.queryLostFoundCommentById(id);
+        Comment lostFoundComment = this.lostFoundCommentMapper.queryLostFoundCommentById(id);
 
         return lostFoundComment;
     }
 
     @Override
-    public List<LostFoundComment> queryLostFoundCommentByUserId(String user_id){
+    public List<Comment> queryLostFoundCommentByUserId(String user_id){
 
-        List<LostFoundComment> list = this.lostFoundCommentMapper.queryLostFoundCommentByUserId(user_id);
-
-        return list;
-    }
-
-    @Override
-    public List<LostFoundComment> queryLostFoundCommentByTableId(String table_id){
-
-        List<LostFoundComment> list = this.lostFoundCommentMapper.queryLostFoundCommentByTableId(table_id);
+        List<Comment> list = this.lostFoundCommentMapper.queryLostFoundCommentByUserId(user_id);
 
         return list;
     }
 
     @Override
-    public int insertLostFoundComment(LostFoundComment lostFoundComment){
+    public List<Comment> queryLostFoundCommentByTableId(String table_id){
+
+        List<Comment> list = this.lostFoundCommentMapper.queryLostFoundCommentByTableId(table_id);
+
+        return list;
+    }
+
+    @Override
+    public int insertLostFoundComment(Comment lostFoundComment){
 
         int temp = this.lostFoundCommentMapper.insertLostFoundComment(lostFoundComment);
 
@@ -98,4 +99,3 @@ public class LostFoundCommentServiceImpl implements LostFoundCommentService {
     }
 
 }
-    

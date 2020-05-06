@@ -1,6 +1,7 @@
 package com.springboot.service.Impl;
 
-import com.springboot.domain.GoodComment;
+import com.springboot.domain.Comment;
+//import com.springboot.domain.GoodComment;
 import com.springboot.mapper.GoodCommentMapper;
 import com.springboot.service.GoodCommentService;
 import org.apache.ibatis.annotations.Param;
@@ -24,40 +25,40 @@ public class GoodCommentServiceImpl implements GoodCommentService {
     private GoodCommentMapper goodCommentMapper;
 
     @Override
-    public List<GoodComment> getAllGoodComment() {
+    public List<Comment> getAllGoodComment() {
 
-        List<GoodComment> list = this.goodCommentMapper.getAllGoodComment();
+        List<Comment> list = this.goodCommentMapper.getAllGoodComment();
 
         return list;
 
     }
 
     @Override
-    public GoodComment queryGoodCommentById(String id){
+    public Comment queryGoodCommentById(String id){
 
-        GoodComment goodComment = this.goodCommentMapper.queryGoodCommentById(id);
+        Comment goodComment = this.goodCommentMapper.queryGoodCommentById(id);
 
         return goodComment;
     }
 
     @Override
-    public List<GoodComment> queryGoodCommentByUserId(String user_id){
+    public List<Comment> queryGoodCommentByUserId(String user_id){
 
-        List<GoodComment> list = this.goodCommentMapper.queryGoodCommentByUserId(user_id);
-
-        return list;
-    }
-
-    @Override
-    public List<GoodComment> queryGoodCommentByTableId(String table_id){
-
-        List<GoodComment> list = this.goodCommentMapper.queryGoodCommentByTableId(table_id);
+        List<Comment> list = this.goodCommentMapper.queryGoodCommentByUserId(user_id);
 
         return list;
     }
 
     @Override
-    public int insertGoodComment(GoodComment goodComment){
+    public List<Comment> queryGoodCommentByTableId(String table_id){
+
+        List<Comment> list = this.goodCommentMapper.queryGoodCommentByTableId(table_id);
+
+        return list;
+    }
+
+    @Override
+    public int insertGoodComment(Comment goodComment){
 
         int temp = this.goodCommentMapper.insertGoodComment(goodComment);
 
@@ -98,4 +99,3 @@ public class GoodCommentServiceImpl implements GoodCommentService {
     }
 
 }
-    
