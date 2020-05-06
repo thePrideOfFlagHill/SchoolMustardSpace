@@ -28,6 +28,7 @@ public class GetController {
 
     @GetMapping("/test")
     public JsonResult a(){
+        return null;
     }
 
 }
