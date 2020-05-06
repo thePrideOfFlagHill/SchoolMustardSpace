@@ -6,7 +6,11 @@ import overview from '../views/overview.vue'
 import sonTask from './manageTask.js'
 import sonLease from './manageLease.js'
 import sonAdmin from './manageAdmin.js'
-import sonComment from './manageComment.js'
+
+import taskComment from './taskComment.js'
+import lostComment from './lostComment.js'
+import leaseComment from './leaseComment.js'
+
 import sonUser from './manageUser.js'
 import sonLost from './manageLost.js'
 
@@ -15,7 +19,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/outer'
+    redirect: '/login'
+    // redirect: '/outer/overview'
   },
   {
     path: '/login',
@@ -58,12 +63,28 @@ const routes = [
         children: sonAdmin
       },
       {
-        path: 'manageComment',
-        name: 'manageComment',
-        redirect: '/outer/manageComment/itemPage',
-        meta: { title: '评论管理' },
+        path: 'taskComment',
+        name: 'taskComment',
+        redirect: '/outer/taskComment/itemPage',
+        meta: { title: '任务评论' },
         component: () => import('../views/Middle.vue'),
-        children: sonComment
+        children: taskComment
+      },
+      {
+        path: 'lostComment',
+        name: 'lostComment',
+        redirect: '/outer/lostComment/itemPage',
+        meta: { title: '失物评论' },
+        component: () => import('../views/Middle.vue'),
+        children: lostComment
+      },
+      {
+        path: 'leaseComment',
+        name: 'leaseComment',
+        redirect: '/outer/leaseComment/itemPage',
+        meta: { title: '租赁评论' },
+        component: () => import('../views/Middle.vue'),
+        children: leaseComment
       },
       {
         path: 'manageUser',

@@ -1,14 +1,25 @@
 <template>
-  <el-row :gutter="20">
+  <el-row :gutter="10">
     <el-col :span="4">
-      <el-input v-model="infos.id" placeholder="输入用户编号" class="width"></el-input>
+      <el-input v-model="infos.content" placeholder="输入" class="width"></el-input>
+    </el-col>
+    <el-col :span="4">
+      <el-dropdown @command="handleCommand">
+        <el-button type="primary">
+          {{infos.contentType}}
+          <i class="el-icon-arrow-down el-icon--right"></i>
+        </el-button>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="所属项目编号">所属项目编号</el-dropdown-item>
+          <el-dropdown-item command="用户编号">用户编号</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </el-col>
     <el-col :span="3">
-      <el-popover placement="bottom" width >
+      <el-popover placement="bottom" width>
         <div style="text-align: right; margin: 0">
           <div class="inline">
-            <p>用户状态：</p>
-            <el-select v-model="value" placeholder="请选择" class="width">
+            <el-select v-model="value" placeholder="任务状态" class="width">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -18,8 +29,7 @@
             </el-select>
           </div>
           <div class="inline">
-            <p>用户种类：</p>
-            <el-select v-model="infos.type" placeholder="请选择" class="width">
+            <el-select v-model="infos.type" placeholder="用户种类" class="width">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -29,12 +39,10 @@
             </el-select>
           </div>
           <div class="inline">
-            <p>用户姓名：</p>
-            <el-input v-model="infos.user" placeholder="请输入内容" class="width"></el-input>
+            <el-input v-model="infos.user" placeholder="用户姓名" class="width"></el-input>
           </div>
           <div class="inline">
-            <p>选择日期：</p>
-            <el-date-picker v-model="infos.date" type="date" placeholder="选择日期" class="width"></el-date-picker>
+            <el-date-picker v-model="infos.date" type="date" placeholder="起始时间" class="width"></el-date-picker>
           </div>
         </div>
         <el-button slot="reference">详细条件</el-button>
@@ -47,18 +55,18 @@
 </template>
 
 <script>
-
 export default {
   name: 'serachBox',
   data () {
     return {
       infos: {
-        date: 'date',
+        date: '',
         type: '',
         user: '',
-        id: ''
+        id: '',
+        content: '',
+        contentType: '所属项目编号'
       },
-
       options: [
         {
           value: '选项1',
@@ -87,6 +95,9 @@ export default {
   methods: {
     sendInfo () {
       this.$store.commit('setOption', this.infos)
+    },
+    handleCommand (command) {
+      this.infos.contentType = command
     }
   },
   watch: {
@@ -95,6 +106,11 @@ export default {
         this.sendInfo()
       },
       deep: true
+    }
+  },
+  mounted: function () {
+    if (this.$route.query.id !== (null || undefined)) {
+      this.infos.content = this.$route.query.id
     }
   }
 }

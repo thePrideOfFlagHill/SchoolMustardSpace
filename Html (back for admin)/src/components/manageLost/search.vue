@@ -1,7 +1,22 @@
 <template>
-  <el-row :gutter="20">
+  <el-row :gutter="10">
     <el-col :span="4">
-      <el-input v-model="infos.id" placeholder="输入失物编号" class="width"></el-input>
+      <el-input v-model="infos.content" placeholder="输入" class="width"></el-input>
+    </el-col>
+    <el-col :span="4">
+      <el-dropdown @command="handleCommand">
+        <el-button type="primary">
+          {{infos.contentType}}
+          <i class="el-icon-arrow-down el-icon--right"></i>
+        </el-button>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="项目编号">项目编号</el-dropdown-item>
+          <el-dropdown-item command="用户编号">用户编号</el-dropdown-item>
+          <el-dropdown-item command="标题">标题</el-dropdown-item>
+          <el-dropdown-item command="内容">内容</el-dropdown-item>
+          <el-dropdown-item command="标签">标签</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </el-col>
     <el-col :span="3">
       <el-popover placement="bottom" width>
@@ -51,9 +66,10 @@ export default {
         date: '',
         type: '',
         user: '',
-        id: ''
+        id: '',
+        content: '',
+        contentType: '用户编号'
       },
-
       options: [
         {
           value: '选项1',
@@ -82,6 +98,9 @@ export default {
   methods: {
     sendInfo () {
       this.$store.commit('setOption', this.infos)
+    },
+    handleCommand (command) {
+      this.infos.contentType = command
     }
   },
   watch: {
@@ -90,6 +109,11 @@ export default {
         this.sendInfo()
       },
       deep: true
+    }
+  },
+  mounted: function () {
+    if (this.$route.query.id !== (null || undefined)) {
+      this.infos.content = this.$route.query.id
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <el-row :gutter="20">
     <el-col :span="4">
-      <el-input v-model="infos.id" placeholder="输入管理员编号" class="width"></el-input>
+      <el-input v-model="infos.id" placeholder="输入管理员账号" class="width"></el-input>
     </el-col>
     <el-col :span="3">
       <el-popover placement="bottom" width>
@@ -92,6 +92,14 @@ export default {
     },
     increaseAdmin () {
       this.$router.push('increase')
+    }
+  },
+  watch: {
+    infos: {
+      handler: function () {
+        this.sendInfo()
+      },
+      deep: true
     }
   }
 }

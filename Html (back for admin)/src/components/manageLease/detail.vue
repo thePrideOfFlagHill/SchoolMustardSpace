@@ -4,7 +4,7 @@
       <el-row style="height:100%;">
         <el-col :span="4" class="picture">
           <div>
-            <el-image style="width: 70%; " :src="url" fit="fill"></el-image>
+            <el-image style="height:200px;width: 200px;" :src="url" fit="scale-down"></el-image>
           </div>
         </el-col>
         <el-col :span="10" class="task">
@@ -22,7 +22,7 @@
           <div class="taskId">
             申请人:
             <el-link type="info" @click="seeUser" :underline="false">
-              {{user}}
+              {{user_id}}
               <i class="el-icon-view el-icon--right"></i>
             </el-link>
           </div>
@@ -30,7 +30,7 @@
         <el-col :span="4" class="btns">
           <el-button-group class="btns">
             <el-button type="primary" icon="el-icon-edit" @click="examine()">审核</el-button>
-            <el-button type="primary" icon="el-icon-delete" @click="deleted()">删除</el-button>
+            <el-button type="primary" icon="el-icon-edit" @click="deleted()">删除</el-button>
           </el-button-group>
         </el-col>
       </el-row>
@@ -51,10 +51,30 @@
           <div>
             <el-row :gutter="20">
               <el-col :span="4">
-                <div class="textDecoration">起止时间：</div>
+                <div class="textDecoration">开始时间：</div>
               </el-col>
               <el-col :span="15">
                 <div class="textDecoration">{{startDate}}</div>
+              </el-col>
+            </el-row>
+          </div>
+          <div>
+            <el-row :gutter="20">
+              <el-col :span="4">
+                <div class="textDecoration">结束时间：</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">{{endDate}}</div>
+              </el-col>
+            </el-row>
+          </div>
+          <div>
+            <el-row :gutter="20">
+              <el-col :span="4">
+                <div class="textDecoration">任务状态</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">{{isDone}}</div>
               </el-col>
             </el-row>
           </div>
@@ -74,7 +94,7 @@
                 <div class="textDecoration">标签：</div>
               </el-col>
               <el-col :span="15">
-                <div class="textDecoration">标签：</div>
+                <div class="textDecoration">{{label}}</div>
               </el-col>
             </el-row>
           </div>
@@ -84,7 +104,7 @@
                 <div class="textDecoration">酬劳：</div>
               </el-col>
               <el-col :span="15">
-                <div class="textDecoration">酬劳：</div>
+                <div class="textDecoration">{{unitPrice}}</div>
               </el-col>
             </el-row>
           </div>
@@ -104,22 +124,17 @@
                 <div class="textDecoration">点赞数</div>
               </el-col>
               <el-col :span="15">
-                <div class="textDecoration">点赞数</div>
+                <div class="textDecoration">{{thumb_up}}</div>
               </el-col>
             </el-row>
           </div>
           <div>
             <el-row :gutter="20">
               <el-col :span="4">
-                <div class="textDecoration">接收人编号</div>
+                <div class="textDecoration">收藏数</div>
               </el-col>
               <el-col :span="15">
-                <div class="textDecoration">
-                  <el-link type="info" @click="seeAccept" :underline="false">
-                    {{user}}
-                    <i class="el-icon-view el-icon--right"></i>
-                  </el-link>
-                </div>
+                <div class="textDecoration">{{collect}}</div>
               </el-col>
             </el-row>
           </div>
@@ -136,7 +151,7 @@
         </el-col>
         <el-col :span="12">
           <div style="width:90%;margin:5%;" class="shadow">
-            <Map></Map>
+            <Map :point="location"></Map>
           </div>
         </el-col>
       </el-row>
@@ -149,15 +164,20 @@ export default {
   name: 'taskDetail',
   data: function () {
     return {
-      url:
-        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586064043299&di=936d37ebfc418579e3debf6d674edc82&imgtype=0&src=http%3A%2F%2Fa0.att.hudong.com%2F64%2F76%2F20300001349415131407760417677.jpg',
-      name: '任务标题1231513513',
-      status: '未完成',
-      id: '123',
-      user: 'wang',
-      startDate: '1900-01-03',
-      endDate: '2020-04-05',
-      decoration: '这是一项艰巨的任务'
+      url: '',
+      name: '',
+      status: '',
+      id: '',
+      user: '',
+      startDate: '',
+      endDate: '',
+      decoration: '',
+      label: '',
+      reword: '',
+      thumb_up: '',
+      comment: '',
+      location: '',
+      collect: ''
     }
   },
   methods: {
@@ -179,10 +199,22 @@ export default {
       })
         .then(() => {
           // 访问接口删除
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          })
+          var that = this
+          this.$axios
+            .post(this.$store.state.headPort + '/api/rental/delete', {
+              id: this.id
+            })
+            .then(function (response) {
+              that.$alert('删除成功', '', {
+                confirmButtonText: '确定',
+                callback: action => {
+                  that.$router.go(-1)
+                }
+              })
+            })
+            .catch(function (error) {
+              console.log(error)
+            })
         })
         .catch(() => {
           this.$message({
@@ -193,19 +225,22 @@ export default {
     },
     // 查看相关评论
     seeComment () {
+      var that = this
       this.$router.push({
-        name: 'commentPage',
-        params: {
-          id: this.id
+        name: 'leaseComment',
+        query: {
+          id: that.id
         }
       })
     },
     // 查看用户信息
     seeUser () {
+      var that = this
+      console.log(that.user_id)
       this.$router.push({
         name: 'userDetail',
-        params: {
-          id: this.id
+        query: {
+          id: this.user_id
         }
       })
     },
@@ -221,8 +256,36 @@ export default {
   },
   // 初始化函数
   created: function () {
-    // console.log(this.$route.query.id)
+    this.location = this.$route.query.location
     // 根据id访问接口获取数据
+    var that = this
+    this.$axios
+      .get(
+        this.$store.state.headPort +
+          '/api/rental/query/id?id=' +
+          this.$route.query.id
+      )
+      .then(function (response) {
+        var data = response.data.data
+        that.url = data.image
+        that.name = data.title
+        that.endDate = data.endTime
+        that.unitPrice = data.unitPrice
+        that.id = data.id
+        that.user_id = data.userId
+        that.startDate = data.startTime
+        that.isDone = data.isDone === 1 ? '已完成' : '未完成'
+        that.decoration = data.content
+        that.label = data.label
+        that.reword = data.reword
+        that.thumb_up = data.thumbUp
+        that.comment = data.comment
+        that.location = data.location
+        that.collect = data.collect
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
   },
   components: {
     Map: () => import('../map.vue')

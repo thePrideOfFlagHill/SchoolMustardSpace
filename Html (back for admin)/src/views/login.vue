@@ -36,19 +36,31 @@ export default {
   },
   methods: {
     onSubmit (formName) {
-      // 为表单绑定验证功能
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          this.$alert('账号或密码错误', '登录失败', {
-            confirmButtonText: '确定'
-          })
-          return false
-          // 使用 vue-router 路由到指定页面，该方式称之为编程式导航
-        } else {
-          this.dialogVisible = true
-          return false
-        }
-      })
+      var that = this
+      this.$axios
+        .post(
+          this.$store.state.headPort +
+            '/api/admin/login?accountNumber=' +
+            that.form.username +
+            '&password=' +
+            that.form.password
+        )
+        .then(function (response) {
+          if (response.data.msg === 'succeed') {
+            that.$store.commit('setAccountnumber', that.form.username)
+            that.$router.push({
+              name: 'overview',
+              params: {
+                accountNumber: that.form.username
+              }
+            })
+          } else {
+            that.$message.error('账号或密码错误')
+          }
+        })
+        .catch(function () {
+          that.$message.error('账号不存在')
+        })
     }
   }
 }

@@ -2,10 +2,10 @@
   <div class="shadow box">
     <el-form ref="form" :model="form" label-width="80px">
       <el-form-item label="账号：">
-        <el-input v-model="form.id" disabled></el-input>
+        <el-input v-model="form.id"></el-input>
       </el-form-item>
-      <el-form-item label="名称：">
-        <el-input v-model="form.name"></el-input>
+      <el-form-item label="密码：">
+        <el-input v-model="form.password"></el-input>
       </el-form-item>
       <el-form-item label="活动区域">
         <el-select v-model="form.region" placeholder="请选择活动区域">
@@ -33,12 +33,6 @@
           <el-checkbox label="查" name="type"></el-checkbox>
         </el-checkbox-group>
       </el-form-item>
-      <el-form-item label="特殊">
-        <el-radio-group v-model="form.resource">
-          <el-radio label="线上品牌商赞助"></el-radio>
-          <el-radio label="线下场地免费"></el-radio>
-        </el-radio-group>
-      </el-form-item>
       <el-form-item label="备注">
         <el-input type="textarea" v-model="form.desc"></el-input>
       </el-form-item>
@@ -57,7 +51,7 @@ export default {
     return {
       form: {
         id: '',
-        name: '',
+        password: '',
         region: '',
         date1: '',
         date2: '',
@@ -70,16 +64,23 @@ export default {
   },
   methods: {
     onSubmit () {
-      // 成功后返回账号
-      this.$alert('账号', '注册成功', {
-        confirmButtonText: '确定',
-        callback: action => {
-          this.$message({
-            type: 'info',
-            message: `action: ${action}`
+      var that = this
+      console.log(that.id)
+      this.$axios
+        .post(this.$store.state.headPort + '/api/admin/register', {
+          accountNumber: that.form.id,
+          password: that.form.password,
+          authority: '1'
+        })
+        .then(function (response) {
+          // 成功后返回账号
+          that.$alert('创建成功', '', {
+            confirmButtonText: '确定',
+            callback: action => {
+              that.$router.go(-1)
+            }
           })
-        }
-      })
+        })
     }
   },
   // 初始化函数

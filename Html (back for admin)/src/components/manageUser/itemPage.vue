@@ -18,11 +18,9 @@
             </el-row>
           </template>
         </el-table-column>
-        <el-table-column prop="date" label="创建时间" sortable></el-table-column>
-        <el-table-column prop="address" label="最后登录时间" :formatter="formatter"></el-table-column>
-        <el-table-column prop="user" label="发布人" sortable></el-table-column>
-        <el-table-column prop="status" label="状态" sortable></el-table-column>
-        <el-table-column prop="status" label="分类" sortable></el-table-column>
+        <el-table-column prop="accountNumber" label="账号" sortable></el-table-column>
+        <el-table-column prop="address" label="地址" :formatter="formatter"></el-table-column>
+        <el-table-column prop="name" label="用户名" sortable></el-table-column>
         <el-table-column fixed="right" label="操作" width="100">
           <template slot-scope="scope">
             <el-button @click="goDetail(scope.row['id'])" type="text" size="small">查看</el-button>
@@ -48,30 +46,9 @@
 export default {
   data () {
     return {
-      pageSize: 1, // 每个页面显示多少个项目
+      pageSize: 10, // 每个页面显示多少个项目
       currentPage: 1, // 当前页数
-      tableData: [
-        {
-          name: '名字',
-          url:
-            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586064043299&di=936d37ebfc418579e3debf6d674edc82&imgtype=0&src=http%3A%2F%2Fa0.att.hudong.com%2F64%2F76%2F20300001349415131407760417677.jpg',
-          id: '222333',
-          date: '2016-05-02',
-          address: '上海市普陀区金沙江路 1518 弄',
-          user: '王小虎',
-          status: '未完成'
-        },
-        {
-          name: '名字',
-          url:
-            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586064043299&di=936d37ebfc418579e3debf6d674edc82&imgtype=0&src=http%3A%2F%2Fa0.att.hudong.com%2F64%2F76%2F20300001349415131407760417677.jpg',
-          id: '222333',
-          date: '2016-05-04',
-          address: '上海市普陀区金沙江路 1518 弄',
-          user: '程小虎',
-          status: '完成'
-        }
-      ]
+      tableData: []
     }
   },
   computed: {
@@ -108,18 +85,78 @@ export default {
     // 翻页
     pageChange (currentPage) {
       this.currentPage = currentPage
+    },
+    allData () {
+      var tableData = this.tableData
+      this.$axios
+        .get(this.$store.state.headPort + '/api/user/query/all')
+        .then(function (response) {
+          var data = response.data.data
+          for (var i = 0; i < data.length; i++) {
+            var sum = {}
+            sum.accountNumber = data[i].accountNumber
+            sum.id = data[i].id
+
+            sum.name = data[i].name
+            sum.url = data[i].head
+            sum.address = data[i].address
+            tableData.push(sum)
+          }
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
     }
   },
   watch: {
     // 监听条件数据的变化
     option (newData, oldData) {
       // 设置表格搜索条件 进行接口访问获取数据
+      console.log(newData)
+      this.tableData = []
+      var page = this
+      if (newData.id === '') {
+        page.allData()
+      } else {
+        this.$axios
+          .get(
+            this.$store.state.headPort +
+              '/api/user/query/accountNumber/' +
+              newData.id
+          )
+          .then(function (response) {
+            var data = response.data.data
+
+            if (response.data.length > 1) {
+              for (var i = 0; i < data.length; i++) {
+                var sum = {}
+                sum.accountNumber = data[i].accountNumber
+                sum.name = data[i].name
+                sum.url = data[i].head
+                sum.address = data[i].address
+                page.tableData.push(sum)
+              }
+            } else if (data.id !== undefined) {
+              var sun = {}
+              sun.accountNumber = data.accountNumber
+              sun.name = data.name
+              sun.url = data.head
+              sun.address = data.address
+              page.tableData.push(sun)
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      }
     }
   },
   components: {
     search: () => import('./search.vue')
   },
-  created: function () {}
+  mounted: function () {
+    this.allData()
+  }
 }
 </script>
 

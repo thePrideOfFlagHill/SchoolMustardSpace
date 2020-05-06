@@ -32,7 +32,13 @@ export default {
     crumb,
     slideNav: () => import('../components/slideNav.vue')
   },
-  created: function () {}
+  mounted: function () {
+    if (this.$store.state.accountNumber === null) {
+      this.$router.push({
+        name: 'login'
+      })
+    }
+  }
 }
 </script>
 

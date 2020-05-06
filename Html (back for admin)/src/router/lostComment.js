@@ -1,0 +1,13 @@
+export default [
+  {
+    path: 'itemPage',
+    meta: { title: '' },
+    name: 'commentPage',
+    component: () => import('../components/lostComment/itemPage.vue')
+  },
+  {
+    path: 'detail',
+    meta: { title: '详细信息' },
+    component: () => import('../components/lostComment/detail.vue')
+  }
+]

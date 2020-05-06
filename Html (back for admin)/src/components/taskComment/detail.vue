@@ -1,110 +1,35 @@
 <template>
   <el-container>
-    <el-header style="height:200px;margin-bottom:10px;" class="shadow">
-      <el-row style="height:100%;">
-        <el-col :span="4" class="picture">
-          <div>
-            <el-image style="height:200px;width: 200px;" :src="url" fit="scale-down"></el-image>
-          </div>
-        </el-col>
-        <el-col :span="10" class="task">
-          <div class="taskId">
-            <div>
-              <p>{{name}}</p>
-            </div>
-            <div style="margin-left:10px;">
-              <el-tag>{{status}}</el-tag>
-            </div>
-          </div>
-          <div class="taskId">
-            <p>编号:{{id}}</p>
-          </div>
-          <div class="taskId">
-            申请人:
-            <el-link type="info" @click="seeUser" :underline="false">
-              {{user_id}}
-              <i class="el-icon-view el-icon--right"></i>
-            </el-link>
-          </div>
-        </el-col>
-        <el-col :span="4" class="btns">
-          <el-button-group class="btns">
-            <el-button type="primary" icon="el-icon-edit" @click="examine()">审核</el-button>
-            <el-button type="primary" icon="el-icon-edit" @click="deleted()">删除</el-button>
-          </el-button-group>
-        </el-col>
-      </el-row>
-    </el-header>
     <el-main class="shadow">
       <el-row>
         <el-col :span="12" class="marginBottom">
           <div>
             <el-row :gutter="20">
               <el-col :span="4">
-                <div class="textDecoration">标题：</div>
+                <div class="textDecoration">内容：</div>
               </el-col>
               <el-col :span="15">
-                <div class="textDecoration">{{name}}</div>
+                <div class="textDecoration">{{content}}</div>
               </el-col>
             </el-row>
           </div>
           <div>
             <el-row :gutter="20">
               <el-col :span="4">
-                <div class="textDecoration">起止时间：</div>
+                <div class="textDecoration">发布时间：</div>
               </el-col>
               <el-col :span="15">
-                <div class="textDecoration">{{startDate}}</div>
+                <div class="textDecoration">{{publish_time}}</div>
               </el-col>
             </el-row>
           </div>
           <div>
             <el-row :gutter="20">
               <el-col :span="4">
-                <div class="textDecoration">任务状态</div>
+                <div class="textDecoration">所属项目编号：</div>
               </el-col>
               <el-col :span="15">
-                <div class="textDecoration">{{isDone}}</div>
-              </el-col>
-            </el-row>
-          </div>
-          <div>
-            <el-row :gutter="20">
-              <el-col :span="4">
-                <div class="textDecoration">任务描述：</div>
-              </el-col>
-              <el-col :span="15">
-                <div class="textDecoration">{{decoration}}</div>
-              </el-col>
-            </el-row>
-          </div>
-          <div>
-            <el-row :gutter="20">
-              <el-col :span="4">
-                <div class="textDecoration">标签：</div>
-              </el-col>
-              <el-col :span="15">
-                <div class="textDecoration">{{label}}</div>
-              </el-col>
-            </el-row>
-          </div>
-          <div>
-            <el-row :gutter="20">
-              <el-col :span="4">
-                <div class="textDecoration">酬劳：</div>
-              </el-col>
-              <el-col :span="15">
-                <div class="textDecoration">{{reword}}</div>
-              </el-col>
-            </el-row>
-          </div>
-          <div>
-            <el-row :gutter="20">
-              <el-col :span="4">
-                <div class="textDecoration">联系方式：</div>
-              </el-col>
-              <el-col :span="15">
-                <div class="textDecoration">联系方式：</div>
+                <div class="textDecoration">{{table_id}}</div>
               </el-col>
             </el-row>
           </div>
@@ -121,20 +46,10 @@
           <div>
             <el-row :gutter="20">
               <el-col :span="4">
-                <div class="textDecoration">收藏数</div>
+                <div class="textDecoration">评论数</div>
               </el-col>
               <el-col :span="15">
-                <div class="textDecoration">{{collect}}</div>
-              </el-col>
-            </el-row>
-          </div>
-          <div>
-            <el-row :gutter="20">
-              <el-col :span="4">
-                <div class="textDecoration">评论</div>
-              </el-col>
-              <el-col :span="15">
-                <el-button @click="seeComment()">查看评论</el-button>
+                <div class="textDecoration">{{comment}}</div>
               </el-col>
             </el-row>
           </div>
@@ -158,7 +73,7 @@ export default {
       name: '',
       status: '',
       id: '',
-      user: '',
+      user_id: '',
       startDate: '',
       endDate: '',
       decoration: '',
@@ -167,7 +82,8 @@ export default {
       thumb_up: '',
       comment: '',
       location: '',
-      collect: ''
+      collect: '',
+      type: ''
     }
   },
   methods: {
@@ -191,9 +107,7 @@ export default {
           // 访问接口删除
           var that = this
           this.$axios
-            .post(this.$store.state.headPort + '/api/lost_and_found/delete', {
-              id: this.id
-            })
+            .post(this.$store.state.headPort + '/api/task/comment/delete?id=' + that.id)
             .then(function (response) {
               that.$alert('删除成功', '', {
                 confirmButtonText: '确定',
@@ -215,11 +129,10 @@ export default {
     },
     // 查看相关评论
     seeComment () {
-      var that = this
       this.$router.push({
-        name: 'lostComment',
-        query: {
-          id: that.id
+        name: 'commentPage',
+        params: {
+          id: this.user_id
         }
       })
     },
@@ -252,25 +165,18 @@ export default {
     this.$axios
       .get(
         this.$store.state.headPort +
-          '/api/lost_and_found/query/id?id=' +
+          '/api/task/query/id/' +
           this.$route.query.id
       )
       .then(function (response) {
         var data = response.data.data
-        that.url = data.image
-        that.name = data.title
-        that.status = data.is_done
         that.id = data.id
-        that.user_id = data.userId
-        that.startDate = data.time
-        that.isDone = data.isDone === 1 ? '已完成' : '未完成'
-        that.decoration = data.content
-        that.label = data.label
-        that.reword = data.reword
-        that.thumb_up = data.thumbUp
+        that.user_id = data.user_id
+        that.publish_time = data.publish_time
+        that.content = data.content
+        that.table_id = data.table_id
+        that.thumb_up = data.thumb_up
         that.comment = data.comment
-        that.location = data.location
-        that.collect = data.collect
       })
       .catch(function (error) {
         console.log(error)

@@ -9,28 +9,12 @@
         style="width: 100%"
         :default-sort="{prop: 'date', order: 'descending'}"
       >
-        <el-table-column prop="id" label="简述" width="500">
-          <template slot-scope="scope">
-            <el-row :gutter="20">
-              <el-col :span="10">
-                <img :src="scope.row['img']" width="100%" />
-              </el-col>
-              <el-col :span="10">
-                <label>标题：</label>
-                <div>{{scope.row['title']}}</div>
-                <div>
-                  <label>编号：</label>
-                  <div>{{scope.row['id']}}</div>
-                </div>
-              </el-col>
-            </el-row>
-          </template>
-        </el-table-column>
-        <el-table-column prop="start_time" label="起始时间" sortable></el-table-column>
+        <el-table-column prop="id" label="编号" sortable></el-table-column>
+        <el-table-column prop="publish_time" label="发布时间" sortable></el-table-column>
         <el-table-column prop="user_id" label="用户编号" sortable></el-table-column>
-        <el-table-column prop="status" label="状态" sortable></el-table-column>
+        <el-table-column prop="content" label="内容" sortable></el-table-column>
+
         <el-table-column prop="comment" label="评论数" sortable></el-table-column>
-        <el-table-column prop="collect" label="收藏数" sortable></el-table-column>
         <el-table-column prop="thumb_up" label="点赞数" sortable></el-table-column>
         <el-table-column fixed="right" label="操作" width="100">
           <template slot-scope="scope">
@@ -77,13 +61,10 @@ export default {
     },
     // 点击跳转到详细页面（带id参数）
     goDetail (that) {
-      var arry = that.location.split(',')
-      var temp = arry.reverse()
       this.$router.push({
         path: 'detail',
         query: {
-          id: that.id,
-          location: temp
+          id: that.id
         }
       })
     },
@@ -95,20 +76,17 @@ export default {
     allData () {
       var tableData = this.tableData
       this.$axios
-        .get(this.$store.state.headPort + '/api/task/query/all')
+        .get(this.$store.state.headPort + '/api/lostfound/comment/query/all')
         .then(function (response) {
           var data = response.data.data
           for (var i = 0; i < data.length; i++) {
             var sum = {}
             sum.id = data[i].id
-            sum.title = data[i].title
-            sum.img = data[i].image
-            sum.start_time = data[i].start_time
-            sum.location = data[i].location
+            sum.content = data[i].content
+
+            sum.publish_time = data[i].publish_time
             sum.user_id = data[i].user_id
-            sum.status = '未完成'
             sum.comment = data[i].comment
-            sum.collect = data[i].collect
             sum.thumb_up = data[i].thumb_up
             tableData.push(sum)
           }
@@ -146,17 +124,12 @@ export default {
       // 设置表格搜索条件 进行接口访问获取数据
       this.tableData = []
       var port = null
-      if (newData.contentType === '项目编号') {
-        port = '/api/task/query/id/'
+      if (newData.contentType === '所属项目编号') {
+        port = '/api/query/lostfound/comment/table_id/'
       } else if (newData.contentType === '用户编号') {
-        port = '/api/task/query/user_id/'
-      } else if (newData.contentType === '标题') {
-        port = '/api/task/query/like/title?title='
-      } else if (newData.contentType === '内容') {
-        port = '/api/task/query/like/content?content='
-      } else if (newData.contentType === '标签') {
-        port = '/api/task/query/like/label?label='
+        port = '/api/query/lostfound/comment/user_id/'
       }
+
       var that = this
       if (newData.content === '') {
         that.allData()
@@ -165,14 +138,14 @@ export default {
           .get(this.$store.state.headPort + port + newData.content)
           .then(function (response) {
             var data = response.data.data
-            console.log(data.id)
-            if (data.length > 0) {
+            if (data.length >= 1) {
               for (var i = 0; i < data.length; i++) {
                 var sum = {}
                 sum.id = data[i].id
+                sum.content = data[i].content
                 sum.title = data[i].title
                 sum.img = data[i].image
-                sum.start_time = data[i].start_time
+                sum.publish_time = data[i].publish_time
                 sum.location = data[i].location
                 sum.user_id = data[i].user_id
                 sum.status = '未完成'
@@ -184,9 +157,11 @@ export default {
             } else if (data.id) {
               var sun = {}
               sun.id = data.id
+              sun.content = data.content
+
               sun.title = data.title
               sun.img = data.image
-              sun.start_time = data.start_time
+              sun.publish_time = data.publish_time
               sun.location = data.location
               sun.user_id = data.user_id
               sun.status = '未完成'

@@ -24,14 +24,23 @@
         <i class="el-icon-document"></i>
         <span slot="title">失物管理</span>
       </el-menu-item>
-       <el-menu-item index="/outer/manageUser/itemPage">
+      <el-menu-item index="/outer/manageUser/itemPage">
         <i class="el-icon-document"></i>
         <span slot="title">用户列表</span>
       </el-menu-item>
-      <el-menu-item index="/outer/manageComment/itemPage">
+      <el-menu-item index="/outer/taskComment/itemPage">
         <i class="el-icon-document"></i>
-        <span slot="title">评论管理</span>
+        <span slot="title">任务评论</span>
       </el-menu-item>
+       <el-menu-item index="/outer/leaseComment/itemPage">
+        <i class="el-icon-document"></i>
+        <span slot="title">租赁评论</span>
+      </el-menu-item>
+      <el-menu-item index="/outer/lostComment/itemPage">
+        <i class="el-icon-document"></i>
+        <span slot="title">失物评论</span>
+      </el-menu-item>
+
       <el-menu-item index="/outer/manageAdmin/itemPage">
         <i class="el-icon-star-on"></i>
         <span slot="title">管理员</span>

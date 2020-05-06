@@ -40,7 +40,7 @@
         <el-input type="textarea" v-model="form.desc"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">创建</el-button>
+        <el-button type="primary" @click="onSubmit">修改</el-button>
         <el-button>取消</el-button>
       </el-form-item>
     </el-form>
@@ -61,7 +61,9 @@ export default {
         delivery: false,
         type: [],
         resource: '',
-        desc: ''
+        desc: '',
+        password: '',
+        newPassword: ''
       }
     }
   },
@@ -71,9 +73,20 @@ export default {
     }
   },
   // 初始化函数
-  created: function () {
+  mounted: function () {
     console.log(this.$route.query.id)
+    var page = this
     // 根据id访问接口获取数据
+    this.$axios
+      .get(
+        this.$store.state.headPort +
+          '/api/admin/query/accountNumber/' +
+          this.$route.query.id
+      )
+      .then(function (response) {
+        var data = response.data.data
+        page.form.id = data.id
+      })
   }
 }
 </script>

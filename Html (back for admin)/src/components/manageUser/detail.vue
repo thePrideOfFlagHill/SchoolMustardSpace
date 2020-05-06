@@ -9,7 +9,7 @@
                 <div class="textDecoration">头像：</div>
               </el-col>
               <el-col :span="15">
-                <el-image style="width: 70%; " :src="url" fit="fill"></el-image>
+                            <el-image style="height:200px;width: 200px;" :src="head" fit="scale-down"></el-image>
               </el-col>
             </el-row>
           </div>
@@ -26,10 +26,10 @@
           <div>
             <el-row :gutter="20">
               <el-col :span="5">
-                <div class="textDecoration">创建时间</div>
+                <div class="textDecoration">账号</div>
               </el-col>
               <el-col :span="15">
-                <div class="textDecoration">{{name}}</div>
+                <div class="textDecoration">{{accountNumber}}</div>
               </el-col>
             </el-row>
           </div>
@@ -39,17 +39,7 @@
                 <div class="textDecoration">用户签名：</div>
               </el-col>
               <el-col :span="15">
-                <div class="textDecoration">{{name}}</div>
-              </el-col>
-            </el-row>
-          </div>
-          <div>
-            <el-row :gutter="20">
-              <el-col :span="5">
-                <div class="textDecoration">标签：</div>
-              </el-col>
-              <el-col :span="15">
-                <div class="textDecoration">{{name}}</div>
+                <div class="textDecoration">{{info}}</div>
               </el-col>
             </el-row>
           </div>
@@ -59,42 +49,49 @@
                 <div class="textDecoration">联系方式：</div>
               </el-col>
               <el-col :span="15">
-                <div class="textDecoration">{{name}}</div>
+                <div class="textDecoration">{{phoneNumber}}</div>
               </el-col>
             </el-row>
           </div>
           <div>
             <el-row :gutter="20">
               <el-col :span="5">
-                <div class="textDecoration">点赞数</div>
+                <div class="textDecoration">性别：</div>
               </el-col>
               <el-col :span="15">
-                <div class="textDecoration">{{name}}</div>
+                <div class="textDecoration">{{sex}}</div>
+              </el-col>
+            </el-row>
+          </div>
+          <div>
+            <el-row :gutter="20">
+              <el-col :span="5">
+                <div class="textDecoration">地址</div>
+              </el-col>
+              <el-col :span="15">
+                <div class="textDecoration">{{address}}</div>
               </el-col>
             </el-row>
           </div>
           <div style="  margin: 20px;">
             <el-popover placement="right" width="500" trigger="click">
               <div class="exBtns">
-                <el-button-group>
+                <el-button-group v-show="false">
                   <el-button @click="seeComment()">查看发布的评论</el-button>
                 </el-button-group>
                 <el-button-group>
-                  <el-button @click="seeComment()">查看发布任务</el-button>
-                  <el-button @click="seeComment()">查看发布租赁</el-button>
-                  <el-button @click="seeComment()">查看发布失物</el-button>
-                </el-button-group>
-                <el-button-group>
-                  <el-button @click="seeComment()">查看接受任务</el-button>
-                  <el-button @click="seeComment()">查看接受租赁</el-button>
-                  <el-button @click="seeComment()">查看接受失物</el-button>
+                  <el-button @click="seeTask()">查看发布任务</el-button>
+                  <el-button @click="seeLease()">查看发布租赁</el-button>
+                  <el-button @click="seeLost()">查看发布失物</el-button>
                 </el-button-group>
               </div>
               <el-button slot="reference">更多相关信息</el-button>
             </el-popover>
           </div>
         </el-col>
-        <el-col :span="12" class="box"></el-col>
+        <el-col :span="12" class="box">
+          <el-button type="primary" icon="el-icon-edit" @click="deleted()">删除</el-button>
+        </el-col>
       </el-row>
     </el-main>
   </el-container>
@@ -105,12 +102,16 @@ export default {
   name: 'taskDetail',
   data: function () {
     return {
-      url:
-        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586064043299&di=936d37ebfc418579e3debf6d674edc82&imgtype=0&src=http%3A%2F%2Fa0.att.hudong.com%2F64%2F76%2F20300001349415131407760417677.jpg',
-      name: '任务标题1231513513',
-      status: '未完成',
-      id: '123',
-      user: 'wang'
+      head: '',
+      name: '',
+      status: '',
+      id: '',
+      user: '',
+      accountNumber: '',
+      address: '',
+      sex: '',
+      info: '',
+      phoneNumber: ''
     }
   },
   methods: {
@@ -123,19 +124,75 @@ export default {
         }
       })
     },
-    // 删除
+    // 查看相关信息按钮
+    seeComment () {
+      var that = this
+
+      this.$router.push({
+        name: 'taskComment',
+        query: {
+          id: that.user_id
+        }
+      })
+    },
+    seeTask () {
+      var that = this
+      this.$store.commit('setContenttype', '用户编号')
+
+      this.$router.push({
+        name: 'manageTask',
+        query: {
+          id: that.user_id
+        }
+      })
+    },
+    seeLease () {
+      var that = this
+      console.log(that.user_id)
+      this.$router.push({
+        name: 'manageLease',
+        query: {
+          id: that.user_id
+        }
+      })
+    },
+    seeLost () {
+      var that = this
+
+      this.$router.push({
+        name: 'manageLost',
+        query: {
+          id: that.user_id
+        }
+      })
+    },
+    // 删除用户
     deleted () {
-      this.$confirm('此操作将永久删除该任务, 是否继续?', '提示', {
+      this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       })
         .then(() => {
           // 访问接口删除
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          })
+          var that = this
+          this.$axios
+            .post(
+              this.$store.state.headPort +
+                '/api/user/delete?accountNumber=' +
+                that.accountNumber
+            )
+            .then(function (response) {
+              that.$alert('删除成功', '', {
+                confirmButtonText: '确定',
+                callback: action => {
+                  that.$router.go(-1)
+                }
+              })
+            })
+            .catch(function (error) {
+              console.log(error)
+            })
         })
         .catch(() => {
           this.$message({
@@ -143,20 +200,34 @@ export default {
             message: '已取消删除'
           })
         })
-    },
-    seeComment () {
-      this.$router.push({
-        name: 'commentPage',
-        params: {
-          id: this.id
-        }
-      })
     }
   },
   // 初始化函数
-  created: function () {
-    console.log(this.$route.query.id)
+  mounted: function () {
     // 根据id访问接口获取数据
+    var that = this
+    this.$axios
+      .get(
+        this.$store.state.headPort +
+          '/api/user/query/id/' +
+          this.$route.query.id
+      )
+      .then(function (response) {
+        var data = response.data.data
+        var str = data.id
+        that.user_id = str
+        that.head = data.head
+        that.name = data.name
+        that.phoneNumber = data.phoneNumber == null ? '暂无' : data.phoneNumber
+        that.accountNumber = data.accountNumber
+        that.sex = data.sex === 0 ? '男' : '女'
+        that.address = data.address == null ? '暂无' : data.address
+        that.info = data.info == null ? '暂无' : data.info
+        that.id = data.id
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
   },
   components: {}
 }
@@ -184,9 +255,7 @@ export default {
 }
 .box {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: relative;
+  justify-content: right;
 }
 .shadow {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);

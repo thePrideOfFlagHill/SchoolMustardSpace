@@ -1,13 +1,8 @@
 <template>
-  <div :id="'center'">
-    <div class="amap-wrapper">
-      <el-amap class="amap-box" vid="amap-vue" :center="center">
-        <el-amap-marker
-          :position="center"
-           vid="index"
-        ></el-amap-marker>
-      </el-amap>
-    </div>
+  <div class="amap-wrapper">
+    <el-amap vid="amapDemo" :center="position" :zoom="zoom" class="amap-demo">
+      <el-amap-marker vid="marker" :position="position" :label="label"></el-amap-marker>
+    </el-amap>
   </div>
 </template>
 
@@ -15,8 +10,26 @@
 export default {
   data () {
     return {
-      center: [121.59996, 31.197646]
+      zoom: 16,
+      center: [121.406051, 31.179695],
+      label: {
+        content: ['地点'],
+        offset: [10, 10]
+      }
     }
+  },
+  props: ['point'],
+  computed: {
+    position () {
+      var temp = this.point
+      for (var i = 0; i < temp.length; i++) {
+        temp[i] = parseFloat(temp[i])
+      }
+      return temp
+    }
+  },
+  mounted: function () {
+    console.log(this.position)
   }
 }
 </script>
@@ -26,6 +39,6 @@ export default {
   width: 95%;
   height: 400px;
   padding: 20px;
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 </style>
