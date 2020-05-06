@@ -28,9 +28,6 @@ public class GetController {
 
     @GetMapping("/test")
     public JsonResult a(){
-        B b = new B("111" , "222");
-
-        return JsonResult.build(100 , "a" , b);
     }
 
 }
