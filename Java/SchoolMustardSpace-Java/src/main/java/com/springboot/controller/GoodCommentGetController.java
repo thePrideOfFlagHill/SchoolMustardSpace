@@ -67,7 +67,7 @@ public class GoodCommentGetController implements GoodCommentConstant {
         Comment goodComment = this.goodCommentService.queryGoodCommentById(id);
 
         CommentPlus commentPlus = new CommentPlus();
-        User user = userService.queryOneUserById(String.valueOf(goodComment.getUser_id()));
+        User user = userService.queryOneUserById(id);
 
         commentPlus.setId(goodComment.getId());
         commentPlus.setUser_id(goodComment.getUser_id());

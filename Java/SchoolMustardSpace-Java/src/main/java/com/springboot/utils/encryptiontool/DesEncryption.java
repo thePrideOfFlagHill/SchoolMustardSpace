@@ -72,7 +72,7 @@ public class DesEncryption {
     }
 
     public static void main(String[] args) {
-        String msg = "123123123";
+        String msg = "1213456789";
         System.out.println("【加密前】：" + msg);
 
         // 加密

@@ -68,7 +68,7 @@ public class LostFoundCommentGetController implements FoundCommentConstant {
         Comment lostFoundComment = this.lostFoundCommentService.queryLostFoundCommentById(id);
 
         CommentPlus commentPlus = new CommentPlus();
-        User user = userService.queryOneUserById(String.valueOf(lostFoundComment.getUser_id()));
+        User user = userService.queryOneUserById(id);
 
         commentPlus.setId(lostFoundComment.getId());
         commentPlus.setUser_id(lostFoundComment.getUser_id());

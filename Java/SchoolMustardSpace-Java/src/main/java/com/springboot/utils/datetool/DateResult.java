@@ -17,6 +17,7 @@ public class DateResult {
 
     //获取当前时间
     public String getCurrentTime(){
+
         SimpleDateFormat ct = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         //System.out.println(ct.format(new Date()));// new Date()为获取当前系统时间
         return ct.format(new Date());
@@ -30,7 +31,7 @@ public class DateResult {
         Calendar d2 = new GregorianCalendar();
         d2.setTime(date2);
         int days = d2.get(Calendar.DAY_OF_YEAR)- d1.get(Calendar.DAY_OF_YEAR);
-//        System.out.println("days="+days);
+        System.out.println("days="+days);
         int y2 = d2.get(Calendar.YEAR);
         if (d1.get(Calendar.YEAR) != y2) {
 //			d1 = (Calendar) d1.clone();
@@ -49,4 +50,8 @@ public class DateResult {
         return calendar.getTime();   //这个时间就是日期往后推一天的结果
     }
 
+//    public static void main(String[] args) {
+//
+//        System.out.println(moveTime(new Date(),-1));// new Date()为获取当前系统时间
+//    }
 }
