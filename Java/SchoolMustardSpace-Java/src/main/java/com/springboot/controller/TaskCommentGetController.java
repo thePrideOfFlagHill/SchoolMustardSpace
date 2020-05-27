@@ -67,7 +67,7 @@ public class TaskCommentGetController implements TaskCommentConstant {
         Comment taskComment = this.taskCommentService.queryTaskCommentById(id);
 
         CommentPlus commentPlus = new CommentPlus();
-        User user = userService.queryOneUserById(id);
+        User user = userService.queryOneUserById(String.valueOf(taskComment.getUser_id()));
 
         commentPlus.setId(taskComment.getId());
         commentPlus.setUser_id(taskComment.getUser_id());

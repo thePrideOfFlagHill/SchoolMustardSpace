@@ -21,7 +21,6 @@ public class UuidResult {
      * @since
      */
     public String setUuidResult() {
-
        return UUID.randomUUID().toString();
     }
 }
