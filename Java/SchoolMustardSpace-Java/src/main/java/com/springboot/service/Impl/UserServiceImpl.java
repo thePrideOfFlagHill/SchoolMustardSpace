@@ -1,8 +1,10 @@
 package com.springboot.service.Impl;
 
+import com.springboot.constant.Constant;
 import com.springboot.domain.User;
 import com.springboot.mapper.UserMapper;
 import com.springboot.service.UserService;
+import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -26,44 +28,57 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String login(String accountNumber, String password) {
+
         int count = userMapper.selectUserByAccountNumberAndPassword(accountNumber, password);//查询user表中账号密码相同的记录数
-        return count == 1 ? "succeed" : "fail";
+
+        return count == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
     }
 
     @Override
     public String register(User user){
+
         int result = userMapper.insertUser(user);
-        return result == 1 ? "succeed" : "fail";
+
+        return result == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
     }
 
     @Override
     public String findPassword(String accountNumber, String newPassword) {
+
         int result = userMapper.updateUserPassword(accountNumber, newPassword);
-        return result == 1 ? "succeed" : "fail";
+
+        return result == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
     }
 
     @Override
     public String changePassword(String accountNumber, String password, String newPassword) {
+
         int count = userMapper.selectUserByAccountNumberAndPassword(accountNumber, password);
+
         if(count == 1){
             int result = userMapper.updateUserPassword(accountNumber, newPassword);
             if(result == 1){
-                return "succeed";
+                return Constant.MSG_SUCCEED;
             }
         }
-        return "fail";
+
+        return Constant.MSG_FAIL;
     }
 
     @Override
     public String updateUserMessage(User user) {
+
         int result = userMapper.updateUser(user);
-        return result == 1 ? "succeed" : "fail";
+
+        return result == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
     }
 
     @Override
     public String deleteUser(String accountNumber) {
+
         int result = userMapper.deleteUserByAccountNumber(accountNumber);
-        return result == 1 ? "succeed" : "fail";
+
+        return result == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
     }
 
     @Override
@@ -76,7 +91,9 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectUserByAccountNumber(accountNumber);
     }
 
-    public User queryOneUserById(String id) {return userMapper.selectUserById(id);}
+    public User queryOneUserById(String id) {
+        return userMapper.selectUserById(id);
+    }
 
     public int selectId(String accountNumber){
         return userMapper.selectId(accountNumber);

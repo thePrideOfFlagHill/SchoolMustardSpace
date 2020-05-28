@@ -12,14 +12,24 @@ import java.util.ArrayList;
  * @since 2020/4/26
  */
 public interface UserService {
+
     String login(String accountNumber, String password);
+
     String register(User user);
+
     String findPassword(String accountNumber, String newPassword);
+
     String changePassword(String accountNumber, String password, String newPassword);
+
     String updateUserMessage(User user);
+
     String deleteUser(String accountNumber);
+
     ArrayList<User> queryAllUser();
+
     User queryOneUser(String accountNumber);
+
     User queryOneUserById(String id);
+
     int selectId(String accountNumber);
 }
