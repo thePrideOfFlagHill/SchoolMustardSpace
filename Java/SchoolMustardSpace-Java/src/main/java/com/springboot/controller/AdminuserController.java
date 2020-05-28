@@ -20,6 +20,7 @@ import javax.annotation.Resource;
  * @since 2020.4.29
  */
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/api/admin")
 public class AdminuserController {
     @Resource
@@ -31,8 +32,9 @@ public class AdminuserController {
         byte[] secretArr = DesEncryption.encryptMode(password.getBytes());
         String str = DesEncryption.byte2Hex(secretArr);
         String msg = adminuserService.login(accountNumber, str);
+        int id = adminuserService.selectId(accountNumber);
         if(msg.equals("succeed")){
-            return JsonResult.build(200, msg, null);
+            return JsonResult.build(200, msg, id);
         }
         else return JsonResult.errorMsg(msg);
     }
@@ -111,6 +113,15 @@ public class AdminuserController {
         Object data = adminuserService.queryOneAdminuser(accountNumber);
         if(data != null){
             return JsonResult.build(200, "succeed", data);
+        }
+        else return JsonResult.errorMsg("fail");
+    }
+
+    @RequestMapping(value = "/query/id/{id}", method = RequestMethod.GET)
+    public JsonResult queryOneUserById(@PathVariable(value = "id") String accountNumber){
+        Object data = adminuserService.queryOneUserById(accountNumber);
+        if(data != null){
+            return JsonResult.build(200,"succeed", data);
         }
         else return JsonResult.errorMsg("fail");
     }

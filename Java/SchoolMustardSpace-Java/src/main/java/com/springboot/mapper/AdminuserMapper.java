@@ -1,6 +1,7 @@
 package com.springboot.mapper;
 
 import com.springboot.domain.Adminuser;
+import com.springboot.domain.User;
 import org.apache.ibatis.annotations.*;
 
 import java.util.ArrayList;
@@ -61,4 +62,15 @@ public interface AdminuserMapper {
     @Select("select * from adminuser where account_number = #{accountNumber}")
     @Results(value = {@Result(column = "account_number", property = "accountNumber")})
     Adminuser selectAdminuserByAccountNumber(@Param("accountNumber") String accountNumber);
+
+
+
+    @Select("select id from adminuser where account_number = #{accountNumber}")
+    int selectId(@Param("accountNumber") String accountNumber);
+
+    @Select("select * from adminuser where id = #{id}")
+    @Results(value = {
+            @Result(column = "account_number", property = "accountNumber")
+    })
+    Adminuser selectUserById(@Param("id") String id);
 }
