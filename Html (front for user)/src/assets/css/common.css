@@ -1,0 +1,29 @@
+html{
+    background-color: #f3f4f9;
+}
+img[lazy=loading] {
+    transform: scale(.3);
+}
+.page-info-list{
+    height: calc(100vh - 380px);
+    overflow: hidden;
+}
+.page{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f3f4f9;
+    z-index: 9999;
+    overflow: scroll;
+}
+.slide-enter-active,.slide-leave-active{
+    transition: all .3s;
+}
+.slide-enter,.slide-leave-to{
+    transform: translate3d(100%, 0, 0);
+}
+li{
+    list-style: none;
+}
