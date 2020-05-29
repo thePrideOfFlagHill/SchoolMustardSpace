@@ -13,9 +13,17 @@ import java.util.Map;
 
 /**
  * AdminuserController
- * TODO
+ * TODO:
  * @description 所有有关管理员操作的接口
- *
+ * 1./api/login                                 登录接口
+ * 2./api/register                              注册接口
+ * 3./api/find/password                         找回密码接口
+ * 4./api/update/password                       修改密码接口
+ * 5./api/update                                更新用户信息接口
+ * 6./api/delete                                删除用户接口
+ * 7./api/query/all                             查询全部用户接口
+ * 8./api/query/accountNumber/{accountNumber}   根据account_number查询用户接口
+ * 9./api/quer/id/{id}                          根据id查询用户接口
  * @author 221701429_黄晓东
  * @version v 1.0.0
  * @since 2020.4.29
