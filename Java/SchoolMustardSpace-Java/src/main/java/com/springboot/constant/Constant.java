@@ -17,5 +17,14 @@ public interface Constant {
 
     //成功时返回的STATUS值
     int STATUS_SUCCEED = 200;
+
+    //sql语句失败的返回
+    int SQL_FAIL = 0;
+
+    //初始化点赞
+    int INIT_THUMB = 0;
+
+    //初始化评论
+    int INIT_COMMENT = 0;
 }
     
