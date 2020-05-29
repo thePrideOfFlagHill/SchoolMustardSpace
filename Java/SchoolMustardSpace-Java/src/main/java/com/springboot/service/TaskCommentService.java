@@ -1,6 +1,7 @@
 package com.springboot.service;
 
-import com.springboot.domain.TaskComment;
+//import com.springboot.domain.TaskComment;
+import com.springboot.domain.Comment;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -15,15 +16,15 @@ import java.util.List;
  */
 public interface TaskCommentService {
 
-    List<TaskComment> getAllTaskComment();
+    List<Comment> getAllTaskComment();
 
-    TaskComment queryTaskCommentById(String id);
+    Comment queryTaskCommentById(String id);
 
-    List<TaskComment> queryTaskCommentByUserId(String user_id);
+    List<Comment> queryTaskCommentByUserId(String user_id);
 
-    List<TaskComment> queryTaskCommentByTableId(String table_id);
+    List<Comment> queryTaskCommentByTableId(String table_id);
 
-    int insertTaskComment(TaskComment taskComment);
+    int insertTaskComment(Comment taskComment);
 
     int updateTaskCommentContent(@Param("content") String content, @Param("id") String id);
 

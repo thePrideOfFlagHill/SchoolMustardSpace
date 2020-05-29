@@ -1,8 +1,10 @@
 package com.springboot.controller;
 
 import com.springboot.service.TaskService;
+import com.springboot.utils.jsontool.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,5 +26,9 @@ public class GetController {
     private TaskService taskService;
 
 
+    @GetMapping("/test")
+    public JsonResult a(){
+        return null;
+    }
 
 }

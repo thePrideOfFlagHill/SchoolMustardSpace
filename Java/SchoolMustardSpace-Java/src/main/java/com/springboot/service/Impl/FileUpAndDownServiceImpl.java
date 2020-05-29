@@ -21,7 +21,7 @@ import java.util.UUID;
 public class FileUpAndDownServiceImpl implements FileUpAndDownService {
 
     //本地图片url
-    private static final String ip = "http://47.95.3.253:8080/space/img";
+    private static final String ip = "http://47.100.251.3/space/img";
 
     @Autowired
     private MessageProperties config; //用来获取file-message.properties配置文件中的信息

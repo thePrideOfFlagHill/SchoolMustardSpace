@@ -1,7 +1,8 @@
 package com.springboot.controller;
 
 import com.springboot.constant.TaskCommentConstant;
-import com.springboot.domain.TaskComment;
+//import com.springboot.domain.TaskComment;
+import com.springboot.domain.Comment;
 import com.springboot.service.TaskCommentService;
 import com.springboot.utils.datetool.DateResult;
 import com.springboot.utils.jsontool.JsonResult;
@@ -40,7 +41,7 @@ public class TaskCommentPostController implements TaskCommentConstant {
      * @since 2020.4.30
      */
     @RequestMapping(value = "task/comment/insert", method = RequestMethod.POST)
-    public JsonResult insertTaskComment(@RequestBody TaskComment taskComment) {
+    public JsonResult insertTaskComment(@RequestBody Comment taskComment) {
 
         //实例化生成
         UuidResult uuidResult = new UuidResult();
@@ -167,4 +168,3 @@ public class TaskCommentPostController implements TaskCommentConstant {
 
 
 }
-    

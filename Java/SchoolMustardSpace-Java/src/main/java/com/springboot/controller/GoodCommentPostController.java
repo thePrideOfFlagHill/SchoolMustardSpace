@@ -1,7 +1,8 @@
 package com.springboot.controller;
 
 import com.springboot.constant.GoodCommentConstant;
-import com.springboot.domain.GoodComment;
+//import com.springboot.domain.GoodComment;
+import com.springboot.domain.Comment;
 import com.springboot.service.GoodCommentService;
 import com.springboot.utils.datetool.DateResult;
 import com.springboot.utils.jsontool.JsonResult;
@@ -40,7 +41,7 @@ public class GoodCommentPostController implements GoodCommentConstant {
      * @since 2020.5.2
      */
     @RequestMapping(value = "good/comment/insert", method = RequestMethod.POST)
-    public JsonResult insertGoodComment(@RequestBody GoodComment goodComment) {
+    public JsonResult insertGoodComment(@RequestBody Comment goodComment) {
 
         //实例化生成
         UuidResult uuidResult = new UuidResult();
@@ -167,4 +168,3 @@ public class GoodCommentPostController implements GoodCommentConstant {
 
 
 }
-    

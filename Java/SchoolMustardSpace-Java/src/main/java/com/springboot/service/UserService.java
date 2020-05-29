@@ -20,4 +20,6 @@ public interface UserService {
     String deleteUser(String accountNumber);
     ArrayList<User> queryAllUser();
     User queryOneUser(String accountNumber);
+    User queryOneUserById(String id);
+    int selectId(String accountNumber);
 }

@@ -76,4 +76,9 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectUserByAccountNumber(accountNumber);
     }
 
+    public User queryOneUserById(String id) {return userMapper.selectUserById(id);}
+
+    public int selectId(String accountNumber){
+        return userMapper.selectId(accountNumber);
+    }
 }

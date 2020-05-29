@@ -30,8 +30,9 @@ public class UserController {
         byte[] secretArr = DesEncryption.encryptMode(password.getBytes());
         String str = DesEncryption.byte2Hex(secretArr);
         String msg = userService.login(accountNumber, str);
+        int id = userService.selectId(accountNumber);
         if(msg.equals("succeed")){
-            return JsonResult.build(200,msg,null);
+            return JsonResult.build(200,msg,id);
         }
         else return JsonResult.errorMsg(msg);
     }
@@ -113,4 +114,14 @@ public class UserController {
         }
         else return JsonResult.errorMsg("fail");
     }
+
+    @RequestMapping(value = "/query/id/{id}", method = RequestMethod.GET)
+    public JsonResult queryOneUserById(@PathVariable(value = "id") String accountNumber){
+        Object data = userService.queryOneUserById(accountNumber);
+        if(data != null){
+            return JsonResult.build(200,"succeed", data);
+        }
+        else return JsonResult.errorMsg("fail");
+    }
+
 }

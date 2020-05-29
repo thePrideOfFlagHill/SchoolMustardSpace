@@ -53,8 +53,8 @@ public class RentalOfGoodController {
         rentalOfGood.setLabel(resMap.get("label").toString());
         rentalOfGood.setLocation(resMap.get("location").toString());
         rentalOfGood.setUnitPrice(resMap.get("unitPrice").toString());
-//        rentalOfGood.setStartTime(resMap.get("startTime").toString());
-//        rentalOfGood.setEndTime(resMap.get("endTime").toString());
+        rentalOfGood.setStartTime(resMap.get("startTime").toString());
+        rentalOfGood.setEndTime(resMap.get("endTime").toString());
         rentalOfGood.setNewDegree(Integer.parseInt(resMap.get("newDegree")));
 
         String msg = rentalOfGoodService.insertRentalOfGood(rentalOfGood);

@@ -1,15 +1,12 @@
 package com.springboot.domain;
 
 /**
- * GoodComment
- * TODO
- * @description GoodComment对应的实体类
- * @author 221701412_theTuring
- * @version v 1.0.0
- * @since 2020.5.1
+ * @author 会飞的大野鸡
+ * @create 2020/5/6
+ * TODO:
  */
-public class GoodComment {
 
+public class Comment {
     //条目id
     private String id;
 
@@ -30,6 +27,9 @@ public class GoodComment {
 
     //评论数
     private int comment;
+
+
+
 
     public String getId() {
         return id;
@@ -87,4 +87,3 @@ public class GoodComment {
         this.comment = comment;
     }
 }
-    

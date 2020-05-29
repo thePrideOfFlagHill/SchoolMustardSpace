@@ -4,6 +4,7 @@ import com.springboot.constant.TaskConstant;
 import com.springboot.domain.Task;
 import com.springboot.service.TaskService;
 import com.springboot.utils.jsontool.JsonResult;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -90,8 +91,9 @@ public class TaskGetController implements TaskConstant {
      * @version v 1.0.0
      * @since 2020.4.29
      */
-    @RequestMapping(value = "task/query/like/title/{title}", method = RequestMethod.GET)
-    public JsonResult queryTaskLikeContent(@PathVariable String title) {
+//    @RequestMapping(value = "task/query/like/title/{title}", method = RequestMethod.GET)
+    @GetMapping("task/query/like/title")
+    public JsonResult queryTaskLikeContent(@Param("title")String title) {
 
         List<Task> list = this.taskService.getLikeTitle(title);
 
@@ -107,8 +109,9 @@ public class TaskGetController implements TaskConstant {
      * @version v 1.0.0
      * @since 2020.4.29
      */
-    @RequestMapping(value = "task/query/like/content/{content}", method = RequestMethod.GET)
-    public JsonResult queryTaskLikeTitle(@PathVariable String content) {
+//    @RequestMapping(value = "task/query/like/content/{content}", method = RequestMethod.GET)
+    @GetMapping("task/query/like/content")
+    public JsonResult queryTaskLikeTitle(@Param("content")String content) {
 
         List<Task> list = this.taskService.getLikeContent(content);
 
@@ -124,8 +127,9 @@ public class TaskGetController implements TaskConstant {
      * @version v 1.0.0
      * @since 2020.4.29
      */
-    @RequestMapping(value = "task/query/like/label/{label}", method = RequestMethod.GET)
-    public JsonResult queryTaskLikeLabel(@PathVariable String label) {
+//    @RequestMapping(value = "task/query/like/label/{label}", method = RequestMethod.GET)
+    @GetMapping("task/query/like/label")
+    public JsonResult queryTaskLikeLabel(@Param("label") String label) {
 
         List<Task> list = this.taskService.getLikeLabel(label);
 

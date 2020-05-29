@@ -1,6 +1,7 @@
 package com.springboot.service.Impl;
 
 import com.springboot.domain.Adminuser;
+import com.springboot.domain.User;
 import com.springboot.mapper.AdminuserMapper;
 import com.springboot.service.AdminuserService;
 import org.springframework.stereotype.Service;
@@ -71,5 +72,11 @@ public class AdminuserServiceImpl implements AdminuserService {
     @Override
     public Adminuser queryOneAdminuser(String accountNumber) {
         return adminuserMapper.selectAdminuserByAccountNumber(accountNumber);
+    }
+
+    public Adminuser queryOneUserById(String id) {return adminuserMapper.selectUserById(id);}
+
+    public int selectId(String accountNumber) {
+        return adminuserMapper.selectId(accountNumber);
     }
 }

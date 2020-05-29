@@ -69,4 +69,15 @@ public interface UserMapper {
             @Result(column = "phone_number", property = "phoneNumber")
     })
     User selectUserByAccountNumber(@Param("accountNumber") String accountNumber);
+
+    @Select("select * from user where id = #{id}")
+    @Results(value = {
+            @Result(column = "account_number", property = "accountNumber"),
+            @Result(column = "phone_number", property = "phoneNumber")
+    })
+    User selectUserById(@Param("id") String id);
+
+
+    @Select("select id from user where account_number = #{accountNumber}")
+    int selectId(@Param("accountNumber") String accountNumber);
 }

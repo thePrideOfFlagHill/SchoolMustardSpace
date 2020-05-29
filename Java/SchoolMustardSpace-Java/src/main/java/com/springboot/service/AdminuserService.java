@@ -20,4 +20,6 @@ public interface AdminuserService {
     String deleteAdminuser(String accountNumber);
     ArrayList<Adminuser> queryAllAdminuser();
     Adminuser queryOneAdminuser(String accountNumber);
+    Adminuser queryOneUserById(String id);
+    int selectId(String accountNumber);
 }

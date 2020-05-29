@@ -1,7 +1,8 @@
 package com.springboot.controller;
 
 import com.springboot.constant.GoodCommentConstant;
-import com.springboot.domain.LostFoundComment;
+//import com.springboot.domain.LostFoundComment;
+import com.springboot.domain.Comment;
 import com.springboot.service.LostFoundCommentService;
 import com.springboot.utils.datetool.DateResult;
 import com.springboot.utils.jsontool.JsonResult;
@@ -40,7 +41,7 @@ public class LostFoundCommentPostController implements GoodCommentConstant {
      * @since 2020.5.2
      */
     @RequestMapping(value = "lostfound/comment/insert", method = RequestMethod.POST)
-    public JsonResult insertLostFoundComment(@RequestBody LostFoundComment lostFoundComment) {
+    public JsonResult insertLostFoundComment(@RequestBody Comment lostFoundComment) {
 
         //实例化生成
         UuidResult uuidResult = new UuidResult();
@@ -167,4 +168,3 @@ public class LostFoundCommentPostController implements GoodCommentConstant {
 
 
 }
-    
