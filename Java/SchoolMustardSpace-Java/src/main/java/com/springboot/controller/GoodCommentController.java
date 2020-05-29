@@ -19,15 +19,15 @@ import java.util.Map;
  * GoodCommentController
  * TODO
  * @description 所有的GoodCommentController请求的接口
- * 1./api/good/comment/query/all 查询全部任评论用接口
- * 2./api/good/comment/query/id/{id} 根据条目id查询任务评论（单个对应）
- * 3./api/good/comment/query/user_id/{user_id} 根据用户id查询任务（多个对应）
- * 4./api/good/comment/query/table_id/{table_id} 根据表条目id查询任务（多个对应）
- * 5./api/good/comment/insert 发布任务用接口 post为一个json整体对应任务实体domain
- * 6./api/good/comment/update/content 更新任务评论的内容用接口 更新修改任务评论的内容 键值对为二 key = id && content
- * 7./api/good/comment/update/thumb_up 更新任务评论的点赞+1用接口 更新修改任务的解决状态 键值对为一 key = id
- * 8./api/good/comment/update/comment 更新任务评论的评论+1用接口 更新修改任务的解决状态 键值对为一 key = id
- * 9./api/good/comment/delete 删除任务用接口 删除任务用接口 键值对为一 key = id
+ * 1./api/good/comment/query/all                  查询全部任评论用接口
+ * 2./api/good/comment/query/id/{id}              根据条目id查询任务评论（单个对应）
+ * 3./api/good/comment/query/user_id/{user_id}    根据用户id查询任务（多个对应）
+ * 4./api/good/comment/query/table_id/{table_id}  根据表条目id查询任务（多个对应）
+ * 5./api/good/comment/insert                     发布任务用接口 post为一个json整体对应任务实体domain
+ * 6./api/good/comment/update/content             更新任务评论的内容用接口 更新修改任务评论的内容 键值对为二 key = id && content
+ * 7./api/good/comment/update/thumb_up            更新任务评论的点赞+1用接口 更新修改任务的解决状态 键值对为一 key = id
+ * 8./api/good/comment/update/comment             更新任务评论的评论+1用接口 更新修改任务的解决状态 键值对为一 key = id
+ * 9./api/good/comment/delete                     删除任务用接口 删除任务用接口 键值对为一 key = id
  * @author 221701412_theTuring
  * @version v 1.0.0
  * @since 2020.5.1
