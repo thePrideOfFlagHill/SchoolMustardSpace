@@ -57,7 +57,7 @@ const router = new VueRouter({
 //           redirect: to.fullPath
 //         }
 //       })
-//      
+//
 //       NProgress.done()
 //     }
 //   } else {

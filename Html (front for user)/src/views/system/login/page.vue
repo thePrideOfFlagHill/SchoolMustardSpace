@@ -18,6 +18,7 @@
           <div class="page-login--form">
             <el-card shadow="never">
               <el-form
+                v-show="islogin"
                 ref="loginForm"
                 label-position="top"
                 :rules="rules"
@@ -43,12 +44,98 @@
                 </el-form-item>
                 <el-button size="default" @click="submit" type="primary" class="button-login">登录</el-button>
               </el-form>
+
+              <el-form
+                v-show="isregest"
+                ref="loginForm"
+                label-position="top"
+                :rules="rules"
+                :model="regestLogin"
+                size="default"
+              >
+                <el-form-item prop="username">
+                  <el-input type="text" v-model="regestLogin.username" placeholder="用户名">
+                    <i slot="prepend" class="fa fa-user-circle-o"></i>
+                  </el-input>
+                </el-form-item>
+                <el-form-item prop="password">
+                  <el-input type="password" v-model="regestLogin.password" placeholder="密码">
+                    <i slot="prepend" class="fa fa-keyboard-o"></i>
+                  </el-input>
+                </el-form-item>
+                <el-form-item prop="name">
+                  <el-input type="text" v-model="regestLogin.name" placeholder="姓名">
+                    <i slot="prepend" class="fa fa-user-circle-o"></i>
+                  </el-input>
+                </el-form-item>
+                <el-form-item prop="phoneNumber">
+                  <el-input type="text" v-model="regestLogin.phoneNumber" placeholder="手机号">
+                    <i slot="prepend" class="fa fa-user-circle-o"></i>
+                  </el-input>
+                </el-form-item>
+                <el-form-item prop="address">
+                  <el-input type="text" v-model="regestLogin.address" placeholder="地址">
+                    <i slot="prepend" class="fa fa-user-circle-o"></i>
+                  </el-input>
+                </el-form-item>
+                <el-form-item prop="info">
+                  <el-input type="text" v-model="regestLogin.info" placeholder="备注信息">
+                    <i slot="prepend" class="fa fa-user-circle-o"></i>
+                  </el-input>
+                </el-form-item>
+                <el-form-item prop="sex">
+                  <el-form-item label="性别">
+                    <el-select v-model="regestLogin.sex" placeholder="性别">
+                      <el-option label="男" value="0"></el-option>
+                      <el-option label="女" value="1"></el-option>
+                    </el-select>
+                  </el-form-item>
+                </el-form-item>
+
+                <el-form-item prop="code">
+                  <el-input type="text" v-model="regestLogin.code" placeholder="验证码">
+                    <template slot="append">
+                      <img class="login-code" src="./image/login-code.png" />
+                    </template>
+                  </el-input>
+                </el-form-item>
+                <el-button size="default" @click="Regest" type="primary" class="button-login">注册</el-button>
+              </el-form>
+
+              <el-form
+                v-show="isforget"
+                ref="loginForm"
+                label-position="top"
+                :rules="rules"
+                :model="formForgt"
+                size="default"
+              >
+                <el-form-item prop="username">
+                  <el-input type="text" v-model="formForgt.username" placeholder="用户名">
+                    <i slot="prepend" class="fa fa-user-circle-o"></i>
+                  </el-input>
+                </el-form-item>
+                <el-form-item prop="password">
+                  <el-input type="password" v-model="formForgt.password" placeholder="密码">
+                    <i slot="prepend" class="fa fa-keyboard-o"></i>
+                  </el-input>
+                </el-form-item>
+                <el-form-item prop="code">
+                  <el-input type="text" v-model="formForgt.code" placeholder="验证码">
+                    <template slot="append">
+                      <img class="login-code" src="./image/login-code.png" />
+                    </template>
+                  </el-input>
+                </el-form-item>
+                <el-button size="default" @click="Forget" type="primary" class="button-login">重置密码</el-button>
+              </el-form>
             </el-card>
             <p class="page-login--options" flex="main:justify cross:center">
-              <span>
+              <span @click="goForget">
                 <d2-icon name="question-circle" />忘记密码
               </span>
-              <span>注册用户</span>
+              <span @click="goRegest">注册用户</span>
+              <span @click="goLogin">登录</span>
             </p>
             <!-- quick login -->
             <el-button
@@ -93,9 +180,21 @@ export default {
   data() {
     return {
       userid: "",
-
+      islogin: true,
+      isregest: false,
+      isforget: false,
       timeInterval: null,
       time: dayjs().format("HH:mm:ss"),
+      sexs: [
+        {
+          value: 0,
+          label: "男"
+        },
+        {
+          value: 1,
+          label: "女"
+        }
+      ],
       // 快速选择用户
       dialogVisible: false,
       users: [
@@ -117,6 +216,21 @@ export default {
       ],
       // 表单
       formLogin: {
+        username: "",
+        password: "",
+        code: "v9am"
+      },
+      regestLogin: {
+        username: "",
+        password: "",
+        code: "v9am",
+        sex: "",
+        name: "",
+        phoneNumber: "",
+        address: "",
+        info: ""
+      },
+      formForgt: {
         username: "",
         password: "",
         code: "v9am"
@@ -179,7 +293,7 @@ export default {
     // 提交登录信息
     submit() {
       this.$refs.loginForm.validate(valid => {
-        if (valid) {
+        if (1) {
           console.log(this.formLogin);
           axios
             .post(
@@ -236,6 +350,45 @@ export default {
       });
 
       console.log(data);
+    },
+    goLogin() {
+      (this.islogin = true), (this.isregest = false), (this.isforget = false);
+    },
+    goRegest() {
+      (this.islogin = false), (this.isregest = true), (this.isforget = false);
+    },
+    goForget() {
+      (this.islogin = false), (this.isregest = false), (this.isforget = true);
+    },
+    Regest() {
+      var that = this;
+      axios
+        .post("/api/user/register", {
+          accountNumber: that.regestLogin.username,
+          password: that.regestLogin.password,
+          sex: that.regestLogin.sex,
+          name: that.regestLogin.name,
+          phoneNumber: that.regestLogin.phoneNumber,
+          head: "",
+          address: that.regestLogin.address,
+          info: that.regestLogin.info
+        })
+        .then(function(res) {
+          alert("恭喜你，注册成功");
+        });
+    },
+    Forget() {
+      var that = this;
+      axios
+        .post(
+          "/api/user/find/password?accountNumber=" +
+            that.formForgt.username +
+            "&newPassword=" +
+            that.formForgt.password
+        )
+        .then(function(res) {
+          alert("重置密码成功");
+        });
     }
   }
 };
