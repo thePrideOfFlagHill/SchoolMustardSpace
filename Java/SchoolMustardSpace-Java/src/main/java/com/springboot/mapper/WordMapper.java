@@ -1,10 +1,7 @@
 package com.springboot.mapper;
 
 import com.springboot.domain.Word;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -16,9 +13,29 @@ import java.util.List;
 
 @Mapper
 public interface WordMapper {
+
+    //=================================== 增 ======================================
+    //添加敏感词
+    //=================================== 增 ======================================
+
+
+    //=================================== 删 ======================================
+    //通过Id或者名称或者类型删除
+    //=================================== 删 ======================================
+
+
+    //=================================== 查 ======================================
     @Select("select * from sensitive_words")
     @Results(value = {
             @Result(column = "words", property = "word")
     })
     List<Word> getWords();
+
+    //=================================== 查 ======================================
+
+
+    //=================================== 改 ======================================
+    //修改敏感词
+    //=================================== 改 ======================================
+
 }
