@@ -80,5 +80,13 @@ export const menuAside = supplementPath([
       { path: '/page11', title: '我的租凭' }
       // { path: '/page4', title: '任务详情' }
     ]
+  },
+  {
+    title: '个人空间',
+    icon: 'folder-o',
+    children: [
+      { path: '/page13', title: '个人信息' },
+      { path: '/page14', title: '个人信息修改' }
+    ]
   }
 ])

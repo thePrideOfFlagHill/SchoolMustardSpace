@@ -129,6 +129,23 @@ const frameIn = [
         },
         component: _import('rental/workDetail')
       },
+      {
+        path: 'page13',
+        name: 'page13',
+        meta: {
+          title: '个人信息',
+          auth: true
+        },
+        component: _import('person/detail')
+      }, {
+        path: 'page14',
+        name: 'page14',
+        meta: {
+          title: '个人信息修改',
+          auth: true
+        },
+        component: _import('person/change')
+      },
       // 系统 前端日志
       {
         path: 'log',
