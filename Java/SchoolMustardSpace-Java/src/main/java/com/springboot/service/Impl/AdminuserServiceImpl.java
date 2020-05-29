@@ -24,8 +24,8 @@ public class AdminuserServiceImpl implements AdminuserService {
     private AdminuserMapper adminuserMapper;
 
     @Override
-    public String login(String accountNumber, String password) {
-        int count = adminuserMapper.selectAdminuserByAccountNumberAndPassword(accountNumber, password);
+    public String login(Adminuser adminuser) {
+        int count = adminuserMapper.selectAdminuserByAccountNumberAndPassword(adminuser);
         return count == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
     }
 
@@ -43,7 +43,10 @@ public class AdminuserServiceImpl implements AdminuserService {
 
     @Override
     public String changePassword(String accountNumber, String password, String newPassword) {
-        int count = adminuserMapper.selectAdminuserByAccountNumberAndPassword(accountNumber, password);
+        Adminuser adminuser = new Adminuser();
+        adminuser.setAccountNumber(accountNumber);
+        adminuser.setPassword(password);
+        int count = adminuserMapper.selectAdminuserByAccountNumberAndPassword(adminuser);
         if(count == 1){
             int result = adminuserMapper.updateAdminuserPassword(accountNumber, newPassword);
             if(result == 1){

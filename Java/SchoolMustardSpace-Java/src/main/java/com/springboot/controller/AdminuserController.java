@@ -1,14 +1,15 @@
 package com.springboot.controller;
 
+import com.springboot.constant.Constant;
 import com.springboot.domain.Adminuser;
 import com.springboot.service.AdminuserService;
 import com.springboot.utils.encryptiontool.DesEncryption;
 import com.springboot.utils.jsontool.JsonResult;
-import com.sun.org.apache.xpath.internal.objects.XObject;
 import org.springframework.web.bind.annotation.*;
 import sun.security.krb5.internal.crypto.Des;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * AdminuserController
@@ -26,103 +27,101 @@ public class AdminuserController {
     @Resource
     private AdminuserService adminuserService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public JsonResult login(@RequestParam(value = "accountNumber") String accountNumber,
-                            @RequestParam(value = "password") String password){
-        byte[] secretArr = DesEncryption.encryptMode(password.getBytes());
+    @PostMapping("/login")
+    public JsonResult login(@RequestBody Adminuser adminuser){
+        byte[] secretArr = DesEncryption.encryptMode(adminuser.getPassword().getBytes());
         String str = DesEncryption.byte2Hex(secretArr);
-        String msg = adminuserService.login(accountNumber, str);
-        int id = adminuserService.selectId(accountNumber);
-        if(msg.equals("succeed")){
-            return JsonResult.build(200, msg, id);
+        adminuser.setPassword(str);
+        String msg = adminuserService.login(adminuser);
+        int id = adminuserService.selectId(adminuser.getAccountNumber());
+        if(msg.equals(Constant.MSG_SUCCEED)){
+            return JsonResult.build(Constant.STATUS_SUCCEED, msg, id);
         }
         else return JsonResult.errorMsg(msg);
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @PostMapping("/register")
     public JsonResult register(@RequestBody Adminuser adminuser){
         byte[] secretArr = DesEncryption.encryptMode(adminuser.getPassword().getBytes());
         String str = DesEncryption.byte2Hex(secretArr);
         adminuser.setPassword(str);
         String msg = adminuserService.register(adminuser);
-        if(msg.equals("succeed")){
-            return JsonResult.build(200, msg, null);
+        if(msg.equals(Constant.MSG_SUCCEED)){
+            return JsonResult.build(Constant.STATUS_SUCCEED, msg, null);
         }
         else return JsonResult.errorMsg(msg);
     }
 
-    @RequestMapping(value = "/find/password", method = RequestMethod.POST)
-    public JsonResult findPassword(@RequestParam(value = "accountNumber") String accountNumber,
-                                   @RequestParam(value = "newPassword") String newPassword){
-        byte[] secretArr = DesEncryption.encryptMode(newPassword.getBytes());
+    @PostMapping("/find/password")
+    public JsonResult findPassword(@RequestBody Map<String, String> map){
+
+        byte[] secretArr = DesEncryption.encryptMode(map.get("newPassword").getBytes());
         String str = DesEncryption.byte2Hex(secretArr);
-        String msg = adminuserService.findPassword(accountNumber, str);
-        if(msg.equals("succeed")){
-            return JsonResult.build(200, msg, null);
+        String msg = adminuserService.findPassword(map.get("accountNumber"), str);
+        if(msg.equals(Constant.MSG_SUCCEED)){
+            return JsonResult.build(Constant.STATUS_SUCCEED, msg, null);
         }
         else return JsonResult.errorMsg(msg);
     }
 
-    @RequestMapping(value = "/update/password", method = RequestMethod.POST)
-    public JsonResult changePassword(@RequestParam(value = "accountNumber") String accountNumber,
-                                     @RequestParam(value = "password") String password,
-                                     @RequestParam(value = "newPassword") String newPassword){
-        byte[] secretArr1 = DesEncryption.encryptMode(password.getBytes());
-        byte[] secretArr2 = DesEncryption.encryptMode(newPassword.getBytes());
+    @PostMapping("/update/password")
+    public JsonResult changePassword(@RequestBody Map<String, String> map){
+        byte[] secretArr1 = DesEncryption.encryptMode(map.get("password").getBytes());
+        byte[] secretArr2 = DesEncryption.encryptMode(map.get("newPassword").getBytes());
         String str1 = DesEncryption.byte2Hex(secretArr1);
         String str2 = DesEncryption.byte2Hex(secretArr2);
-        String msg = adminuserService.changePassword(accountNumber, str1, str2);
-        if(msg.equals("succeed")){
-            return JsonResult.build(200, msg, null);
+        String msg = adminuserService.changePassword(map.get("accountNumber"), str1, str2);
+        if(msg.equals(Constant.MSG_SUCCEED)){
+            return JsonResult.build(Constant.STATUS_SUCCEED, msg, null);
         }
         else return JsonResult.errorMsg(msg);
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @PostMapping("/update")
     public JsonResult updateAdminuserMessage(@RequestBody Adminuser adminuser){
         byte[] secretArr = DesEncryption.encryptMode(adminuser.getPassword().getBytes());
         String str = DesEncryption.byte2Hex(secretArr);
         adminuser.setPassword(str);
         String msg = adminuserService.updateAdminuserMessage(adminuser);
-        if(msg.equals("succeed")){
-            return JsonResult.build(200, msg, null);
+        if(msg.equals(Constant.MSG_SUCCEED)){
+            return JsonResult.build(Constant.STATUS_SUCCEED, msg, null);
         }
         else return JsonResult.errorMsg(msg);
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public JsonResult deleteAdminuser(@RequestParam(value = "accountNumber") String accountNumber){
-        String msg = adminuserService.deleteAdminuser(accountNumber);
-        if(msg.equals("succeed")){
-            return JsonResult.build(200, msg, null);
+    @PostMapping("/delete")
+    public JsonResult deleteAdminuser(@RequestBody Map<String, String> map){
+        String msg = adminuserService.deleteAdminuser(map.get("accountNumber"));
+        if(msg.equals(Constant.MSG_SUCCEED)){
+            return JsonResult.build(Constant.STATUS_SUCCEED, msg, null);
         }
         else return JsonResult.errorMsg(msg);
     }
 
-    @RequestMapping(value = "/query/all", method = RequestMethod.GET)
+    @GetMapping("/query/all")
     public JsonResult queryAllAdminuser(){
         Object data = adminuserService.queryAllAdminuser();
         if(data != null){
-            return JsonResult.build(200, "succeed", data);
+            return JsonResult.build(Constant.STATUS_SUCCEED, Constant.MSG_SUCCEED, data);
         }
-        else return JsonResult.errorMsg("fail");
+        else return JsonResult.errorMsg(Constant.MSG_FAIL);
     }
 
-    @RequestMapping(value = "/query/accountNumber/{accountNumber}", method = RequestMethod.GET)
+    @GetMapping("/query/accountNumber/{accountNumber}")
     public JsonResult queryOneAdminuser(@PathVariable(value = "accountNumber") String accountNumber){
         Object data = adminuserService.queryOneAdminuser(accountNumber);
         if(data != null){
-            return JsonResult.build(200, "succeed", data);
+            return JsonResult.build(Constant.STATUS_SUCCEED, Constant.MSG_SUCCEED, data);
         }
-        else return JsonResult.errorMsg("fail");
+        else return JsonResult.errorMsg(Constant.MSG_FAIL);
     }
 
-    @RequestMapping(value = "/query/id/{id}", method = RequestMethod.GET)
+    @GetMapping("/query/id/{id}")
     public JsonResult queryOneUserById(@PathVariable(value = "id") String accountNumber){
         Object data = adminuserService.queryOneUserById(accountNumber);
         if(data != null){
-            return JsonResult.build(200,"succeed", data);
+            return JsonResult.build(Constant.STATUS_SUCCEED, Constant.MSG_SUCCEED, data);
         }
-        else return JsonResult.errorMsg("fail");
+        else return JsonResult.errorMsg(Constant.MSG_FAIL);
     }
 }
