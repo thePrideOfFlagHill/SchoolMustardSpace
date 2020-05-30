@@ -237,4 +237,8 @@ public class FileUploadController {
         }
         return result;
     }
+
+    /**
+     * 对于断点续传的一些思考
+     */
 }
