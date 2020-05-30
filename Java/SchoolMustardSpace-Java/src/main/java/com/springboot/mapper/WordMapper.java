@@ -48,8 +48,8 @@ public interface WordMapper {
 
     //=================================== 改 ======================================
     //修改敏感词
-    @Update("update sensitive_words set words = #{word}")
-    int updateWord(@Param("word")String word);
+    @Update("update sensitive_words set words = #{newWord} where words = #{word}")
+    int updateWord(@Param("word")String word , @Param("newWord")String newWord);
     //=================================== 改 ======================================
 
 }

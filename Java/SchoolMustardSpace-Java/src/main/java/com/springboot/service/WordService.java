@@ -15,11 +15,11 @@ public interface WordService {
 
     int deleteWordByInt(int id);
 
-    int deleteWordByString(String something);
+    int deleteWordByString(int chioce , String something);
 
     List<Word> getWords();
 
     boolean checkRepeat(String word);
 
-    int updateWord(String word);
+    int updateWord(String word , String newWord);
 }

@@ -22,26 +22,32 @@ public class WordServiceImpl implements WordService {
     private WordMapper wordMapper;
 
     public int addWord(String word){
-        return 1;
+        return wordMapper.addWord(word);
     }
 
     public int deleteWordByInt(int id){
-        return 1;
+        return wordMapper.deleteById(id);
     }
 
-    public int deleteWordByString(String something){
-        return 1;
+    public int deleteWordByString(int chioce ,String something){
+        if (chioce == 1){
+            return wordMapper.deleteByWord(something);
+        }
+        if (chioce == 2){
+            return wordMapper.deleteByType(something);
+        }
+        return 0;
     }
 
     public List<Word> getWords(){
-        return null;
+        return wordMapper.getWords();
     }
 
     public boolean checkRepeat(String word){
-        return true;
+        return wordMapper.checkRepeat(word);
     }
 
-    public int updateWord(String word){
-        return 1;
+    public int updateWord(String word , String newWord){
+        return wordMapper.updateWord(word , newWord);
     }
 }
