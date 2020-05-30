@@ -11,15 +11,15 @@ import java.util.List;
  */
 
 public interface WordService {
-    int addWord(String word);
+    String addWord(String word);
 
-    int deleteWordByInt(int id);
+    String deleteWordByInt(int id);
 
-    int deleteWordByString(int chioce , String something);
+    String deleteWordByString(int chioce , String something);
 
     List<Word> getWords();
 
     boolean checkRepeat(String word);
 
-    int updateWord(String word , String newWord);
+    String updateWord(String word , String newWord);
 }

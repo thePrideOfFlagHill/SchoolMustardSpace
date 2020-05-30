@@ -1,14 +1,16 @@
 package com.springboot.controller;
 
+import com.springboot.constant.Constant;
 import com.springboot.domain.Word;
 import com.springboot.mapper.WordMapper;
+import com.springboot.service.WordService;
+import com.springboot.utils.jsontool.JsonResult;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 会飞的大野鸡
@@ -18,14 +20,65 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api")
+@RequestMapping("/api/words")
 public class WordController {
     @Autowired
-    private WordMapper wordMapper;
+    private WordService wordService;
 
-    @GetMapping("/words")
-    public void a(){
-        List<Word> words = wordMapper.getWords();
-        System.out.println(words);
+    @GetMapping("/query/all")
+    public JsonResult getWords(){
+        List<Word> words = wordService.getWords();
+        return JsonResult.build(200 , "succeed" , words);
+    }
+
+    @PostMapping("/delete/id")
+    public JsonResult deleteById(@RequestBody Map<String , String> resMap){
+        String msg = wordService.deleteWordByInt(Integer.parseInt(resMap.get("id")));
+        if(msg.equals("succeed")){
+            return JsonResult.build(200,msg,null);
+        }
+        else return JsonResult.errorMsg(msg);
+    }
+
+    @PostMapping("/delete/type")
+    public JsonResult deleteByType(@RequestBody Map<String , String> resMap){
+        String msg = wordService.deleteWordByString(2 , resMap.get("type").toString());
+        if(msg.equals("succeed")){
+            return JsonResult.build(200,msg,null);
+        }
+        else return JsonResult.errorMsg(msg);
+    }
+
+    @PostMapping("/delete/word")
+    public JsonResult deleteByWord(@RequestBody Map<String , String> resMap){
+        String msg = wordService.deleteWordByString(1 , resMap.get("word").toString());
+        if(msg.equals("succeed")){
+            return JsonResult.build(200,msg,null);
+        }
+        else return JsonResult.errorMsg(msg);
+    }
+
+    @GetMapping("/insert")
+    public JsonResult addWords(@Param("word")String word){
+        boolean exist = wordService.checkRepeat(word);
+        if (exist){
+            return JsonResult.errorMsg(Constant.MSG_FAIL);
+        }
+        String msg = wordService.addWord(word);
+        if(msg.equals("succeed")){
+            return JsonResult.build(200,msg,null);
+        }
+        else return JsonResult.errorMsg(msg);
+    }
+
+    @PostMapping("/update")
+    public JsonResult update(@RequestBody Map<String , String> resMap){
+        String word = resMap.get("word");
+        String newWord = resMap.get("newWord");
+        String msg = wordService.updateWord(word , newWord);
+        if(msg.equals("succeed")){
+            return JsonResult.build(200,msg,null);
+        }
+        else return JsonResult.errorMsg(msg);
     }
 }

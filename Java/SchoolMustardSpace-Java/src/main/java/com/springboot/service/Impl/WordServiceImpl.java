@@ -1,5 +1,6 @@
 package com.springboot.service.Impl;
 
+import com.springboot.constant.Constant;
 import com.springboot.domain.Word;
 import com.springboot.mapper.WordMapper;
 import com.springboot.service.WordService;
@@ -21,22 +22,22 @@ public class WordServiceImpl implements WordService {
     @Autowired
     private WordMapper wordMapper;
 
-    public int addWord(String word){
-        return wordMapper.addWord(word);
+    public String addWord(String word){
+        return wordMapper.addWord(word) == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
     }
 
-    public int deleteWordByInt(int id){
-        return wordMapper.deleteById(id);
+    public String deleteWordByInt(int id){
+        return wordMapper.deleteById(id) == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
     }
 
-    public int deleteWordByString(int chioce ,String something){
+    public String deleteWordByString(int chioce ,String something){
         if (chioce == 1){
-            return wordMapper.deleteByWord(something);
+            return wordMapper.deleteByWord(something) == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
         }
         if (chioce == 2){
-            return wordMapper.deleteByType(something);
+            return wordMapper.deleteByType(something) == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
         }
-        return 0;
+        return null;
     }
 
     public List<Word> getWords(){
@@ -47,7 +48,7 @@ public class WordServiceImpl implements WordService {
         return wordMapper.checkRepeat(word);
     }
 
-    public int updateWord(String word , String newWord){
-        return wordMapper.updateWord(word , newWord);
+    public String updateWord(String word , String newWord){
+        return wordMapper.updateWord(word , newWord) == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
     }
 }
