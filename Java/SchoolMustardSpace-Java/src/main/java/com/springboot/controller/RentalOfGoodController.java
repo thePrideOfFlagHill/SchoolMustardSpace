@@ -1,11 +1,9 @@
 package com.springboot.controller;
 
-import com.springboot.constant.Constant;
 import com.springboot.constant.RentalOfGoodConstant;
 import com.springboot.domain.RentalOfGood;
 import com.springboot.service.RentalOfGoodService;
 import com.springboot.utils.jsontool.JsonResult;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,11 +1,10 @@
 package com.springboot.service.Impl;
 
-import com.springboot.constant.Constant;
+import com.springboot.constant.LostAndFoundConstant;
 import com.springboot.domain.LostAndFound;
 import com.springboot.mapper.LostAndFoundMapper;
 import com.springboot.service.LostAndFoundService;
 import org.apache.ibatis.annotations.Param;
-import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,32 +18,32 @@ import java.util.List;
  */
 
 @Service
-public class LostAndFoundServiceImpl implements LostAndFoundService {
+public class LostAndFoundServiceImpl implements LostAndFoundService, LostAndFoundConstant {
     @Autowired
     private LostAndFoundMapper lostAndFoundMapper;
 
     public String insertLostAndFound(LostAndFound lostAndFound){
-       return lostAndFoundMapper.insertLostAndFound(lostAndFound) == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
+       return lostAndFoundMapper.insertLostAndFound(lostAndFound) == 1 ? MSG_SUCCEED : MSG_FAIL;
     }
 
     public String updateSome(int choice , String uuid){
         if (choice == 1){
-            return lostAndFoundMapper.updateDone(uuid) == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
+            return lostAndFoundMapper.updateDone(uuid) == 1 ? MSG_SUCCEED : MSG_FAIL;
         }
         if (choice == 2){
-            return lostAndFoundMapper.updateThumbUp(uuid) == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
+            return lostAndFoundMapper.updateThumbUp(uuid) == 1 ? MSG_SUCCEED : MSG_FAIL;
         }
         if (choice == 3){
-            return lostAndFoundMapper.updateCollect(uuid) == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
+            return lostAndFoundMapper.updateCollect(uuid) == 1 ? MSG_SUCCEED : MSG_FAIL;
         }
         if (choice == 4){
-            return lostAndFoundMapper.updateComment(uuid) == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
+            return lostAndFoundMapper.updateComment(uuid) == 1 ? MSG_SUCCEED : MSG_FAIL;
         }
         return null;
     }
 
     public String deleteById(String id){
-        return lostAndFoundMapper.deleteById(id) == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
+        return lostAndFoundMapper.deleteById(id) == 1 ? MSG_SUCCEED : MSG_FAIL;
     }
 
     public List<LostAndFound> selectList(int choice , int userId){
