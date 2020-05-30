@@ -1,6 +1,6 @@
 package com.springboot.controller;
 
-import com.springboot.constant.Constant;
+import com.springboot.constant.GoodCommentConstant;
 import com.springboot.domain.Comment;
 import com.springboot.domain.CommentPlus;
 import com.springboot.domain.User;
@@ -36,7 +36,7 @@ import java.util.Map;
 @RestController
 @CrossOrigin
 @RequestMapping("/api")
-public class GoodCommentController {
+public class GoodCommentController implements GoodCommentConstant {
     @Autowired
     private GoodCommentService goodCommentService;
     @Autowired
@@ -55,7 +55,7 @@ public class GoodCommentController {
 
         List<Comment> list = this.goodCommentService.getAllGoodComment();
 
-        return JsonResult.build(Constant.STATUS_SUCCEED,Constant.MSG_SUCCEED,list);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
 
     }
 
@@ -84,7 +84,7 @@ public class GoodCommentController {
         commentPlus.setTable_id(goodComment.getTable_id());
         commentPlus.setName(user.getName());
 
-        return JsonResult.build(Constant.STATUS_SUCCEED,Constant.MSG_SUCCEED,commentPlus);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,commentPlus);
     }
 
     /**
@@ -100,7 +100,7 @@ public class GoodCommentController {
 
         List<Comment> list = this.goodCommentService.queryGoodCommentByUserId(user_id);
 
-        return JsonResult.build(Constant.STATUS_SUCCEED, Constant.MSG_SUCCEED,list);
+        return JsonResult.build(STATUS_SUCCEED, MSG_SUCCEED,list);
     }
 
     /**
@@ -116,8 +116,7 @@ public class GoodCommentController {
 
         List<Comment> list = this.goodCommentService.queryGoodCommentByTableId(table_id);
 
-        return JsonResult.build(Constant.STATUS_SUCCEED,Constant.MSG_SUCCEED,list);
-
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
     }
 
     /**
@@ -139,16 +138,16 @@ public class GoodCommentController {
         //发布初始化
         goodComment.setId(uuidResult.setUuidResult());
         goodComment.setPublish_time(dateResult.getCurrentTime());
-        goodComment.setThumb_up(Constant.INIT_THUMB);
-        goodComment.setComment(Constant.INIT_COMMENT);
+        goodComment.setThumb_up(INIT_THUMB);
+        goodComment.setComment(INIT_COMMENT);
 
         int temp = goodCommentService.insertGoodComment(goodComment);
 
-        if(temp==Constant.SQL_FAIL){
-            return JsonResult.errorMsg(Constant.MSG_FAIL);
+        if(temp==SQL_FAIL){
+            return JsonResult.errorMsg(MSG_FAIL);
         }
 
-        return JsonResult.build(Constant.STATUS_SUCCEED,Constant.MSG_SUCCEED,null);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,null);
     }
 
     /**
@@ -165,11 +164,11 @@ public class GoodCommentController {
         int temp = goodCommentService.updateGoodCommentContent(map.get("content"),map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
-        if(temp==Constant.SQL_FAIL){
-            return JsonResult.errorMsg(Constant.MSG_FAIL);
+        if(temp==SQL_FAIL){
+            return JsonResult.errorMsg(MSG_FAIL);
         }
 
-        return JsonResult.build(Constant.STATUS_SUCCEED,Constant.MSG_SUCCEED,null);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,null);
     }
 
     /**
@@ -186,11 +185,11 @@ public class GoodCommentController {
         int temp = goodCommentService.updateGoodCommentThumb(map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
-        if(temp==Constant.SQL_FAIL){
-            return JsonResult.errorMsg(Constant.MSG_FAIL);
+        if(temp==SQL_FAIL){
+            return JsonResult.errorMsg(MSG_FAIL);
         }
 
-        return JsonResult.build(Constant.STATUS_SUCCEED, Constant.MSG_SUCCEED,null);
+        return JsonResult.build(STATUS_SUCCEED, MSG_SUCCEED,null);
     }
 
     /**
@@ -207,11 +206,11 @@ public class GoodCommentController {
         int temp = goodCommentService.updateGoodCommentComment(map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
-        if(temp==Constant.SQL_FAIL){
-            return JsonResult.errorMsg(Constant.MSG_FAIL);
+        if(temp==SQL_FAIL){
+            return JsonResult.errorMsg(MSG_FAIL);
         }
 
-        return JsonResult.build(Constant.STATUS_SUCCEED,Constant.MSG_SUCCEED,null);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,null);
     }
 
     /**
@@ -228,10 +227,10 @@ public class GoodCommentController {
         int temp = goodCommentService.deleteGoodComment(map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
-        if(temp==Constant.SQL_FAIL){
-            return JsonResult.errorMsg(Constant.MSG_FAIL);
+        if(temp==SQL_FAIL){
+            return JsonResult.errorMsg(MSG_FAIL);
         }
 
-        return JsonResult.build(Constant.STATUS_SUCCEED, Constant.MSG_SUCCEED,null);
+        return JsonResult.build(STATUS_SUCCEED, MSG_SUCCEED,null);
     }
 }

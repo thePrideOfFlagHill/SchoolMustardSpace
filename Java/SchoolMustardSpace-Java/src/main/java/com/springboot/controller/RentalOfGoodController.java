@@ -1,5 +1,7 @@
 package com.springboot.controller;
 
+import com.springboot.constant.Constant;
+import com.springboot.constant.RentalOfGoodConstant;
 import com.springboot.domain.RentalOfGood;
 import com.springboot.service.RentalOfGoodService;
 import com.springboot.utils.jsontool.JsonResult;
@@ -37,7 +39,7 @@ import java.util.UUID;
 @RestController
 @CrossOrigin
 @RequestMapping("/api/rental")
-public class RentalOfGoodController {
+public class RentalOfGoodController implements RentalOfGoodConstant {
     @Autowired
     private RentalOfGoodService rentalOfGoodService;
 
@@ -58,8 +60,8 @@ public class RentalOfGoodController {
         rentalOfGood.setNewDegree(Integer.parseInt(resMap.get("newDegree")));
 
         String msg = rentalOfGoodService.insertRentalOfGood(rentalOfGood);
-        if(msg.equals("succeed")){
-            return JsonResult.build(200,msg,uuid);
+        if(msg.equals(MSG_SUCCEED)){
+            return JsonResult.build(STATUS_SUCCEED,msg,uuid);
         }
         else return JsonResult.errorMsg(msg);
     }
@@ -83,51 +85,51 @@ public class RentalOfGoodController {
     }
 
     @GetMapping("/rent")
-    public JsonResult rent(@Param("id") String id){
-        String msg = rentalOfGoodService.insertTime(1 , id);
-        if(msg.equals("succeed")){
-            return JsonResult.build(200,msg,null);
+    public JsonResult rent(@RequestBody Map<String, String> map){
+        String msg = rentalOfGoodService.insertTime(1 , map.get("id"));
+        if(msg.equals(MSG_SUCCEED)){
+            return JsonResult.build(STATUS_SUCCEED,msg,null);
         }
         else return JsonResult.errorMsg(msg);
     }
 
     @GetMapping("/update/isDone")
-    public JsonResult updateIsDone(@Param("id")String id){
-        String msg = rentalOfGoodService.updateSome(1 , id);
-        String msg2 = rentalOfGoodService.insertTime(2 , id);
+    public JsonResult updateIsDone(@RequestBody Map<String, String> map){
+        String msg = rentalOfGoodService.updateSome(1 , map.get("id"));
+        String msg2 = rentalOfGoodService.insertTime(2 , map.get("id"));
 
-        if(msg.equals("succeed") && msg2.equals("succeed")){
-            return JsonResult.build(200,msg,null);
+        if(msg.equals(MSG_SUCCEED) && msg2.equals(MSG_SUCCEED)){
+            return JsonResult.build(STATUS_SUCCEED,msg,null);
         }
         else return JsonResult.errorMsg(msg);
     }
 
     @GetMapping("/update/thumbUp")
-    public JsonResult updateThumbUp(@Param("id")String id){
-        String msg = rentalOfGoodService.updateSome(2 , id);
+    public JsonResult updateThumbUp(@RequestBody Map<String, String> map){
+        String msg = rentalOfGoodService.updateSome(2 , map.get("id"));
 
-        if(msg.equals("succeed")){
-            return JsonResult.build(200,msg,null);
+        if(msg.equals(MSG_SUCCEED)){
+            return JsonResult.build(STATUS_SUCCEED,msg,null);
         }
         else return JsonResult.errorMsg(msg);
     }
 
     @GetMapping("/update/collect")
-    public JsonResult updateCollect(@Param("id")String id){
-        String msg = rentalOfGoodService.updateSome(3 , id);
+    public JsonResult updateCollect(@RequestBody Map<String, String> map){
+        String msg = rentalOfGoodService.updateSome(3 , map.get("id"));
 
-        if(msg.equals("succeed")){
-            return JsonResult.build(200,msg,null);
+        if(msg.equals(MSG_SUCCEED)){
+            return JsonResult.build(STATUS_SUCCEED,msg,null);
         }
         else return JsonResult.errorMsg(msg);
     }
 
     @GetMapping("/update/comment")
-    public JsonResult updateComment(@Param("id")String id){
-        String msg = rentalOfGoodService.updateSome(4 , id);
+    public JsonResult updateComment(@RequestBody Map<String, String> map ){
+        String msg = rentalOfGoodService.updateSome(4 , map.get("id"));
 
-        if(msg.equals("succeed")){
-            return JsonResult.build(200,msg,null);
+        if(msg.equals(MSG_SUCCEED)){
+            return JsonResult.build(STATUS_SUCCEED,msg,null);
         }
         else return JsonResult.errorMsg(msg);
     }
@@ -136,8 +138,8 @@ public class RentalOfGoodController {
     public JsonResult delete(@RequestBody Map<String , String> resMap){
         String msg = rentalOfGoodService.deleteById(resMap.get("id").toString());
 
-        if(msg.equals("succeed")){
-            return JsonResult.build(200,msg,null);
+        if(msg.equals(MSG_SUCCEED)){
+            return JsonResult.build(STATUS_SUCCEED,msg,null);
         }
         else return JsonResult.errorMsg(msg);
     }
@@ -150,40 +152,40 @@ public class RentalOfGoodController {
     public JsonResult queryAll(){
         List<RentalOfGood> rentalOfGoods = new LinkedList<RentalOfGood>();
         rentalOfGoods = rentalOfGoodService.selectList(1 , 0);
-        return JsonResult.build(200 , "succeed" , rentalOfGoods);
+        return JsonResult.build(STATUS_SUCCEED , MSG_SUCCEED , rentalOfGoods);
     }
 
     @GetMapping("/query/id")
-    public JsonResult queryId(@Param("id")String id){
-        RentalOfGood rentalOfGood = rentalOfGoodService.selectOne( id );
-        return JsonResult.build(200 , "succeed" , rentalOfGood);
+    public JsonResult queryId(@RequestBody Map<String, String> map){
+        RentalOfGood rentalOfGood = rentalOfGoodService.selectOne(map.get("id"));
+        return JsonResult.build(STATUS_SUCCEED , MSG_SUCCEED , rentalOfGood);
     }
 
     @GetMapping("/query/userId")
-    public JsonResult queryUserId(@Param("userId")int userId){
-        List<RentalOfGood> rentalOfGoods = rentalOfGoodService.selectList(2 , userId);
-        return JsonResult.build(200 , "succeed" , rentalOfGoods);
+    public JsonResult queryUserId(@RequestBody Map<String, String> map){
+        List<RentalOfGood> rentalOfGoods = rentalOfGoodService.selectList(2 , Integer.parseInt(map.get("userId")));
+        return JsonResult.build(STATUS_SUCCEED , MSG_SUCCEED , rentalOfGoods);
     }
 
     /**
      * 模糊查询beta版本运用tried树实现
      */
     @GetMapping("query/like/title")
-    public JsonResult queryLikeTitle(@Param("text")String text){
-        List<RentalOfGood> rentalOfGoods = rentalOfGoodService.selectLike(1 , text);
-        return JsonResult.build(200 , "succeed" , rentalOfGoods);
+    public JsonResult queryLikeTitle(@RequestBody Map<String, String> map){
+        List<RentalOfGood> rentalOfGoods = rentalOfGoodService.selectLike(1 , map.get("text"));
+        return JsonResult.build(STATUS_SUCCEED , MSG_SUCCEED , rentalOfGoods);
     }
 
     @GetMapping("query/like/content")
-    public JsonResult queryLikeContent(@Param("text")String text){
-        List<RentalOfGood> rentalOfGoods = rentalOfGoodService.selectLike(2 , text);
-        return JsonResult.build(200 , "succeed" , rentalOfGoods);
+    public JsonResult queryLikeContent(@RequestBody Map<String, String> map){
+        List<RentalOfGood> rentalOfGoods = rentalOfGoodService.selectLike(2 , map.get("text"));
+        return JsonResult.build(STATUS_SUCCEED , MSG_SUCCEED , rentalOfGoods);
     }
 
     @GetMapping("query/like/label")
-    public JsonResult queryLikeLabel(@Param("text")String text){
-        List<RentalOfGood> rentalOfGoods = rentalOfGoodService.selectLike(3 , text);
-        return JsonResult.build(200 , "succeed" , rentalOfGoods);
+    public JsonResult queryLikeLabel(@RequestBody Map<String, String> map){
+        List<RentalOfGood> rentalOfGoods = rentalOfGoodService.selectLike(3 , map.get("text"));
+        return JsonResult.build(STATUS_SUCCEED , MSG_SUCCEED , rentalOfGoods);
     }
 
 }

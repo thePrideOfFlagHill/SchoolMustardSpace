@@ -1,9 +1,9 @@
 package com.springboot.constant;
 
 /**
- * TaskCommentConstant
+ * GoodCommentConstant
  * TODO
- * @description 任务常量接口 TaskCommentConstant
+ * @description 物品租赁评论常量接口 GoodCommentConstant
  * @author 221701412_theTuring
  * @version v 1.0.0
  * @since 2020.4.30

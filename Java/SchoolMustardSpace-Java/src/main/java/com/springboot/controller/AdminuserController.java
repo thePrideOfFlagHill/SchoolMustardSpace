@@ -1,6 +1,6 @@
 package com.springboot.controller;
 
-import com.springboot.constant.Constant;
+import com.springboot.constant.AdminuserConstant;
 import com.springboot.domain.Adminuser;
 import com.springboot.service.AdminuserService;
 import com.springboot.utils.encryptiontool.DesEncryption;
@@ -31,7 +31,7 @@ import java.util.Map;
 @RestController
 @CrossOrigin
 @RequestMapping(value = "/api/admin")
-public class AdminuserController {
+public class AdminuserController implements AdminuserConstant {
     @Resource
     private AdminuserService adminuserService;
 
@@ -42,8 +42,8 @@ public class AdminuserController {
         adminuser.setPassword(str);
         String msg = adminuserService.login(adminuser);
         int id = adminuserService.selectId(adminuser.getAccountNumber());
-        if(msg.equals(Constant.MSG_SUCCEED)){
-            return JsonResult.build(Constant.STATUS_SUCCEED, msg, id);
+        if(msg.equals(MSG_SUCCEED)){
+            return JsonResult.build(STATUS_SUCCEED, msg, id);
         }
         else return JsonResult.errorMsg(msg);
     }
@@ -54,8 +54,8 @@ public class AdminuserController {
         String str = DesEncryption.byte2Hex(secretArr);
         adminuser.setPassword(str);
         String msg = adminuserService.register(adminuser);
-        if(msg.equals(Constant.MSG_SUCCEED)){
-            return JsonResult.build(Constant.STATUS_SUCCEED, msg, null);
+        if(msg.equals(MSG_SUCCEED)){
+            return JsonResult.build(STATUS_SUCCEED, msg, null);
         }
         else return JsonResult.errorMsg(msg);
     }
@@ -66,8 +66,8 @@ public class AdminuserController {
         byte[] secretArr = DesEncryption.encryptMode(map.get("newPassword").getBytes());
         String str = DesEncryption.byte2Hex(secretArr);
         String msg = adminuserService.findPassword(map.get("accountNumber"), str);
-        if(msg.equals(Constant.MSG_SUCCEED)){
-            return JsonResult.build(Constant.STATUS_SUCCEED, msg, null);
+        if(msg.equals(MSG_SUCCEED)){
+            return JsonResult.build(STATUS_SUCCEED, msg, null);
         }
         else return JsonResult.errorMsg(msg);
     }
@@ -79,8 +79,8 @@ public class AdminuserController {
         String str1 = DesEncryption.byte2Hex(secretArr1);
         String str2 = DesEncryption.byte2Hex(secretArr2);
         String msg = adminuserService.changePassword(map.get("accountNumber"), str1, str2);
-        if(msg.equals(Constant.MSG_SUCCEED)){
-            return JsonResult.build(Constant.STATUS_SUCCEED, msg, null);
+        if(msg.equals(MSG_SUCCEED)){
+            return JsonResult.build(STATUS_SUCCEED, msg, null);
         }
         else return JsonResult.errorMsg(msg);
     }
@@ -91,8 +91,8 @@ public class AdminuserController {
         String str = DesEncryption.byte2Hex(secretArr);
         adminuser.setPassword(str);
         String msg = adminuserService.updateAdminuserMessage(adminuser);
-        if(msg.equals(Constant.MSG_SUCCEED)){
-            return JsonResult.build(Constant.STATUS_SUCCEED, msg, null);
+        if(msg.equals(MSG_SUCCEED)){
+            return JsonResult.build(STATUS_SUCCEED, msg, null);
         }
         else return JsonResult.errorMsg(msg);
     }
@@ -100,8 +100,8 @@ public class AdminuserController {
     @PostMapping("/delete")
     public JsonResult deleteAdminuser(@RequestBody Map<String, String> map){
         String msg = adminuserService.deleteAdminuser(map.get("accountNumber"));
-        if(msg.equals(Constant.MSG_SUCCEED)){
-            return JsonResult.build(Constant.STATUS_SUCCEED, msg, null);
+        if(msg.equals(MSG_SUCCEED)){
+            return JsonResult.build(STATUS_SUCCEED, msg, null);
         }
         else return JsonResult.errorMsg(msg);
     }
@@ -110,26 +110,26 @@ public class AdminuserController {
     public JsonResult queryAllAdminuser(){
         Object data = adminuserService.queryAllAdminuser();
         if(data != null){
-            return JsonResult.build(Constant.STATUS_SUCCEED, Constant.MSG_SUCCEED, data);
+            return JsonResult.build(STATUS_SUCCEED, MSG_SUCCEED, data);
         }
-        else return JsonResult.errorMsg(Constant.MSG_FAIL);
+        else return JsonResult.errorMsg(MSG_FAIL);
     }
 
     @GetMapping("/query/accountNumber/{accountNumber}")
     public JsonResult queryOneAdminuser(@PathVariable(value = "accountNumber") String accountNumber){
         Object data = adminuserService.queryOneAdminuser(accountNumber);
         if(data != null){
-            return JsonResult.build(Constant.STATUS_SUCCEED, Constant.MSG_SUCCEED, data);
+            return JsonResult.build(STATUS_SUCCEED, MSG_SUCCEED, data);
         }
-        else return JsonResult.errorMsg(Constant.MSG_FAIL);
+        else return JsonResult.errorMsg(MSG_FAIL);
     }
 
     @GetMapping("/query/id/{id}")
     public JsonResult queryOneUserById(@PathVariable(value = "id") String accountNumber){
         Object data = adminuserService.queryOneUserById(accountNumber);
         if(data != null){
-            return JsonResult.build(Constant.STATUS_SUCCEED, Constant.MSG_SUCCEED, data);
+            return JsonResult.build(STATUS_SUCCEED, MSG_SUCCEED, data);
         }
-        else return JsonResult.errorMsg(Constant.MSG_FAIL);
+        else return JsonResult.errorMsg(MSG_FAIL);
     }
 }

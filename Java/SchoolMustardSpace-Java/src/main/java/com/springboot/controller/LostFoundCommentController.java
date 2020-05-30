@@ -1,7 +1,6 @@
 package com.springboot.controller;
 
-
-import com.springboot.constant.Constant;
+import com.springboot.constant.LostFoundCommentConstant;
 import com.springboot.domain.Comment;
 import com.springboot.domain.CommentPlus;
 import com.springboot.domain.User;
@@ -38,7 +37,7 @@ import java.util.Map;
 @RestController
 @CrossOrigin
 @RequestMapping("/api")
-public class LostFoundCommentController {
+public class LostFoundCommentController implements LostFoundCommentConstant {
 
     @Autowired
     private LostFoundCommentService lostFoundCommentService;
@@ -58,7 +57,7 @@ public class LostFoundCommentController {
 
         List<Comment> list = this.lostFoundCommentService.getAllLostFoundComment();
 
-        return JsonResult.build(Constant.STATUS_SUCCEED,Constant.MSG_SUCCEED,list);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
     }
 
     /**
@@ -86,7 +85,7 @@ public class LostFoundCommentController {
         commentPlus.setTable_id(lostFoundComment.getTable_id());
         commentPlus.setName(user.getName());
 
-        return JsonResult.build(Constant.STATUS_SUCCEED,Constant.MSG_SUCCEED,commentPlus);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,commentPlus);
     }
 
     /**
@@ -102,7 +101,7 @@ public class LostFoundCommentController {
 
         List<Comment> list = this.lostFoundCommentService.queryLostFoundCommentByUserId(user_id);
 
-        return JsonResult.build(Constant.STATUS_SUCCEED,Constant.MSG_SUCCEED,list);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
     }
 
     /**
@@ -118,7 +117,7 @@ public class LostFoundCommentController {
 
         List<Comment> list = this.lostFoundCommentService.queryLostFoundCommentByTableId(table_id);
 
-        return JsonResult.build(Constant.STATUS_SUCCEED,Constant.MSG_SUCCEED,list);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
     }
 
     /**
@@ -140,16 +139,16 @@ public class LostFoundCommentController {
         //发布初始化
         lostFoundComment.setId(uuidResult.setUuidResult());
         lostFoundComment.setPublish_time(dateResult.getCurrentTime());
-        lostFoundComment.setThumb_up(Constant.INIT_THUMB);
-        lostFoundComment.setComment(Constant.INIT_COMMENT);
+        lostFoundComment.setThumb_up(INIT_THUMB);
+        lostFoundComment.setComment(INIT_COMMENT);
 
         int temp = lostFoundCommentService.insertLostFoundComment(lostFoundComment);
 
-        if(temp==Constant.SQL_FAIL){
-            return JsonResult.errorMsg(Constant.MSG_FAIL);
+        if(temp==SQL_FAIL){
+            return JsonResult.errorMsg(MSG_FAIL);
         }
 
-        return JsonResult.build(Constant.STATUS_SUCCEED,Constant.MSG_SUCCEED,null);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,null);
     }
 
     /**
@@ -167,11 +166,11 @@ public class LostFoundCommentController {
         int temp = lostFoundCommentService.updateLostFoundCommentContent(map.get("content"), map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
-        if(temp==Constant.SQL_FAIL){
-            return JsonResult.errorMsg(Constant.MSG_FAIL);
+        if(temp==SQL_FAIL){
+            return JsonResult.errorMsg(MSG_FAIL);
         }
 
-        return JsonResult.build(Constant.STATUS_SUCCEED,Constant.MSG_SUCCEED,null);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,null);
     }
 
     /**
@@ -188,11 +187,11 @@ public class LostFoundCommentController {
         int temp = lostFoundCommentService.updateLostFoundCommentThumb(map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
-        if(temp==Constant.SQL_FAIL){
-            return JsonResult.errorMsg(Constant.MSG_FAIL);
+        if(temp==SQL_FAIL){
+            return JsonResult.errorMsg(MSG_FAIL);
         }
 
-        return JsonResult.build(Constant.STATUS_SUCCEED, Constant.MSG_SUCCEED,null);
+        return JsonResult.build(STATUS_SUCCEED, MSG_SUCCEED,null);
     }
 
     /**
@@ -209,11 +208,11 @@ public class LostFoundCommentController {
         int temp = lostFoundCommentService.updateLostFoundCommentComment(map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
-        if(temp==Constant.SQL_FAIL){
-            return JsonResult.errorMsg(Constant.MSG_FAIL);
+        if(temp==SQL_FAIL){
+            return JsonResult.errorMsg(MSG_FAIL);
         }
 
-        return JsonResult.build(Constant.STATUS_SUCCEED,Constant.MSG_SUCCEED,null);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,null);
     }
 
     /**
@@ -230,10 +229,10 @@ public class LostFoundCommentController {
         int temp = lostFoundCommentService.deleteLostFoundComment(map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
-        if(temp==Constant.SQL_FAIL){
-            return JsonResult.errorMsg(Constant.MSG_FAIL);
+        if(temp==SQL_FAIL){
+            return JsonResult.errorMsg(MSG_FAIL);
         }
 
-        return JsonResult.build(Constant.STATUS_SUCCEED,Constant.MSG_SUCCEED,null);
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,null);
     }
 }
