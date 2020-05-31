@@ -161,7 +161,7 @@ public class GoodCommentController implements GoodCommentConstant {
     @PostMapping("good/comment/update/content")
     public JsonResult updateGoodCommentContent(@RequestBody Map<String, String> map) {
 
-        int temp = goodCommentService.updateGoodCommentContent(map.get("content"),map.get("id"));
+        int temp = goodCommentService.update(3,map.get("content"),map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -182,7 +182,7 @@ public class GoodCommentController implements GoodCommentConstant {
     @PostMapping("good/comment/update/thumb_up")
     public JsonResult updateGoodCommentThump(@RequestBody Map<String, String> map) {
 
-        int temp = goodCommentService.updateGoodCommentThumb(map.get("id"));
+        int temp = goodCommentService.update(1, null, map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -203,7 +203,7 @@ public class GoodCommentController implements GoodCommentConstant {
     @PostMapping("good/comment/update/comment")
     public JsonResult updateGoodCommentComment(@RequestBody Map<String, String> map) {
 
-        int temp = goodCommentService.updateGoodCommentComment(map.get("id"));
+        int temp = goodCommentService.update(2, null, map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){

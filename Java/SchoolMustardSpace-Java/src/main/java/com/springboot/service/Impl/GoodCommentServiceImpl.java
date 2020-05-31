@@ -80,28 +80,42 @@ public class GoodCommentServiceImpl implements GoodCommentService {
 
     }
 
-    @Override
+    /*@Override
     public int updateGoodCommentContent(@Param("content") String content, @Param("id") String id){
 
         int temp = this.goodCommentMapper.updateGoodCommentContent(content,id);
 
         return temp;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public int updateGoodCommentThumb(String id){
 
         int temp = this.goodCommentMapper.updateGoodCommentThumb(id);
 
         return temp;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public int updateGoodCommentComment(String id){
 
         int temp = this.goodCommentMapper.updateGoodCommentComment(id);
 
         return temp;
+    }*/
+
+    @Override
+    public int update(int choice, @Param("content") String content, @Param("id") String id){
+        if(choice == 1){//更新物品租赁点赞数
+            return this.goodCommentMapper.updateGoodCommentThumb(id);
+        }
+        else if(choice == 2){//更新物品租赁评论数
+            return this.goodCommentMapper.updateGoodCommentComment(id);
+        }
+        else if(choice == 3){
+            this.goodCommentMapper.updateGoodCommentContent(content,id);
+        }
+        return -1;
     }
 
     @Override

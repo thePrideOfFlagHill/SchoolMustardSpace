@@ -28,11 +28,13 @@ public interface GoodCommentService {
 
     int insertGoodComment(Comment goodComment);
 
-    int updateGoodCommentContent(@Param("content") String content, @Param("id") String id);
+    //int updateGoodCommentContent(@Param("content") String content, @Param("id") String id);
 
-    int updateGoodCommentThumb(String id);
+    //int updateGoodCommentThumb(String id);
 
-    int updateGoodCommentComment(String id);
+    //int updateGoodCommentComment(String id);
+
+    int update(int choice, @Param("content") String content, @Param("id") String id);
 
     int deleteGoodComment(String id);
 
