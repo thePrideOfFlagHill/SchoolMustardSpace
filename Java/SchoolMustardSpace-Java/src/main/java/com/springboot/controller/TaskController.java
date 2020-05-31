@@ -103,7 +103,7 @@ public class TaskController implements TaskConstant {
     @GetMapping("task/query/like/title")
     public JsonResult queryTaskLikeContent(@Param("title")String title) {
 
-        List<Task> list = this.taskService.getLikeTitle(title);
+        List<Task> list = this.taskService.getLike(2, title);
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
     }
@@ -120,7 +120,7 @@ public class TaskController implements TaskConstant {
     @GetMapping("task/query/like/content")
     public JsonResult queryTaskLikeTitle(@Param("content")String content) {
 
-        List<Task> list = this.taskService.getLikeContent(content);
+        List<Task> list = this.taskService.getLike(1, content);
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
     }
@@ -137,7 +137,7 @@ public class TaskController implements TaskConstant {
     @GetMapping("task/query/like/label")
     public JsonResult queryTaskLikeLabel(@Param("label") String label) {
 
-        List<Task> list = this.taskService.getLikeLabel(label);
+        List<Task> list = this.taskService.getLike(3, label);
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
     }
@@ -204,7 +204,7 @@ public class TaskController implements TaskConstant {
    @PostMapping(value = "task/update/is_done")
     public JsonResult updateTaskDone(@RequestBody Map<String, String> map) {
 
-        int temp = taskService.updateTaskIs_done(Integer.parseInt(map.get("is_done")),map.get("id"));
+        int temp = taskService.update(1, Integer.parseInt(map.get("is_done")),map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -227,7 +227,7 @@ public class TaskController implements TaskConstant {
     public JsonResult updateTaskThump(@RequestBody Map<String, String> map) {
 
 
-        int temp = taskService.updateTaskThumb(map.get("id"));
+        int temp = taskService.update(2, -1, map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -250,7 +250,7 @@ public class TaskController implements TaskConstant {
     public JsonResult updateTaskCollect(@RequestBody Map<String, String> map) {
 
 
-        int temp = taskService.updateTaskCollect(map.get("id"));
+        int temp = taskService.update(3, -1, map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -273,7 +273,7 @@ public class TaskController implements TaskConstant {
     public JsonResult updateTaskComment(@RequestBody Map<String, String> map) {
 
 
-        int temp = taskService.updateTaskComment(map.get("id"));
+        int temp = taskService.update(4, -1, map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
