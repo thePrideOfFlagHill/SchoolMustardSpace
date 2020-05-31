@@ -24,14 +24,14 @@ public class GoodCommentServiceImpl implements GoodCommentService {
     @Autowired
     private GoodCommentMapper goodCommentMapper;
 
-    @Override
+    /*@Override
     public List<Comment> getAllGoodComment() {
 
         List<Comment> list = this.goodCommentMapper.getAllGoodComment();
 
         return list;
 
-    }
+    }*/
 
     @Override
     public Comment queryGoodCommentById(String id){
@@ -41,20 +41,34 @@ public class GoodCommentServiceImpl implements GoodCommentService {
         return goodComment;
     }
 
-    @Override
+    /*@Override
     public List<Comment> queryGoodCommentByUserId(String user_id){
 
         List<Comment> list = this.goodCommentMapper.queryGoodCommentByUserId(user_id);
 
         return list;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public List<Comment> queryGoodCommentByTableId(String table_id){
 
         List<Comment> list = this.goodCommentMapper.queryGoodCommentByTableId(table_id);
 
         return list;
+    }*/
+
+    @Override
+    public List<Comment> select(int choice, String id){
+        if(choice == 1){//获取全部物品租赁的评论
+            return this.goodCommentMapper.getAllGoodComment();
+        }
+        else if(choice == 2){//根据user_id查询物品租赁评论
+            return this.goodCommentMapper.queryGoodCommentByUserId(id);
+        }
+        else if(choice == 3){//根据table_id查询物品租赁评论
+            return this.goodCommentMapper.queryGoodCommentByTableId(id);
+        }
+        return null;
     }
 
     @Override

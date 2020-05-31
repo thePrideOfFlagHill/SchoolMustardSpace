@@ -53,7 +53,7 @@ public class GoodCommentController implements GoodCommentConstant {
     @GetMapping("good/comment/query/all")
     public JsonResult queryGoodCommentAll() {
 
-        List<Comment> list = this.goodCommentService.getAllGoodComment();
+        List<Comment> list = this.goodCommentService.select(1,null);
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
 
@@ -98,7 +98,7 @@ public class GoodCommentController implements GoodCommentConstant {
     @GetMapping("query/good/comment/user_id/{user_id}")
     public JsonResult queryGoodCommentByUserId(@PathVariable String user_id) {
 
-        List<Comment> list = this.goodCommentService.queryGoodCommentByUserId(user_id);
+        List<Comment> list = this.goodCommentService.select(2, user_id);
 
         return JsonResult.build(STATUS_SUCCEED, MSG_SUCCEED,list);
     }
@@ -114,7 +114,7 @@ public class GoodCommentController implements GoodCommentConstant {
     @GetMapping("query/good/comment/table_id/{table_id}")
     public JsonResult queryGoodCommentByTableId(@PathVariable String table_id) {
 
-        List<Comment> list = this.goodCommentService.queryGoodCommentByTableId(table_id);
+        List<Comment> list = this.goodCommentService.select(3, table_id);
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
     }

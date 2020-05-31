@@ -16,13 +16,15 @@ import java.util.List;
  */
 public interface GoodCommentService {
 
-    List<Comment> getAllGoodComment();
+    //List<Comment> getAllGoodComment();
 
     Comment queryGoodCommentById(String id);
 
-    List<Comment> queryGoodCommentByUserId(String user_id);
+    //List<Comment> queryGoodCommentByUserId(String user_id);
 
-    List<Comment> queryGoodCommentByTableId(String table_id);
+    //List<Comment> queryGoodCommentByTableId(String table_id);
+
+    List<Comment> select(int choice, String id);
 
     int insertGoodComment(Comment goodComment);
 

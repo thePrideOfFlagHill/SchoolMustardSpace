@@ -77,6 +77,7 @@ public class AdminuserServiceImpl implements AdminuserService, AdminuserConstant
         return adminuserMapper.selectAdminuserByAccountNumber(accountNumber);
     }
 
+    @Override
     public Adminuser queryOneUserById(String id) {return adminuserMapper.selectUserById(id);}
 
     public int selectId(String accountNumber) {
