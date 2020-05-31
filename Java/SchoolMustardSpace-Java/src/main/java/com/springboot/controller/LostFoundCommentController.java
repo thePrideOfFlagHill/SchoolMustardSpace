@@ -55,7 +55,7 @@ public class LostFoundCommentController implements LostFoundCommentConstant {
     @GetMapping("lostfound/comment/query/all")
     public JsonResult queryLostFoundCommentAll() {
 
-        List<Comment> list = this.lostFoundCommentService.getAllLostFoundComment();
+        List<Comment> list = this.lostFoundCommentService.select(1,null);
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
     }
@@ -99,7 +99,7 @@ public class LostFoundCommentController implements LostFoundCommentConstant {
     @GetMapping("query/lostfound/comment/user_id/{user_id}")
     public JsonResult queryLostFoundCommentByUserId(@PathVariable String user_id) {
 
-        List<Comment> list = this.lostFoundCommentService.queryLostFoundCommentByUserId(user_id);
+        List<Comment> list = this.lostFoundCommentService.select(2, user_id);
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
     }
@@ -115,7 +115,7 @@ public class LostFoundCommentController implements LostFoundCommentConstant {
     @GetMapping("query/lostfound/comment/table_id/{table_id}")
     public JsonResult queryLostFoundCommentByTableId(@PathVariable String table_id) {
 
-        List<Comment> list = this.lostFoundCommentService.queryLostFoundCommentByTableId(table_id);
+        List<Comment> list = this.lostFoundCommentService.select(3, table_id);
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
     }
@@ -163,7 +163,7 @@ public class LostFoundCommentController implements LostFoundCommentConstant {
     public JsonResult updateLostFoundCommentContent(@RequestBody Map<String, String> map) {
 
 
-        int temp = lostFoundCommentService.updateLostFoundCommentContent(map.get("content"), map.get("id"));
+        int temp = lostFoundCommentService.update(1, map.get("content"), map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -184,7 +184,7 @@ public class LostFoundCommentController implements LostFoundCommentConstant {
     @PostMapping("lostfound/comment/update/thumb_up")
         public JsonResult updateLostFoundCommentThump(@RequestBody Map<String, String> map) {
 
-        int temp = lostFoundCommentService.updateLostFoundCommentThumb(map.get("id"));
+        int temp = lostFoundCommentService.update(2, null, map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -205,7 +205,7 @@ public class LostFoundCommentController implements LostFoundCommentConstant {
     @PostMapping("lostfound/comment/update/comment")
     public JsonResult updateLostFoundCommentComment(@RequestBody Map<String, String> map) {
 
-        int temp = lostFoundCommentService.updateLostFoundCommentComment(map.get("id"));
+        int temp = lostFoundCommentService.update(3, null, map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){

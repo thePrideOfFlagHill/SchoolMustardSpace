@@ -24,14 +24,14 @@ public class LostFoundCommentServiceImpl implements LostFoundCommentService {
     @Autowired
     private LostFoundCommentMapper lostFoundCommentMapper;
 
-    @Override
+    /*@Override
     public List<Comment> getAllLostFoundComment() {
 
         List<Comment> list = this.lostFoundCommentMapper.getAllLostFoundComment();
 
         return list;
 
-    }
+    }*/
 
     @Override
     public Comment queryLostFoundCommentById(String id){
@@ -41,20 +41,34 @@ public class LostFoundCommentServiceImpl implements LostFoundCommentService {
         return lostFoundComment;
     }
 
-    @Override
+    /*@Override
     public List<Comment> queryLostFoundCommentByUserId(String user_id){
 
         List<Comment> list = this.lostFoundCommentMapper.queryLostFoundCommentByUserId(user_id);
 
         return list;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public List<Comment> queryLostFoundCommentByTableId(String table_id){
 
         List<Comment> list = this.lostFoundCommentMapper.queryLostFoundCommentByTableId(table_id);
 
         return list;
+    }*/
+
+    @Override
+    public List<Comment> select(int choice, String id){
+        if(choice == 1){//获取全部失物招领评论
+            return this.lostFoundCommentMapper.getAllLostFoundComment();
+        }
+        else if(choice == 2){//根据user_id查询失物招领评论
+            return this.lostFoundCommentMapper.queryLostFoundCommentByUserId(id);
+        }
+        else if(choice == 3){
+            this.lostFoundCommentMapper.queryLostFoundCommentByTableId(id);
+        }
+        return null;
     }
 
     @Override
@@ -66,28 +80,43 @@ public class LostFoundCommentServiceImpl implements LostFoundCommentService {
 
     }
 
-    @Override
+    /*@Override
     public int updateLostFoundCommentContent(@Param("content") String content, @Param("id") String id){
 
         int temp = this.lostFoundCommentMapper.updateLostFoundCommentContent(content,id);
 
         return temp;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public int updateLostFoundCommentThumb(String id){
 
         int temp = this.lostFoundCommentMapper.updateLostFoundCommentThumb(id);
 
         return temp;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public int updateLostFoundCommentComment(String id){
 
         int temp = this.lostFoundCommentMapper.updateLostFoundCommentComment(id);
 
         return temp;
+    }*/
+
+    @Override
+    public int update(int choice, @Param("content") String content, @Param("id") String id){
+        if(choice == 1){//更新失物招领评论内容
+            return this.lostFoundCommentMapper.updateLostFoundCommentContent(content,id);
+        }
+        else if(choice == 2){//更新失物招领评论点赞数
+            return this.lostFoundCommentMapper.updateLostFoundCommentThumb(id);
+        }
+        else if(choice == 3){//更新失物招领评论数
+            return this.lostFoundCommentMapper.updateLostFoundCommentComment(id);
+        }
+
+        return -1;
     }
 
     @Override

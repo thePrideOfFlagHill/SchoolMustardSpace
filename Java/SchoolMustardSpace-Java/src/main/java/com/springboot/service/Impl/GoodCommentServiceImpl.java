@@ -106,13 +106,13 @@ public class GoodCommentServiceImpl implements GoodCommentService {
 
     @Override
     public int update(int choice, @Param("content") String content, @Param("id") String id){
-        if(choice == 1){//更新物品租赁点赞数
+        if(choice == 1){//更新物品租赁评论点赞数
             return this.goodCommentMapper.updateGoodCommentThumb(id);
         }
-        else if(choice == 2){//更新物品租赁评论数
+        else if(choice == 2){//更新物品租赁评论评论数
             return this.goodCommentMapper.updateGoodCommentComment(id);
         }
-        else if(choice == 3){
+        else if(choice == 3){//更新物品租赁评论内容
             this.goodCommentMapper.updateGoodCommentContent(content,id);
         }
         return -1;
