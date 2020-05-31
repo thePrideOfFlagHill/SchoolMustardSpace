@@ -16,21 +16,25 @@ import java.util.List;
  */
 public interface TaskCommentService {
 
-    List<Comment> getAllTaskComment();
+    //List<Comment> getAllTaskComment();
 
     Comment queryTaskCommentById(String id);
 
-    List<Comment> queryTaskCommentByUserId(String user_id);
+    //List<Comment> queryTaskCommentByUserId(String user_id);
 
-    List<Comment> queryTaskCommentByTableId(String table_id);
+    //List<Comment> queryTaskCommentByTableId(String table_id);
+
+    List<Comment> select(int choice, String id);
 
     int insertTaskComment(Comment taskComment);
 
-    int updateTaskCommentContent(@Param("content") String content, @Param("id") String id);
+    //int updateTaskCommentContent(@Param("content") String content, @Param("id") String id);
 
-    int updateTaskCommentThumb(String id);
+    //int updateTaskCommentThumb(String id);
 
-    int updateTaskCommentComment(String id);
+    //int updateTaskCommentComment(String id);
+
+    int update(int choice, @Param("content") String content, @Param("id") String id);
 
     int deleteTaskComment(String id);
 

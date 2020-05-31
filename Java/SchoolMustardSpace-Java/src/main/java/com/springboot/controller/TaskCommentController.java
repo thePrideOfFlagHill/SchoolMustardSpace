@@ -54,7 +54,7 @@ public class TaskCommentController implements TaskCommentConstant {
     @GetMapping("task/comment/query/all")
     public JsonResult queryTaskCommentAll() {
 
-        List<Comment> list = this.taskCommentService.getAllTaskComment();
+        List<Comment> list = this.taskCommentService.select(1, null);
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
     }
@@ -98,7 +98,7 @@ public class TaskCommentController implements TaskCommentConstant {
     @GetMapping("query/task/comment/user_id/{user_id}")
     public JsonResult queryTaskCommentByUserId(@PathVariable String user_id) {
 
-        List<Comment> list = this.taskCommentService.queryTaskCommentByUserId(user_id);
+        List<Comment> list = this.taskCommentService.select(2, user_id);
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
     }
@@ -114,7 +114,7 @@ public class TaskCommentController implements TaskCommentConstant {
     @GetMapping("query/task/comment/table_id/{table_id}")
     public JsonResult queryTaskCommentByTableId(@PathVariable String table_id) {
 
-        List<Comment> list = this.taskCommentService.queryTaskCommentByTableId(table_id);
+        List<Comment> list = this.taskCommentService.select(3, table_id);
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
     }
@@ -161,7 +161,7 @@ public class TaskCommentController implements TaskCommentConstant {
     @PostMapping("task/comment/update/content")
     public JsonResult updateTaskCommentContent(@RequestBody Map<String, String> map) {
 
-        int temp = taskCommentService.updateTaskCommentContent(map.get("content"),map.get("id"));
+        int temp = taskCommentService.update(1, map.get("content"),map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -182,7 +182,7 @@ public class TaskCommentController implements TaskCommentConstant {
     @PostMapping("task/comment/update/thumb_up")
     public JsonResult updateTaskCommentThump(@RequestBody Map<String, String> map) {
 
-        int temp = taskCommentService.updateTaskCommentThumb(map.get("id"));
+        int temp = taskCommentService.update(2, null, map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -203,7 +203,7 @@ public class TaskCommentController implements TaskCommentConstant {
     @PostMapping("task/comment/update/comment")
     public JsonResult updateTaskCommentComment(@RequestBody Map<String, String> map) {
 
-        int temp = taskCommentService.updateTaskCommentComment(map.get("id"));
+        int temp = taskCommentService.update(3, null, map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
