@@ -16,20 +16,29 @@
     </div>
     <div class="tcc">
       <p>
-        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-        <span v-if="workInfo.thumbUp != undefined">{{workInfo.thumbUp}}</span>
-        <span v-else>{{workInfo.thumb_up}}</span>
+        <a>
+          <i class="fa fa-thumbs-o-up" aria-hidden="true" @click="up"></i>
+        </a>
+        <span>{{workInfo.thumb_up}}</span>
       </p>
       <p>
-        <i class="el-icon-star-off"></i>
+        <a @click="star">
+          <i class="el-icon-star-off"></i>
+        </a>
         <span>{{workInfo.collect}}</span>
       </p>
       <p>
         <i class="fa fa-comment-o itop" aria-hidden="true"></i>
-        <span>{{workInfo.comment}}</span>
+        <span>{{numCom}}</span>
       </p>
     </div>
     <comment-list :data="commentInfo"></comment-list>
+    <div>
+      <div style="margin-top: 15px;">
+        <el-input placeholder="请输入内容" v-model="input"></el-input>
+        <el-button @click="send">发送</el-button>
+      </div>
+    </div>
   </d2-container>
 </template>
 
@@ -42,7 +51,9 @@ export default {
     return {
       workInfo: "",
       userInfo: "",
-      commentInfo: ""
+      commentInfo: "",
+      input: "",
+      numCom: ""
     };
   },
   components: {
@@ -57,19 +68,47 @@ export default {
       // console.log(this.userInfo);
     },
     async getCommentInfo(item) {
-      
       const { data } = await axios.get(
         `/api/query/good/comment/table_id/${item.id}`
       );
       // console.log(data);
       this.commentInfo = data.data;
       console.log(this.commentInfo);
+      this.numCom = this.commentInfo.length;
+
       // this.$options.methods.getUserName(this.commentInfo.user_id);
     },
     // async getUserName(user_id) {
     //   const { data } = await axios.get(`/api/user/query/id/${user_id}`);
     //   console.log(data);
     // }
+
+    up() {
+      axios
+        .get("/api/rental/update/thumbUp?id=" + this.workInfo.id)
+        .then(function(res) {});
+    },
+    send() {
+      var that = this;
+      axios
+        .post("/api/good/comment/insert", {
+          id: "1",
+          user_id: that.userInfo.id,
+          content: that.input,
+          publish_time: "2020/05-30",
+          table_id: that.workInfo.id,
+          thumb_up: 0,
+          comment: 0
+        })
+        .then(function(res) {
+          console.log(res.data);
+        });
+    },
+    star() {
+      axios
+        .get("/api/rental/update/collect?id=" + this.workInfo.id)
+        .then(function(res) {});
+    }
   },
   created() {
     this.getinfo(this.$route.params.data);
