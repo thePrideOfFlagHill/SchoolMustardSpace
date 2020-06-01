@@ -47,6 +47,7 @@ import axios from "axios";
 import CommentList from "@/components/commentList/commentList";
 export default {
   name: "page1",
+  inject:['beforeRouteEnter'],
   data() {
     return {
       workInfo: "",
@@ -101,6 +102,7 @@ export default {
           comment: 0
         })
         .then(function(res) {
+          this.$route.go(0)
           console.log(res.data);
         });
     },

@@ -57,7 +57,7 @@ export default {
   computed: {
     thumb: function() {
       return workInfo.thumb_up;
-    }
+    },
   },
   components: {
     CommentList
