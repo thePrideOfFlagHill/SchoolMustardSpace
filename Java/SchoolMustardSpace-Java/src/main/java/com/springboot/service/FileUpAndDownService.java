@@ -17,4 +17,5 @@ public interface FileUpAndDownService {
 
     Map<String, Object> uploadPicture(MultipartFile file) throws ServiceException;
 
+    Map<String, Object> uploadPicture2(MultipartFile file) throws ServiceException;
 }
