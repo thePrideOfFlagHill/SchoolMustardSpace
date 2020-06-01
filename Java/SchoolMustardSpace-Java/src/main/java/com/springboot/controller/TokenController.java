@@ -29,8 +29,8 @@ public class TokenController {
 
         User userForBase = new User();
         userForBase.setId(1);
-        userForBase.setPassword("123");
-        userForBase.setAccountNumber("mrc");
+        userForBase.setPassword("test");
+        userForBase.setAccountNumber("test");
 
         if (!userForBase.getPassword().equals(user.getPassword())) {
             return JsonResult.errorMsg("密码错误");

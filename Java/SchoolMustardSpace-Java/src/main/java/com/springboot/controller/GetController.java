@@ -26,6 +26,7 @@ public class GetController {
     private TaskService taskService;
 
 
+    //请求队列的思考。。。。。
     @GetMapping("/test")
     public JsonResult a(){
         return null;
