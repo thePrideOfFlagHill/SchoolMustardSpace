@@ -159,9 +159,10 @@ public class TaskCommentController implements TaskCommentConstant {
      * @since 2020.4.29
      */
     @PostMapping("task/comment/update/content")
-    public JsonResult updateTaskCommentContent(@RequestBody Map<String, String> map) {
+    public JsonResult updateTaskCommentContent(@RequestParam(value = "id") String id,
+                                               @RequestParam(value = "content") String content) {
 
-        int temp = taskCommentService.update(1, map.get("content"),map.get("id"));
+        int temp = taskCommentService.update(1, content, id);
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -180,9 +181,9 @@ public class TaskCommentController implements TaskCommentConstant {
      * @since 2020.4.29
      */
     @PostMapping("task/comment/update/thumb_up")
-    public JsonResult updateTaskCommentThump(@RequestBody Map<String, String> map) {
+    public JsonResult updateTaskCommentThump(@RequestParam(value = "id") String id) {
 
-        int temp = taskCommentService.update(2, null, map.get("id"));
+        int temp = taskCommentService.update(2, null, id);
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -201,9 +202,9 @@ public class TaskCommentController implements TaskCommentConstant {
      * @since 2020.4.29
      */
     @PostMapping("task/comment/update/comment")
-    public JsonResult updateTaskCommentComment(@RequestBody Map<String, String> map) {
+    public JsonResult updateTaskCommentComment(@RequestParam(value = "id") String id) {
 
-        int temp = taskCommentService.update(3, null, map.get("id"));
+        int temp = taskCommentService.update(3, null, id);
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -222,9 +223,9 @@ public class TaskCommentController implements TaskCommentConstant {
      * @since 2020.4.29
      */
     @PostMapping("task/comment/delete")
-    public JsonResult deleteTaskComment(@RequestBody Map<String, String> map) {
+    public JsonResult deleteTaskComment(@RequestParam(value = "id") String id) {
 
-        int temp = taskCommentService.deleteTaskComment(map.get("id"));
+        int temp = taskCommentService.deleteTaskComment(id);
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){

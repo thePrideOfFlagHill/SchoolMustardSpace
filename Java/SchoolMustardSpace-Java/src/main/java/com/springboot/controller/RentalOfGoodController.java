@@ -4,6 +4,7 @@ import com.springboot.constant.RentalOfGoodConstant;
 import com.springboot.domain.RentalOfGood;
 import com.springboot.service.RentalOfGoodService;
 import com.springboot.utils.jsontool.JsonResult;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -83,8 +84,8 @@ public class RentalOfGoodController implements RentalOfGoodConstant {
     }
 
     @GetMapping("/rent")
-    public JsonResult rent(@RequestBody Map<String, String> map){
-        String msg = rentalOfGoodService.insertTime(1 , map.get("id"));
+    public JsonResult rent(@Param(value = "id") String id){
+        String msg = rentalOfGoodService.insertTime(1 , id);
         if(msg.equals(MSG_SUCCEED)){
             return JsonResult.build(STATUS_SUCCEED,msg,null);
         }
@@ -92,9 +93,9 @@ public class RentalOfGoodController implements RentalOfGoodConstant {
     }
 
     @GetMapping("/update/isDone")
-    public JsonResult updateIsDone(@RequestBody Map<String, String> map){
-        String msg = rentalOfGoodService.updateSome(1 , map.get("id"));
-        String msg2 = rentalOfGoodService.insertTime(2 , map.get("id"));
+    public JsonResult updateIsDone(@Param(value = "id") String id){
+        String msg = rentalOfGoodService.updateSome(1 , id);
+        String msg2 = rentalOfGoodService.insertTime(2 , id);
 
         if(msg.equals(MSG_SUCCEED) && msg2.equals(MSG_SUCCEED)){
             return JsonResult.build(STATUS_SUCCEED,msg,null);
@@ -103,8 +104,8 @@ public class RentalOfGoodController implements RentalOfGoodConstant {
     }
 
     @GetMapping("/update/thumbUp")
-    public JsonResult updateThumbUp(@RequestBody Map<String, String> map){
-        String msg = rentalOfGoodService.updateSome(2 , map.get("id"));
+    public JsonResult updateThumbUp(@Param(value = "id") String id){
+        String msg = rentalOfGoodService.updateSome(2 , id);
 
         if(msg.equals(MSG_SUCCEED)){
             return JsonResult.build(STATUS_SUCCEED,msg,null);
@@ -113,8 +114,8 @@ public class RentalOfGoodController implements RentalOfGoodConstant {
     }
 
     @GetMapping("/update/collect")
-    public JsonResult updateCollect(@RequestBody Map<String, String> map){
-        String msg = rentalOfGoodService.updateSome(3 , map.get("id"));
+    public JsonResult updateCollect(@Param(value = "id") String id){
+        String msg = rentalOfGoodService.updateSome(3 , id);
 
         if(msg.equals(MSG_SUCCEED)){
             return JsonResult.build(STATUS_SUCCEED,msg,null);
@@ -123,8 +124,8 @@ public class RentalOfGoodController implements RentalOfGoodConstant {
     }
 
     @GetMapping("/update/comment")
-    public JsonResult updateComment(@RequestBody Map<String, String> map ){
-        String msg = rentalOfGoodService.updateSome(4 , map.get("id"));
+    public JsonResult updateComment(@Param(value = "id") String id){
+        String msg = rentalOfGoodService.updateSome(4 , id);
 
         if(msg.equals(MSG_SUCCEED)){
             return JsonResult.build(STATUS_SUCCEED,msg,null);
@@ -154,14 +155,14 @@ public class RentalOfGoodController implements RentalOfGoodConstant {
     }
 
     @GetMapping("/query/id")
-    public JsonResult queryId(@RequestBody Map<String, String> map){
-        RentalOfGood rentalOfGood = rentalOfGoodService.selectOne(map.get("id"));
+    public JsonResult queryId(@Param(value = "id") String id){
+        RentalOfGood rentalOfGood = rentalOfGoodService.selectOne(id);
         return JsonResult.build(STATUS_SUCCEED , MSG_SUCCEED , rentalOfGood);
     }
 
     @GetMapping("/query/userId")
-    public JsonResult queryUserId(@RequestBody Map<String, String> map){
-        List<RentalOfGood> rentalOfGoods = rentalOfGoodService.selectList(2 , Integer.parseInt(map.get("userId")));
+    public JsonResult queryUserId(@Param("userId")int userId){
+        List<RentalOfGood> rentalOfGoods = rentalOfGoodService.selectList(2 , userId);
         return JsonResult.build(STATUS_SUCCEED , MSG_SUCCEED , rentalOfGoods);
     }
 
@@ -169,20 +170,20 @@ public class RentalOfGoodController implements RentalOfGoodConstant {
      * 模糊查询beta版本运用tried树实现
      */
     @GetMapping("query/like/title")
-    public JsonResult queryLikeTitle(@RequestBody Map<String, String> map){
-        List<RentalOfGood> rentalOfGoods = rentalOfGoodService.selectLike(1 , map.get("text"));
+    public JsonResult queryLikeTitle(@Param("text")String text){
+        List<RentalOfGood> rentalOfGoods = rentalOfGoodService.selectLike(1 , text);
         return JsonResult.build(STATUS_SUCCEED , MSG_SUCCEED , rentalOfGoods);
     }
 
     @GetMapping("query/like/content")
-    public JsonResult queryLikeContent(@RequestBody Map<String, String> map){
-        List<RentalOfGood> rentalOfGoods = rentalOfGoodService.selectLike(2 , map.get("text"));
+    public JsonResult queryLikeContent(@Param("text")String text){
+        List<RentalOfGood> rentalOfGoods = rentalOfGoodService.selectLike(2 , text);
         return JsonResult.build(STATUS_SUCCEED , MSG_SUCCEED , rentalOfGoods);
     }
 
     @GetMapping("query/like/label")
-    public JsonResult queryLikeLabel(@RequestBody Map<String, String> map){
-        List<RentalOfGood> rentalOfGoods = rentalOfGoodService.selectLike(3 , map.get("text"));
+    public JsonResult queryLikeLabel(@Param("text")String text){
+        List<RentalOfGood> rentalOfGoods = rentalOfGoodService.selectLike(3 , text);
         return JsonResult.build(STATUS_SUCCEED , MSG_SUCCEED , rentalOfGoods);
     }
 

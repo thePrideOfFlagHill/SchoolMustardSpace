@@ -202,9 +202,10 @@ public class TaskController implements TaskConstant {
      * @since 2020.4.29
      */
    @PostMapping(value = "task/update/is_done")
-    public JsonResult updateTaskDone(@RequestBody Map<String, String> map) {
+    public JsonResult updateTaskDone(@RequestParam(value = "id") String id,
+                                     @RequestParam(value = "is_done") int is_done) {
 
-        int temp = taskService.update(1, Integer.parseInt(map.get("is_done")),map.get("id"));
+        int temp = taskService.update(1, is_done, id);
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -224,10 +225,10 @@ public class TaskController implements TaskConstant {
      * @since 2020.4.29
      */
    @PostMapping(value = "task/update/thumb_up")
-    public JsonResult updateTaskThump(@RequestBody Map<String, String> map) {
+    public JsonResult updateTaskThump(@RequestParam(value = "id") String id) {
 
 
-        int temp = taskService.update(2, -1, map.get("id"));
+        int temp = taskService.update(2, -1, id);
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -247,10 +248,10 @@ public class TaskController implements TaskConstant {
      * @since 2020.4.29
      */
    @PostMapping(value = "task/update/collect")
-    public JsonResult updateTaskCollect(@RequestBody Map<String, String> map) {
+    public JsonResult updateTaskCollect(@RequestParam(value = "id") String id) {
 
 
-        int temp = taskService.update(3, -1, map.get("id"));
+        int temp = taskService.update(3, -1, id);
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -270,10 +271,10 @@ public class TaskController implements TaskConstant {
      * @since 2020.4.29
      */
    @PostMapping(value = "task/update/comment")
-    public JsonResult updateTaskComment(@RequestBody Map<String, String> map) {
+    public JsonResult updateTaskComment(@RequestParam(value = "id") String id) {
 
 
-        int temp = taskService.update(4, -1, map.get("id"));
+        int temp = taskService.update(4, -1, id);
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -293,10 +294,10 @@ public class TaskController implements TaskConstant {
      * @since 2020.4.29
      */
    @PostMapping(value = "task/delete")
-    public JsonResult deleteTask(@RequestBody Map<String, String> map) {
+    public JsonResult deleteTask(@RequestParam(value = "id") String id) {
 
 
-        int temp = taskService.deleteTask(map.get("id"));
+        int temp = taskService.deleteTask(id);
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){

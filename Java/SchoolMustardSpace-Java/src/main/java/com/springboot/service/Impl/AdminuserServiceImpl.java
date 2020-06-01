@@ -23,8 +23,8 @@ public class AdminuserServiceImpl implements AdminuserService, AdminuserConstant
     private AdminuserMapper adminuserMapper;
 
     @Override
-    public String login(Adminuser adminuser) {
-        int count = adminuserMapper.selectAdminuserByAccountNumberAndPassword(adminuser);
+    public String login(String accountNumber, String password) {
+        int count = adminuserMapper.selectAdminuserByAccountNumberAndPassword(accountNumber, password);
         return count == 1 ? MSG_SUCCEED : MSG_FAIL;
     }
 
@@ -42,10 +42,7 @@ public class AdminuserServiceImpl implements AdminuserService, AdminuserConstant
 
     @Override
     public String changePassword(String accountNumber, String password, String newPassword) {
-        Adminuser adminuser = new Adminuser();
-        adminuser.setAccountNumber(accountNumber);
-        adminuser.setPassword(password);
-        int count = adminuserMapper.selectAdminuserByAccountNumberAndPassword(adminuser);
+        int count = adminuserMapper.selectAdminuserByAccountNumberAndPassword(accountNumber, password);
         if(count == 1){
             int result = adminuserMapper.updateAdminuserPassword(accountNumber, newPassword);
             if(result == 1){

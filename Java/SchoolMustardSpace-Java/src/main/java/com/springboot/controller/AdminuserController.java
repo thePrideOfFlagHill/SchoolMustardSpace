@@ -36,12 +36,12 @@ public class AdminuserController implements AdminuserConstant {
     private AdminuserService adminuserService;
 
     @PostMapping("/login")
-    public JsonResult login(@RequestBody Adminuser adminuser){
-        byte[] secretArr = DesEncryption.encryptMode(adminuser.getPassword().getBytes());
+    public JsonResult login(@RequestParam(value = "accountNumber") String accountNumber,
+                            @RequestParam(value = "password") String password){
+        byte[] secretArr = DesEncryption.encryptMode(password.getBytes());
         String str = DesEncryption.byte2Hex(secretArr);
-        adminuser.setPassword(str);
-        String msg = adminuserService.login(adminuser);
-        int id = adminuserService.selectId(adminuser.getAccountNumber());
+        String msg = adminuserService.login(accountNumber, str);
+        int id = adminuserService.selectId(accountNumber);
         if(msg.equals(MSG_SUCCEED)){
             return JsonResult.build(STATUS_SUCCEED, msg, id);
         }
@@ -61,11 +61,11 @@ public class AdminuserController implements AdminuserConstant {
     }
 
     @PostMapping("/find/password")
-    public JsonResult findPassword(@RequestBody Map<String, String> map){
-
-        byte[] secretArr = DesEncryption.encryptMode(map.get("newPassword").getBytes());
+    public JsonResult findPassword(@RequestParam(value = "accountNumber") String accountNumber,
+                                   @RequestParam(value = "newPassword") String newPassword){
+        byte[] secretArr = DesEncryption.encryptMode(newPassword.getBytes());
         String str = DesEncryption.byte2Hex(secretArr);
-        String msg = adminuserService.findPassword(map.get("accountNumber"), str);
+        String msg = adminuserService.findPassword(accountNumber, str);
         if(msg.equals(MSG_SUCCEED)){
             return JsonResult.build(STATUS_SUCCEED, msg, null);
         }
@@ -73,12 +73,14 @@ public class AdminuserController implements AdminuserConstant {
     }
 
     @PostMapping("/update/password")
-    public JsonResult changePassword(@RequestBody Map<String, String> map){
-        byte[] secretArr1 = DesEncryption.encryptMode(map.get("password").getBytes());
-        byte[] secretArr2 = DesEncryption.encryptMode(map.get("newPassword").getBytes());
+    public JsonResult changePassword(@RequestParam(value = "accountNumber") String accountNumber,
+                                     @RequestParam(value = "password") String password,
+                                     @RequestParam(value = "newPassword") String newPassword){
+        byte[] secretArr1 = DesEncryption.encryptMode(password.getBytes());
+        byte[] secretArr2 = DesEncryption.encryptMode(newPassword.getBytes());
         String str1 = DesEncryption.byte2Hex(secretArr1);
         String str2 = DesEncryption.byte2Hex(secretArr2);
-        String msg = adminuserService.changePassword(map.get("accountNumber"), str1, str2);
+        String msg = adminuserService.changePassword(accountNumber, str1, str2);
         if(msg.equals(MSG_SUCCEED)){
             return JsonResult.build(STATUS_SUCCEED, msg, null);
         }
@@ -98,8 +100,8 @@ public class AdminuserController implements AdminuserConstant {
     }
 
     @PostMapping("/delete")
-    public JsonResult deleteAdminuser(@RequestBody Map<String, String> map){
-        String msg = adminuserService.deleteAdminuser(map.get("accountNumber"));
+    public JsonResult deleteAdminuser(@RequestParam(value = "accountNumber") String accountNumber){
+        String msg = adminuserService.deleteAdminuser(accountNumber);
         if(msg.equals(MSG_SUCCEED)){
             return JsonResult.build(STATUS_SUCCEED, msg, null);
         }

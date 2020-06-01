@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public interface AdminuserService {
 
-    String login(Adminuser adminuser);
+    String login(String accountNumber, String password);
 
     String register(Adminuser adminuser);
 

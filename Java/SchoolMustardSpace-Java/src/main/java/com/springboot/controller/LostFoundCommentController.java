@@ -160,10 +160,10 @@ public class LostFoundCommentController implements LostFoundCommentConstant {
      * @since 2020.5.2
      */
     @PostMapping("lostfound/comment/update/content")
-    public JsonResult updateLostFoundCommentContent(@RequestBody Map<String, String> map) {
+    public JsonResult updateLostFoundCommentContent(@RequestParam(value = "id") String id,
+                                                    @RequestParam(value = "content") String content) {
 
-
-        int temp = lostFoundCommentService.update(1, map.get("content"), map.get("id"));
+        int temp = lostFoundCommentService.update(1, content, id);
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -182,9 +182,9 @@ public class LostFoundCommentController implements LostFoundCommentConstant {
      * @since 2020.5.2
      */
     @PostMapping("lostfound/comment/update/thumb_up")
-        public JsonResult updateLostFoundCommentThump(@RequestBody Map<String, String> map) {
+        public JsonResult updateLostFoundCommentThump(@RequestParam(value = "id") String id) {
 
-        int temp = lostFoundCommentService.update(2, null, map.get("id"));
+        int temp = lostFoundCommentService.update(2, null, id);
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -203,9 +203,9 @@ public class LostFoundCommentController implements LostFoundCommentConstant {
      * @since 2020.5.2
      */
     @PostMapping("lostfound/comment/update/comment")
-    public JsonResult updateLostFoundCommentComment(@RequestBody Map<String, String> map) {
+    public JsonResult updateLostFoundCommentComment(@RequestParam(value = "id") String id) {
 
-        int temp = lostFoundCommentService.update(3, null, map.get("id"));
+        int temp = lostFoundCommentService.update(3, null, id);
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -224,9 +224,9 @@ public class LostFoundCommentController implements LostFoundCommentConstant {
      * @since 2020.5.2
      */
     @PostMapping("lostfound/comment/delete")
-    public JsonResult deleteLostFoundComment(@RequestBody Map<String, String> map) {
+    public JsonResult deleteLostFoundComment(@RequestParam(value = "id") String id) {
 
-        int temp = lostFoundCommentService.deleteLostFoundComment(map.get("id"));
+        int temp = lostFoundCommentService.deleteLostFoundComment(id);
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
