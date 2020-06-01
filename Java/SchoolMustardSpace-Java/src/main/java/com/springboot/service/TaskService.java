@@ -22,23 +22,27 @@ public interface TaskService {
 
     List<Task> queryTaskByUserId(String user_id);
 
-    List<Task> getLikeContent(@Param("text") String text);
+    //List<Task> getLikeContent(@Param("text") String text);
 
-    List<Task> getLikeTitle(@Param("text") String text);
+    //List<Task> getLikeTitle(@Param("text") String text);
 
-    List<Task> getLikeLabel(@Param("text") String text);
+    //List<Task> getLikeLabel(@Param("text") String text);
+
+    List<Task> getLike(int choice, @Param("text") String text);
 
     int insertTask(Task task);
 
     int updateTask(Task task);
 
-    int updateTaskIs_done(@Param("is_done") int is_done, @Param("id") String id);
+    //int updateTaskIs_done(@Param("is_done") int is_done, @Param("id") String id);
 
-    int updateTaskThumb(String id);
+    //int updateTaskThumb(String id);
 
-    int updateTaskCollect(String id);
+    //int updateTaskCollect(String id);
 
-    int updateTaskComment(String id);
+    //int updateTaskComment(String id);
+
+    int update(int choice, @Param("is_done") int is_done, @Param("id") String id);
 
     int updateTaskImageUrl(@Param("image") String image, @Param("id") String id);
 

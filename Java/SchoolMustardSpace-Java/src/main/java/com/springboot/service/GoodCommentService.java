@@ -16,21 +16,25 @@ import java.util.List;
  */
 public interface GoodCommentService {
 
-    List<Comment> getAllGoodComment();
+    //List<Comment> getAllGoodComment();
 
     Comment queryGoodCommentById(String id);
 
-    List<Comment> queryGoodCommentByUserId(String user_id);
+    //List<Comment> queryGoodCommentByUserId(String user_id);
 
-    List<Comment> queryGoodCommentByTableId(String table_id);
+    //List<Comment> queryGoodCommentByTableId(String table_id);
+
+    List<Comment> select(int choice, String id);
 
     int insertGoodComment(Comment goodComment);
 
-    int updateGoodCommentContent(@Param("content") String content, @Param("id") String id);
+    //int updateGoodCommentContent(@Param("content") String content, @Param("id") String id);
 
-    int updateGoodCommentThumb(String id);
+    //int updateGoodCommentThumb(String id);
 
-    int updateGoodCommentComment(String id);
+    //int updateGoodCommentComment(String id);
+
+    int update(int choice, @Param("content") String content, @Param("id") String id);
 
     int deleteGoodComment(String id);
 

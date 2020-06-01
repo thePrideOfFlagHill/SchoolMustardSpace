@@ -24,14 +24,14 @@ public class GoodCommentServiceImpl implements GoodCommentService {
     @Autowired
     private GoodCommentMapper goodCommentMapper;
 
-    @Override
+    /*@Override
     public List<Comment> getAllGoodComment() {
 
         List<Comment> list = this.goodCommentMapper.getAllGoodComment();
 
         return list;
 
-    }
+    }*/
 
     @Override
     public Comment queryGoodCommentById(String id){
@@ -41,20 +41,34 @@ public class GoodCommentServiceImpl implements GoodCommentService {
         return goodComment;
     }
 
-    @Override
+    /*@Override
     public List<Comment> queryGoodCommentByUserId(String user_id){
 
         List<Comment> list = this.goodCommentMapper.queryGoodCommentByUserId(user_id);
 
         return list;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public List<Comment> queryGoodCommentByTableId(String table_id){
 
         List<Comment> list = this.goodCommentMapper.queryGoodCommentByTableId(table_id);
 
         return list;
+    }*/
+
+    @Override
+    public List<Comment> select(int choice, String id){
+        if(choice == 1){//获取全部物品租赁的评论
+            return this.goodCommentMapper.getAllGoodComment();
+        }
+        else if(choice == 2){//根据user_id查询物品租赁评论
+            return this.goodCommentMapper.queryGoodCommentByUserId(id);
+        }
+        else if(choice == 3){//根据table_id查询物品租赁评论
+            return this.goodCommentMapper.queryGoodCommentByTableId(id);
+        }
+        return null;
     }
 
     @Override
@@ -66,28 +80,42 @@ public class GoodCommentServiceImpl implements GoodCommentService {
 
     }
 
-    @Override
+    /*@Override
     public int updateGoodCommentContent(@Param("content") String content, @Param("id") String id){
 
         int temp = this.goodCommentMapper.updateGoodCommentContent(content,id);
 
         return temp;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public int updateGoodCommentThumb(String id){
 
         int temp = this.goodCommentMapper.updateGoodCommentThumb(id);
 
         return temp;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public int updateGoodCommentComment(String id){
 
         int temp = this.goodCommentMapper.updateGoodCommentComment(id);
 
         return temp;
+    }*/
+
+    @Override
+    public int update(int choice, @Param("content") String content, @Param("id") String id){
+        if(choice == 1){//更新物品租赁评论点赞数
+            return this.goodCommentMapper.updateGoodCommentThumb(id);
+        }
+        else if(choice == 2){//更新物品租赁评论评论数
+            return this.goodCommentMapper.updateGoodCommentComment(id);
+        }
+        else if(choice == 3){//更新物品租赁评论内容
+            this.goodCommentMapper.updateGoodCommentContent(content,id);
+        }
+        return -1;
     }
 
     @Override

@@ -12,21 +12,31 @@ import com.springboot.utils.uuidtool.UuidResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.List;
-
-import static com.springboot.constant.GoodCommentConstant.*;
+import java.util.Map;
 
 /**
- * @author 会飞的大野鸡
- * @create 2020/5/29
- * TODO:
+ * GoodCommentController
+ * TODO
+ * @description 所有的GoodCommentController请求的接口
+ * 1./api/good/comment/query/all                  查询全部任评论用接口
+ * 2./api/good/comment/query/id/{id}              根据条目id查询任务评论（单个对应）
+ * 3./api/good/comment/query/user_id/{user_id}    根据用户id查询任务（多个对应）
+ * 4./api/good/comment/query/table_id/{table_id}  根据表条目id查询任务（多个对应）
+ * 5./api/good/comment/insert                     发布任务用接口 post为一个json整体对应任务实体domain
+ * 6./api/good/comment/update/content             更新任务评论的内容用接口 更新修改任务评论的内容 键值对为二 key = id && content
+ * 7./api/good/comment/update/thumb_up            更新任务评论的点赞+1用接口 更新修改任务的解决状态 键值对为一 key = id
+ * 8./api/good/comment/update/comment             更新任务评论的评论+1用接口 更新修改任务的解决状态 键值对为一 key = id
+ * 9./api/good/comment/delete                     删除任务用接口 删除任务用接口 键值对为一 key = id
+ * @author 221701412_theTuring
+ * @version v 1.0.0
+ * @since 2020.5.1
  */
 
 @RestController
 @CrossOrigin
 @RequestMapping("/api")
-public class GoodCommentController {
+public class GoodCommentController implements GoodCommentConstant {
     @Autowired
     private GoodCommentService goodCommentService;
     @Autowired
@@ -40,10 +50,10 @@ public class GoodCommentController {
      * @version v 1.0.0
      * @since 2020.5.1
      */
-    @RequestMapping(value = "good/comment/query/all", method = RequestMethod.GET)
+    @GetMapping("good/comment/query/all")
     public JsonResult queryGoodCommentAll() {
 
-        List<Comment> list = this.goodCommentService.getAllGoodComment();
+        List<Comment> list = this.goodCommentService.select(1,null);
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
 
@@ -57,7 +67,7 @@ public class GoodCommentController {
      * @version v 1.0.0
      * @since 2020.5.1
      */
-    @RequestMapping(value = "query/good/comment/id/{id}", method = RequestMethod.GET)
+    @GetMapping("query/good/comment/id/{id}")
     public JsonResult queryGoodCommentById(@PathVariable String id) {
 
         Comment goodComment = this.goodCommentService.queryGoodCommentById(id);
@@ -75,7 +85,6 @@ public class GoodCommentController {
         commentPlus.setName(user.getName());
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,commentPlus);
-
     }
 
     /**
@@ -86,13 +95,12 @@ public class GoodCommentController {
      * @version v 1.0.0
      * @since 2020.5.1
      */
-    @RequestMapping(value = "query/good/comment/user_id/{user_id}", method = RequestMethod.GET)
+    @GetMapping("query/good/comment/user_id/{user_id}")
     public JsonResult queryGoodCommentByUserId(@PathVariable String user_id) {
 
-        List<Comment> list = this.goodCommentService.queryGoodCommentByUserId(user_id);
+        List<Comment> list = this.goodCommentService.select(2, user_id);
 
-        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
-
+        return JsonResult.build(STATUS_SUCCEED, MSG_SUCCEED,list);
     }
 
     /**
@@ -103,16 +111,23 @@ public class GoodCommentController {
      * @version v 1.0.0
      * @since 2020.5.1
      */
-    @RequestMapping(value = "query/good/comment/table_id/{table_id}", method = RequestMethod.GET)
+    @GetMapping("query/good/comment/table_id/{table_id}")
     public JsonResult queryGoodCommentByTableId(@PathVariable String table_id) {
 
-        List<Comment> list = this.goodCommentService.queryGoodCommentByTableId(table_id);
+        List<Comment> list = this.goodCommentService.select(3, table_id);
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
-
     }
 
-    @RequestMapping(value = "good/comment/insert", method = RequestMethod.POST)
+    /**
+     * insertGoodComment
+     * TODO
+     * @description /api/good/comment/insert 发布任务评论用接口 post为一个json整体对应任务实体domain
+     * @author 221701412_theTuring
+     * @version v 1.0.0
+     * @since 2020.5.2
+     */
+    @PostMapping("good/comment/insert")
     public JsonResult insertGoodComment(@RequestBody Comment goodComment) {
 
         //实例化生成
@@ -129,9 +144,7 @@ public class GoodCommentController {
         int temp = goodCommentService.insertGoodComment(goodComment);
 
         if(temp==SQL_FAIL){
-
             return JsonResult.errorMsg(MSG_FAIL);
-
         }
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,null);
@@ -145,22 +158,17 @@ public class GoodCommentController {
      * @version v 1.0.0
      * @since 2020.5.2
      */
-    @RequestMapping(value = "good/comment/update/content", method = RequestMethod.POST)
-    public JsonResult updateGoodCommentContent(@RequestParam(value = "id") String id,
-                                               @RequestParam(value = "content") String content) {
+    @PostMapping("good/comment/update/content")
+    public JsonResult updateGoodCommentContent(@RequestBody Map<String, String> map) {
 
-
-        int temp = goodCommentService.updateGoodCommentContent(content,id);
+        int temp = goodCommentService.update(3,map.get("content"),map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
-
             return JsonResult.errorMsg(MSG_FAIL);
-
         }
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,null);
-
     }
 
     /**
@@ -171,21 +179,17 @@ public class GoodCommentController {
      * @version v 1.0.0
      * @since 2020.5.2
      */
-    @RequestMapping(value = "good/comment/update/thumb_up", method = RequestMethod.POST)
-    public JsonResult updateGoodCommentThump(@RequestParam(value = "id") String id) {
+    @PostMapping("good/comment/update/thumb_up")
+    public JsonResult updateGoodCommentThump(@RequestBody Map<String, String> map) {
 
-
-        int temp = goodCommentService.updateGoodCommentThumb(id);
+        int temp = goodCommentService.update(1, null, map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
-
             return JsonResult.errorMsg(MSG_FAIL);
-
         }
 
         return JsonResult.build(STATUS_SUCCEED, MSG_SUCCEED,null);
-
     }
 
     /**
@@ -196,21 +200,17 @@ public class GoodCommentController {
      * @version v 1.0.0
      * @since 2020.5.2
      */
-    @RequestMapping(value = "good/comment/update/comment", method = RequestMethod.POST)
-    public JsonResult updateGoodCommentComment(@RequestParam(value = "id") String id) {
+    @PostMapping("good/comment/update/comment")
+    public JsonResult updateGoodCommentComment(@RequestBody Map<String, String> map) {
 
-
-        int temp = goodCommentService.updateGoodCommentComment(id);
+        int temp = goodCommentService.update(2, null, map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
-
             return JsonResult.errorMsg(MSG_FAIL);
-
         }
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,null);
-
     }
 
     /**
@@ -221,20 +221,16 @@ public class GoodCommentController {
      * @version v 1.0.0
      * @since 2020.5.2
      */
-    @RequestMapping(value = "good/comment/delete", method = RequestMethod.POST)
-    public JsonResult deleteGoodComment(@RequestParam(value = "id") String id) {
+    @PostMapping("good/comment/delete")
+    public JsonResult deleteGoodComment(@RequestBody Map<String, String> map) {
 
-
-        int temp = goodCommentService.deleteGoodComment(id);
+        int temp = goodCommentService.deleteGoodComment(map.get("id"));
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
-
             return JsonResult.errorMsg(MSG_FAIL);
-
         }
 
-        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,null);
-
+        return JsonResult.build(STATUS_SUCCEED, MSG_SUCCEED,null);
     }
 }

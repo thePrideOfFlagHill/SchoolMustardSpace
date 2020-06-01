@@ -16,21 +16,25 @@ import java.util.List;
  */
 public interface LostFoundCommentService {
 
-    List<Comment> getAllLostFoundComment();
+    //List<Comment> getAllLostFoundComment();
 
     Comment queryLostFoundCommentById(String id);
 
-    List<Comment> queryLostFoundCommentByUserId(String user_id);
+    //List<Comment> queryLostFoundCommentByUserId(String user_id);
 
-    List<Comment> queryLostFoundCommentByTableId(String table_id);
+    //List<Comment> queryLostFoundCommentByTableId(String table_id);
+
+    List<Comment> select(int choice, String id);
 
     int insertLostFoundComment(Comment lostFoundComment);
 
-    int updateLostFoundCommentContent(@Param("content") String content, @Param("id") String id);
+    //int updateLostFoundCommentContent(@Param("content") String content, @Param("id") String id);
 
-    int updateLostFoundCommentThumb(String id);
+    //int updateLostFoundCommentThumb(String id);
 
-    int updateLostFoundCommentComment(String id);
+    //int updateLostFoundCommentComment(String id);
+
+    int update(int choice, @Param("content") String content, @Param("id") String id);
 
     int deleteLostFoundComment(String id);
 

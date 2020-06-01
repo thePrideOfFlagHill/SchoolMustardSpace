@@ -40,28 +40,43 @@ public class TaskServiceImpl implements TaskService {
         return task;
     }
 
-    @Override
+    /*@Override
     public List<Task> getLikeContent(@Param("text") String text){
 
         List<Task> list = this.taskMapper.getLikeContent(text);
 
         return list;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public List<Task> getLikeTitle(@Param("text") String text){
 
         List<Task> list = this.taskMapper.getLikeTitle(text);
 
         return list;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public List<Task> getLikeLabel(@Param("text") String text){
 
         List<Task> list = this.taskMapper.getLikeLabel(text);
 
         return list;
+    }*/
+
+    @Override
+    public List<Task> getLike(int choice, @Param("text") String text){
+        if(choice == 1){//根据内容查询
+            return this.taskMapper.getLikeContent(text);
+        }
+        else if(choice == 2){//根据标题查询
+            return this.taskMapper.getLikeTitle(text);
+        }
+        else if(choice == 3){//根据标签查询
+            return this.taskMapper.getLikeLabel(text);
+        }
+
+        return null;
     }
 
     @Override
@@ -89,36 +104,54 @@ public class TaskServiceImpl implements TaskService {
         return temp;
     }
 
-    @Override
+    /*@Override
     public int updateTaskIs_done(@Param("is_done") int is_done, @Param("id") String id){
 
         int temp = this.taskMapper.updateTaskIs_done(is_done,id);
 
         return temp;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public int updateTaskThumb(String id){
 
         int temp = this.taskMapper.updateTaskThumb(id);
 
         return temp;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public int updateTaskCollect(String id){
 
         int temp = this.taskMapper.updateTaskCollect(id);
 
         return temp;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public int updateTaskComment(String id){
 
         int temp = this.taskMapper.updateTaskComment(id);
 
         return temp;
+    }*/
+
+    @Override
+    public int update(int choice, @Param("is_done") int is_done, @Param("id") String id){
+        if(choice == 1){//更新任务完成情况
+            return this.taskMapper.updateTaskIs_done(is_done,id);
+        }
+        else if(choice == 2){//更新任务点赞数
+            return this.taskMapper.updateTaskThumb(id);
+        }
+        else if(choice == 3){//更新任务收藏数
+            return this.taskMapper.updateTaskCollect(id);
+        }
+        else if(choice == 4){//更新任务评论数
+            return this.taskMapper.updateTaskComment(id);
+        }
+
+        return -1;
     }
 
     @Override
