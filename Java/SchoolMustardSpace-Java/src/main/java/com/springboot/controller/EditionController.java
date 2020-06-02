@@ -26,6 +26,7 @@ import java.util.Map;
 @RequestMapping("/api/edition")
 public class EditionController {
     private static String newEdition = null;
+    private static String path = null;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FileUploadController.class);
 
@@ -46,15 +47,13 @@ public class EditionController {
             if (!IStatusMessage.SystemStatus.SUCCESS.getMessage().equals(resultMap.get("result"))) {
                 result.setCode(IStatusMessage.SystemStatus.PARAM.getCode());
                 result.setMessage((String) resultMap.get("msg"));
+                
                 return result;
             }
-
-
             result.setData(resultMap);
-
         } catch (ServiceException e) {
             e.printStackTrace();
-            LOGGER.error(">>>>>>图片上传异常，e={}", e.getMessage());
+            LOGGER.error(">>>>>>文件上传异常，e={}", e.getMessage());
             result.setCode(IStatusMessage.SystemStatus.ERROR.getCode());
             result.setMessage(IStatusMessage.SystemStatus.ERROR.getMessage());
         }
