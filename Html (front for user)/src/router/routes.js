@@ -146,6 +146,15 @@ const frameIn = [
         },
         component: _import('person/change')
       },
+      {
+        path: 'empty',
+        name: 'empty',
+        meta: {
+          title: '无',
+          auth: true
+        },
+        component: _import('system/empty')
+      },
       // 系统 前端日志
       {
         path: 'log',

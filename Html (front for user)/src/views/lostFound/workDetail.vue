@@ -19,13 +19,13 @@
         <a>
           <i class="fa fa-thumbs-o-up" aria-hidden="true" @click="up"></i>
         </a>
-        <span>{{workInfo.thumb_up}}</span>
+        <span>{{thumb}}</span>
       </p>
       <p>
         <a @click="star">
           <i class="el-icon-star-off"></i>
         </a>
-        <span>{{workInfo.collect}}</span>
+        <span>{{col}}</span>
       </p>
       <p>
         <i class="fa fa-comment-o itop" aria-hidden="true"></i>
@@ -53,8 +53,18 @@ export default {
       userInfo: "",
       commentInfo: "",
       input: "",
-      numCom: ""
+      numCom: "",
+      t: "",
+      c: ""
     };
+  },
+  computed: {
+    thumb: function() {
+      return this.t;
+    },
+    col: function() {
+      return this.c;
+    }
   },
   components: {
     CommentList
@@ -71,20 +81,21 @@ export default {
       const { data } = await axios.get(
         `/api/query/lostfound/comment/table_id/${item.id}`
       );
-      // console.log(data);
       this.commentInfo = data.data;
       this.$options.methods.getUserName(this.commentInfo.user_id);
       this.numCom = this.commentInfo.length;
+
+      console.log(this.commentInfo);
     },
     async getUserName(user_id) {
       const { data } = await axios.get(`/api/user/query/id/${user_id}`);
-      console.log(data);
     },
 
     up() {
       axios
         .get("/api/lost_and_found/update/thumbUp?id=" + this.workInfo.id)
         .then(function(res) {});
+      this.t++;
     },
     send() {
       var that = this;
@@ -106,11 +117,14 @@ export default {
       axios
         .get("/api/lost_and_found/update/collect?id=" + this.workInfo.id)
         .then(function(res) {});
+      this.c++;
     }
   },
   created() {
     this.getinfo(this.$route.params.data);
     this.getCommentInfo(this.$route.params.data);
+    this.c = this.workInfo.collect;
+    this.t = this.workInfo.thumb_up;
   }
 };
 </script>

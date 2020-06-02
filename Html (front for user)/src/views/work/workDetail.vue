@@ -19,11 +19,13 @@
         <a>
           <i class="fa fa-thumbs-o-up" aria-hidden="true" @click="up"></i>
         </a>
-        <span>{{workInfo.thumb_up}}</span>
+        <span>{{thumb}}</span>
       </p>
       <p>
-        <a @click="star"><i class="el-icon-star-off"></i></a>
-        <span>{{workInfo.collect}}</span>
+        <a @click="star">
+          <i class="el-icon-star-off"></i>
+        </a>
+        <span>{{col}}</span>
       </p>
       <p>
         <i class="fa fa-comment-o itop" aria-hidden="true"></i>
@@ -51,13 +53,18 @@ export default {
       userInfo: "",
       commentInfo: "",
       input: "",
-      numCom: ""
+      numCom: "",
+      t: "",
+      c: ""
     };
   },
   computed: {
     thumb: function() {
-      return workInfo.thumb_up;
+      return this.t;
     },
+    col: function() {
+      return this.c;
+    }
   },
   components: {
     CommentList
@@ -88,6 +95,7 @@ export default {
       axios
         .post("/api/task/update/thumb_up?id=" + this.workInfo.id)
         .then(function(res) {});
+        this.t++
     },
     send() {
       var that = this;
@@ -109,11 +117,14 @@ export default {
       axios
         .post("/api/task/update/collect?id=" + this.workInfo.id)
         .then(function(res) {});
+        this.c++
     }
   },
   created() {
     this.getinfo(this.$route.params.data);
     this.getCommentInfo(this.$route.params.data);
+    this.c = this.workInfo.collect;
+    this.t = this.workInfo.thumb_up;
   }
 };
 </script>

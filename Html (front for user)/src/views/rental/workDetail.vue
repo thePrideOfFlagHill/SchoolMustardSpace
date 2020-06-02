@@ -19,13 +19,13 @@
         <a>
           <i class="fa fa-thumbs-o-up" aria-hidden="true" @click="up"></i>
         </a>
-        <span>{{workInfo.thumb_up}}</span>
+        <span>{{thumb}}</span>
       </p>
       <p>
         <a @click="star">
           <i class="el-icon-star-off"></i>
         </a>
-        <span>{{workInfo.collect}}</span>
+        <span>{{col}}</span>
       </p>
       <p>
         <i class="fa fa-comment-o itop" aria-hidden="true"></i>
@@ -47,15 +47,25 @@ import axios from "axios";
 import CommentList from "@/components/commentList/commentList";
 export default {
   name: "page1",
-  inject:['beforeRouteEnter'],
+  inject: ["beforeRouteEnter"],
   data() {
     return {
       workInfo: "",
       userInfo: "",
       commentInfo: "",
       input: "",
-      numCom: ""
+      numCom: "",
+      t: "",
+      c: ""
     };
+  },
+  computed: {
+    thumb: function() {
+      return this.t;
+    },
+    col: function() {
+      return this.c;
+    }
   },
   components: {
     CommentList
@@ -88,6 +98,7 @@ export default {
       axios
         .get("/api/rental/update/thumbUp?id=" + this.workInfo.id)
         .then(function(res) {});
+      this.t++;
     },
     send() {
       var that = this;
@@ -102,7 +113,7 @@ export default {
           comment: 0
         })
         .then(function(res) {
-          this.$route.go(0)
+          this.$route.go(0);
           console.log(res.data);
         });
     },
@@ -110,11 +121,14 @@ export default {
       axios
         .get("/api/rental/update/collect?id=" + this.workInfo.id)
         .then(function(res) {});
+      this.c++;
     }
   },
   created() {
     this.getinfo(this.$route.params.data);
     this.getCommentInfo(this.$route.params.data);
+    this.c = this.workInfo.collect;
+    this.t = this.workInfo.thumb_up;
   }
 };
 </script>
