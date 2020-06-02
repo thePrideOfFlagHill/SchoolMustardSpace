@@ -1,5 +1,6 @@
 package com.springboot.controller;
 
+import com.springboot.constant.LostAndFoundConstant;
 import com.springboot.domain.LostAndFound;
 import com.springboot.service.LostAndFoundService;
 import com.springboot.utils.datetool.DateResult;
@@ -37,7 +38,7 @@ import java.util.UUID;
 @RestController
 @CrossOrigin
 @RequestMapping("/api/lost_and_found")
-public class LostAndFoundController {
+public class LostAndFoundController implements LostAndFoundConstant {
     @Autowired
     private LostAndFoundService lostAndFoundService;
 
@@ -57,8 +58,8 @@ public class LostAndFoundController {
         lostAndFound.setIsLost(Integer.parseInt(a.get("isLost")));
 
         String msg = lostAndFoundService.insertLostAndFound(lostAndFound);
-        if(msg.equals("succeed")){
-            return JsonResult.build(200,msg,uuid);
+        if(msg.equals(MSG_SUCCEED)){
+            return JsonResult.build(STATUS_SUCCEED,msg,uuid);
         }
         else return JsonResult.errorMsg(msg);
 
@@ -86,8 +87,8 @@ public class LostAndFoundController {
     public JsonResult updateIsDone(@RequestParam("id")String id){
         String msg = lostAndFoundService.updateSome(1 , id);
 
-        if(msg.equals("succeed")){
-            return JsonResult.build(200,msg,null);
+        if(msg.equals(MSG_SUCCEED)){
+            return JsonResult.build(STATUS_SUCCEED,msg,null);
         }
         else return JsonResult.errorMsg(msg);
     }
@@ -96,8 +97,8 @@ public class LostAndFoundController {
     public JsonResult updateThumbUp(@RequestParam("id")String id){
         String msg = lostAndFoundService.updateSome(2 , id);
 
-        if(msg.equals("succeed")){
-            return JsonResult.build(200,msg,null);
+        if(msg.equals(MSG_SUCCEED)){
+            return JsonResult.build(STATUS_SUCCEED,msg,null);
         }
         else return JsonResult.errorMsg(msg);
     }
@@ -106,8 +107,8 @@ public class LostAndFoundController {
     public JsonResult updateCollect(@RequestParam("id")String id){
         String msg = lostAndFoundService.updateSome(3 , id);
 
-        if(msg.equals("succeed")){
-            return JsonResult.build(200,msg,null);
+        if(msg.equals(MSG_SUCCEED)){
+            return JsonResult.build(STATUS_SUCCEED,msg,null);
         }
         else return JsonResult.errorMsg(msg);
     }
@@ -116,8 +117,8 @@ public class LostAndFoundController {
     public JsonResult updateComment(@RequestParam("id")String id){
         String msg = lostAndFoundService.updateSome(4 , id);
 
-        if(msg.equals("succeed")){
-            return JsonResult.build(200,msg,null);
+        if(msg.equals(MSG_SUCCEED)){
+            return JsonResult.build(STATUS_SUCCEED,msg,null);
         }
         else return JsonResult.errorMsg(msg);
     }
@@ -126,8 +127,8 @@ public class LostAndFoundController {
     public JsonResult delete(@RequestBody Map<String , String> resMap){
         String msg = lostAndFoundService.deleteById(resMap.get("id").toString());
 
-        if(msg.equals("succeed")){
-            return JsonResult.build(200,msg,null);
+        if(msg.equals(MSG_SUCCEED)){
+            return JsonResult.build(STATUS_SUCCEED,msg,null);
         }
         else return JsonResult.errorMsg(msg);
     }
@@ -141,19 +142,19 @@ public class LostAndFoundController {
     public JsonResult queryAll(){
         List<LostAndFound> lostAndFoundList = new LinkedList<LostAndFound>();
         lostAndFoundList = lostAndFoundService.selectList(1 , 0);
-        return JsonResult.build(200 , "succeed" , lostAndFoundList);
+        return JsonResult.build(STATUS_SUCCEED , MSG_SUCCEED , lostAndFoundList);
     }
 
     @GetMapping("/query/id")
     public JsonResult queryId(@RequestParam("id")String id){
-        LostAndFound lostAndFound = lostAndFoundService.selectOne( id );
-        return JsonResult.build(200 , "succeed" , lostAndFound);
+        LostAndFound lostAndFound = lostAndFoundService.selectOne(id);
+        return JsonResult.build(STATUS_SUCCEED , MSG_SUCCEED , lostAndFound);
     }
 
     @GetMapping("/query/userId")
     public JsonResult queryUserId(@RequestParam("userId")int userId){
         List<LostAndFound> lostAndFound = lostAndFoundService.selectList(2 , userId);
-        return JsonResult.build(200 , "succeed" , lostAndFound);
+        return JsonResult.build(STATUS_SUCCEED , MSG_SUCCEED , lostAndFound);
     }
 
     /**
@@ -162,18 +163,18 @@ public class LostAndFoundController {
     @GetMapping("query/like/title")
     public JsonResult queryLikeTitle(@RequestParam("text")String text){
         List<LostAndFound> lostAndFounds = lostAndFoundService.selectLike(1 , text);
-        return JsonResult.build(200 , "succeed" , lostAndFounds);
+        return JsonResult.build(STATUS_SUCCEED , MSG_SUCCEED , lostAndFounds);
     }
 
     @GetMapping("query/like/content")
     public JsonResult queryLikeContent(@RequestParam("text")String text){
         List<LostAndFound> lostAndFounds = lostAndFoundService.selectLike(2 , text);
-        return JsonResult.build(200 , "succeed" , lostAndFounds);
+        return JsonResult.build(STATUS_SUCCEED , MSG_SUCCEED , lostAndFounds);
     }
 
     @GetMapping("query/like/label")
     public JsonResult queryLikeLabel(@RequestParam("text")String text){
         List<LostAndFound> lostAndFounds = lostAndFoundService.selectLike(3 , text);
-        return JsonResult.build(200 , "succeed" , lostAndFounds);
+        return JsonResult.build(STATUS_SUCCEED , MSG_SUCCEED , lostAndFounds);
     }
 }

@@ -1,6 +1,5 @@
 package com.springboot.service.Impl;
 
-import com.springboot.constant.Constant;
 import com.springboot.domain.RentalOfGood;
 import com.springboot.mapper.RentalOfGoodMapper;
 import com.springboot.service.RentalOfGoodService;

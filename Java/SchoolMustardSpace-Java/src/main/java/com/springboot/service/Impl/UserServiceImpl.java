@@ -1,11 +1,8 @@
 package com.springboot.service.Impl;
 
-import com.springboot.constant.Constant;
 import com.springboot.domain.User;
 import com.springboot.mapper.UserMapper;
 import com.springboot.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -159,9 +159,10 @@ public class GoodCommentController implements GoodCommentConstant {
      * @since 2020.5.2
      */
     @PostMapping("good/comment/update/content")
-    public JsonResult updateGoodCommentContent(@RequestBody Map<String, String> map) {
+    public JsonResult updateGoodCommentContent(@RequestParam(value = "content") String content,
+                                               @RequestParam(value = "id") String id) {
 
-        int temp = goodCommentService.update(3,map.get("content"),map.get("id"));
+        int temp = goodCommentService.update(3,content,id);
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -180,9 +181,9 @@ public class GoodCommentController implements GoodCommentConstant {
      * @since 2020.5.2
      */
     @PostMapping("good/comment/update/thumb_up")
-    public JsonResult updateGoodCommentThump(@RequestBody Map<String, String> map) {
+    public JsonResult updateGoodCommentThump(@RequestParam(value = "id") String id) {
 
-        int temp = goodCommentService.update(1, null, map.get("id"));
+        int temp = goodCommentService.update(1, null,id);
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -201,9 +202,9 @@ public class GoodCommentController implements GoodCommentConstant {
      * @since 2020.5.2
      */
     @PostMapping("good/comment/update/comment")
-    public JsonResult updateGoodCommentComment(@RequestBody Map<String, String> map) {
+    public JsonResult updateGoodCommentComment(@RequestParam(value = "id") String id) {
 
-        int temp = goodCommentService.update(2, null, map.get("id"));
+        int temp = goodCommentService.update(2, null, id);
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){
@@ -222,9 +223,9 @@ public class GoodCommentController implements GoodCommentConstant {
      * @since 2020.5.2
      */
     @PostMapping("good/comment/delete")
-    public JsonResult deleteGoodComment(@RequestBody Map<String, String> map) {
+    public JsonResult deleteGoodComment(@RequestParam(value = "id") String id) {
 
-        int temp = goodCommentService.deleteGoodComment(map.get("id"));
+        int temp = goodCommentService.deleteGoodComment(id);
 
         //temp为记录sql语句影响行数 成功为1
         if(temp==SQL_FAIL){

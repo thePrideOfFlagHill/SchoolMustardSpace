@@ -50,7 +50,7 @@ public class FileUploadController {
     @RequestMapping(value = "/task/setFileUpload", method = RequestMethod.POST)
     @ResponseBody
     public ResponseResult setTaskFileUpload(@RequestParam(value = "file") MultipartFile file,
-                                        @RequestParam(value = "id") String id) {
+                                            @RequestParam(value = "id") String id) {
 
         ResponseResult result = new ResponseResult();
         try {
@@ -78,7 +78,7 @@ public class FileUploadController {
     @RequestMapping(value = "/good/setFileUpload", method = RequestMethod.POST)
     @ResponseBody
     public ResponseResult setGoodFileUpload(@RequestParam(value = "file") MultipartFile file,
-                                        @RequestParam(value = "id") String id) {
+                                            @RequestParam(value = "id") String id) {
 
         ResponseResult result = new ResponseResult();
         try {
@@ -106,7 +106,7 @@ public class FileUploadController {
     @RequestMapping(value = "/lostfound/setFileUpload", method = RequestMethod.POST)
     @ResponseBody
     public ResponseResult setLostFoundFileUpload(@RequestParam(value = "file") MultipartFile file,
-                                        @RequestParam(value = "id") String id) {
+                                                 @RequestParam(value = "id") String id) {
 
         ResponseResult result = new ResponseResult();
         try {
