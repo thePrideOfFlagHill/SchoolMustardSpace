@@ -83,7 +83,7 @@ public class LostAndFoundController {
     }
 
     @GetMapping("/update/isDone")
-    public JsonResult updateIsDone(@Param("id")String id){
+    public JsonResult updateIsDone(@RequestParam("id")String id){
         String msg = lostAndFoundService.updateSome(1 , id);
 
         if(msg.equals("succeed")){
@@ -93,7 +93,7 @@ public class LostAndFoundController {
     }
 
     @GetMapping("/update/thumbUp")
-    public JsonResult updateThumbUp(@Param("id")String id){
+    public JsonResult updateThumbUp(@RequestParam("id")String id){
         String msg = lostAndFoundService.updateSome(2 , id);
 
         if(msg.equals("succeed")){
@@ -103,7 +103,7 @@ public class LostAndFoundController {
     }
 
     @GetMapping("/update/collect")
-    public JsonResult updateCollect(@Param("id")String id){
+    public JsonResult updateCollect(@RequestParam("id")String id){
         String msg = lostAndFoundService.updateSome(3 , id);
 
         if(msg.equals("succeed")){
@@ -113,7 +113,7 @@ public class LostAndFoundController {
     }
 
     @GetMapping("/update/comment")
-    public JsonResult updateComment(@Param("id")String id){
+    public JsonResult updateComment(@RequestParam("id")String id){
         String msg = lostAndFoundService.updateSome(4 , id);
 
         if(msg.equals("succeed")){
@@ -145,13 +145,13 @@ public class LostAndFoundController {
     }
 
     @GetMapping("/query/id")
-    public JsonResult queryId(@Param("id")String id){
+    public JsonResult queryId(@RequestParam("id")String id){
         LostAndFound lostAndFound = lostAndFoundService.selectOne( id );
         return JsonResult.build(200 , "succeed" , lostAndFound);
     }
 
     @GetMapping("/query/userId")
-    public JsonResult queryUserId(@Param("userId")int userId){
+    public JsonResult queryUserId(@RequestParam("userId")int userId){
         List<LostAndFound> lostAndFound = lostAndFoundService.selectList(2 , userId);
         return JsonResult.build(200 , "succeed" , lostAndFound);
     }
@@ -160,19 +160,19 @@ public class LostAndFoundController {
      * 模糊查询beta版本运用tried树实现
      */
     @GetMapping("query/like/title")
-    public JsonResult queryLikeTitle(@Param("text")String text){
+    public JsonResult queryLikeTitle(@RequestParam("text")String text){
         List<LostAndFound> lostAndFounds = lostAndFoundService.selectLike(1 , text);
         return JsonResult.build(200 , "succeed" , lostAndFounds);
     }
 
     @GetMapping("query/like/content")
-    public JsonResult queryLikeContent(@Param("text")String text){
+    public JsonResult queryLikeContent(@RequestParam("text")String text){
         List<LostAndFound> lostAndFounds = lostAndFoundService.selectLike(2 , text);
         return JsonResult.build(200 , "succeed" , lostAndFounds);
     }
 
     @GetMapping("query/like/label")
-    public JsonResult queryLikeLabel(@Param("text")String text){
+    public JsonResult queryLikeLabel(@RequestParam("text")String text){
         List<LostAndFound> lostAndFounds = lostAndFoundService.selectLike(3 , text);
         return JsonResult.build(200 , "succeed" , lostAndFounds);
     }
