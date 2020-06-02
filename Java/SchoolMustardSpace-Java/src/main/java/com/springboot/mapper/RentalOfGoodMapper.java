@@ -63,7 +63,7 @@ public interface RentalOfGoodMapper {
     //=================================== 查 ======================================
 
 
-    @Select("select * from rental_of_goods")
+    @Select("select * from rental_of_goods order by start_time desc")
     @Results(value = {
             @Result(column = "user_id" , property = "userId"),
             @Result(column = "is_done" , property = "isDone"),
@@ -87,7 +87,7 @@ public interface RentalOfGoodMapper {
     })
     RentalOfGood getRentalById(@Param("id") String id);
 
-    @Select("select * from rental_of_goods where user_id = #{userId}")
+    @Select("select * from rental_of_goods where user_id = #{userId} order by start_time desc")
     @Results(value = {
             @Result(column = "user_id" , property = "userId"),
             @Result(column = "is_done" , property = "isDone"),
@@ -99,7 +99,7 @@ public interface RentalOfGoodMapper {
     })
     List<RentalOfGood> getRentalByUserId(@Param("userId") int userId);
 
-    @Select("select * from rental_of_goods where content like concat('%' , #{text} , '%')")
+    @Select("select * from rental_of_goods where content like concat('%' , #{text} , '%') order by start_time desc")
     @Results(value = {
             @Result(column = "user_id" , property = "userId"),
             @Result(column = "is_done" , property = "isDone"),
@@ -111,7 +111,7 @@ public interface RentalOfGoodMapper {
     })
     List<RentalOfGood> getLikeContent(@Param("text") String text);
 
-    @Select("select * from rental_of_goods where title like concat('%' , #{text} , '%')")
+    @Select("select * from rental_of_goods where title like concat('%' , #{text} , '%') order by start_time desc")
     @Results(value = {
             @Result(column = "user_id" , property = "userId"),
             @Result(column = "is_done" , property = "isDone"),
@@ -123,7 +123,7 @@ public interface RentalOfGoodMapper {
     })
     List<RentalOfGood> getLikeTitle(@Param("text") String text);
 
-    @Select("select * from rental_of_goods where label like concat('%' , #{text} , '%')")
+    @Select("select * from rental_of_goods where label like concat('%' , #{text} , '%') order by start_time desc")
     @Results(value = {
             @Result(column = "user_id" , property = "userId"),
             @Result(column = "is_done" , property = "isDone"),

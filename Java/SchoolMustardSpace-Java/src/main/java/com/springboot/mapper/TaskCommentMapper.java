@@ -18,7 +18,7 @@ import java.util.List;
 public interface TaskCommentMapper {
 
     //查询全部
-    @Select("select * from task_comment")
+    @Select("select * from task_comment order by publish_time desc")
     List<Comment> getAllTaskComment();
 
     //根据条目id查询具体任务评论
@@ -26,11 +26,11 @@ public interface TaskCommentMapper {
     Comment queryTaskCommentById(String id);
 
     //按上传者的owner_id查询具体任务评论
-    @Select("SELECT * FROM task_comment WHERE user_id =#{user_id}")
+    @Select("SELECT * FROM task_comment WHERE user_id =#{user_id} order by publish_time desc")
     List<Comment> queryTaskCommentByUserId(String user_id);
 
     //按任务表的table_id查询具体任务评论
-    @Select("SELECT * FROM task_comment WHERE table_id =#{table_id}")
+    @Select("SELECT * FROM task_comment WHERE table_id =#{table_id} order by publish_time desc")
     List<Comment> queryTaskCommentByTableId(String table_id);
 
     //发布插入任务评论

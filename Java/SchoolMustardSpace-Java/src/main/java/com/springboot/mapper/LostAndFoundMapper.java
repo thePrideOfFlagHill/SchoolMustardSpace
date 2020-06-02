@@ -65,7 +65,7 @@ public interface LostAndFoundMapper {
     //=================================== 查 ======================================
 
 
-    @Select("select * from lost_and_found")
+    @Select("select * from lost_and_found order by time desc")
     @Results(value = {
             @Result(column = "user_id" , property = "userId"),
             @Result(column = "is_done" , property = "isDone"),
@@ -83,7 +83,7 @@ public interface LostAndFoundMapper {
     })
     LostAndFound getLostAndFoundById(@Param("id") String id);
 
-    @Select("select * from lost_and_found where user_id = #{userId}")
+    @Select("select * from lost_and_found where user_id = #{userId} order by time desc")
     @Results(value = {
             @Result(column = "user_id" , property = "userId"),
             @Result(column = "is_done" , property = "isDone"),
@@ -92,7 +92,7 @@ public interface LostAndFoundMapper {
     })
     List<LostAndFound> getLostAndFoundByUserId(@Param("userId") int userId);
 
-    @Select("select * from lost_and_found where content like concat('%' , #{text} , '%')")
+    @Select("select * from lost_and_found where content like concat('%' , #{text} , '%') order by time desc")
     @Results(value = {
             @Result(column = "user_id" , property = "userId"),
             @Result(column = "is_done" , property = "isDone"),
@@ -101,7 +101,7 @@ public interface LostAndFoundMapper {
     })
     List<LostAndFound> getLikeContent(@Param("text") String text);
 
-    @Select("select * from lost_and_found where title like concat('%' , #{text} , '%')")
+    @Select("select * from lost_and_found where title like concat('%' , #{text} , '%') order by time desc")
     @Results(value = {
             @Result(column = "user_id" , property = "userId"),
             @Result(column = "is_done" , property = "isDone"),
@@ -110,7 +110,7 @@ public interface LostAndFoundMapper {
     })
     List<LostAndFound> getLikeTitle(@Param("text") String text);
 
-    @Select("select * from lost_and_found where label like concat('%' , #{text} , '%')")
+    @Select("select * from lost_and_found where label like concat('%' , #{text} , '%') order by time desc")
     @Results(value = {
             @Result(column = "user_id" , property = "userId"),
             @Result(column = "is_done" , property = "isDone"),
