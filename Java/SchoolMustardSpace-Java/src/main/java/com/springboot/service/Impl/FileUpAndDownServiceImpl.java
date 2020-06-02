@@ -23,6 +23,9 @@ public class FileUpAndDownServiceImpl implements FileUpAndDownService {
     //本地图片url
     private static final String ip = "http://47.100.251.3/space/img";
     private static final String ip2 = "http://47.100.251.3/space/edition";
+//    private static final String ip2 = "http://localhost:8080/space/edition";
+//    private static final String ip2 = "/Users/a/file";
+
 
     @Autowired
     private MessageProperties config; //用来获取file-message.properties配置文件中的信息
@@ -97,15 +100,8 @@ public class FileUpAndDownServiceImpl implements FileUpAndDownService {
     public Map<String, Object> uploadPicture2(MultipartFile file) throws ServiceException {
         try {
             Map<String, Object> resMap = new HashMap<String, Object>();
-            String[] IMAGE_TYPE = config.getImageType().split(",");
             String path = null;
-            boolean flag = false;
-            for (String type : IMAGE_TYPE) {
-                if (StringUtils.endsWithIgnoreCase(file.getOriginalFilename(), type)) {
-                    flag = true;
-                    break;
-                }
-            }
+            boolean flag = true;
             if (flag) {
                 resMap.put("result", IStatusMessage.SystemStatus.SUCCESS.getMessage());
                 String uuid = UUID.randomUUID().toString().replaceAll("-", "");
@@ -125,7 +121,7 @@ public class FileUpAndDownServiceImpl implements FileUpAndDownService {
                     // 重新生成
                     String newUUID = UUID.randomUUID().toString().replaceAll("-", "");
                     newFileName = newUUID + "." + imageName;
-                    path = config.getUpPath() + "/" + basedir + "/" + newUUID + "." + imageName;
+                    path = config.getUpPath2() + "/" + basedir + "/" + newUUID + "." + imageName;
                     // 如果目录不存在则创建目录
                     File oldFile = new File(path);
                     if (!oldFile.exists()) {
@@ -137,7 +133,7 @@ public class FileUpAndDownServiceImpl implements FileUpAndDownService {
                     // 显示路径
                     resMap.put("path", ip2 + "/" + basedir + "/" + newUUID + "." + imageName);
                 } else {
-                    path = config.getUpPath() + "/" + basedir + "/" + uuid + "." + imageName;
+                    path = config.getUpPath2() + "/" + basedir + "/" + uuid + "." + imageName;
                     // 如果目录不存在则创建目录
                     File uploadFile = new File(path);
                     if (!uploadFile.exists()) {
@@ -150,8 +146,6 @@ public class FileUpAndDownServiceImpl implements FileUpAndDownService {
                 resMap.put("oldFileName", oldFileName);
                 resMap.put("newFileName", newFileName);
                 resMap.put("fileSize", file.getSize());
-            } else {
-                resMap.put("result", "图片格式不正确,支持png|jpg|jpeg");
             }
             return resMap;
         } catch (Exception e) {

@@ -2,6 +2,7 @@ package com.springboot.controller;
 
 import com.springboot.service.FileUpAndDownService;
 import com.springboot.utils.filetool.IStatusMessage;
+import com.springboot.utils.filetool.ResponseResult;
 import com.springboot.utils.filetool.ServiceException;
 import com.springboot.utils.jsontool.JsonResult;
 import org.apache.ibatis.annotations.Param;
@@ -38,8 +39,26 @@ public class EditionController {
      * @return
      */
     @PostMapping("/upload")
-    public JsonResult uploadd(@RequestParam("file")MultipartFile file , @RequestParam("edition")String newEdition){
-        return null;
+    public ResponseResult uploadd(@RequestParam("file")MultipartFile file , @RequestParam("edition")String newEdition) throws ServiceException {
+        ResponseResult result = new ResponseResult();
+        try {
+            Map<String, Object> resultMap = upload(file);
+            if (!IStatusMessage.SystemStatus.SUCCESS.getMessage().equals(resultMap.get("result"))) {
+                result.setCode(IStatusMessage.SystemStatus.PARAM.getCode());
+                result.setMessage((String) resultMap.get("msg"));
+                return result;
+            }
+
+
+            result.setData(resultMap);
+
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            LOGGER.error(">>>>>>图片上传异常，e={}", e.getMessage());
+            result.setCode(IStatusMessage.SystemStatus.ERROR.getCode());
+            result.setMessage(IStatusMessage.SystemStatus.ERROR.getMessage());
+        }
+        return result;
     }
 
 
@@ -50,6 +69,7 @@ public class EditionController {
      */
     @GetMapping("/checkForNew")
     public JsonResult checkForNew(@Param("edition")String edition){
+
         return null;
     }
 
@@ -60,7 +80,7 @@ public class EditionController {
         Map<String, Object> returnMap = new HashMap<String, Object>();
         try {
             if (!file.isEmpty()) {
-                Map<String, Object> picMap = fileUpAndDownService.uploadPicture(file);
+                Map<String, Object> picMap = fileUpAndDownService.uploadPicture2(file);
                 if (IStatusMessage.SystemStatus.SUCCESS.getMessage().equals(picMap.get("result"))) {
                     return picMap;
                 } else {
@@ -68,7 +88,7 @@ public class EditionController {
                     returnMap.put("msg", picMap.get("result"));
                 }
             } else {
-                LOGGER.info(">>>>>>上传图片为空文件");
+                LOGGER.info(">>>>>>上传文件为空文件");
                 returnMap.put("result", IStatusMessage.SystemStatus.FILE_UPLOAD_NULL.getMessage());
                 returnMap.put("msg", IStatusMessage.SystemStatus.FILE_UPLOAD_NULL.getMessage());
             }

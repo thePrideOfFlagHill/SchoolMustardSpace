@@ -15,6 +15,8 @@ public class MessageProperties {
 
     private String upPath; //保存路径
 
+    private String upPath2;
+
     private String imageType; //图片类型
 
     public long getFileSize() {
@@ -39,6 +41,14 @@ public class MessageProperties {
 
     public void setUpPath(String upPath) {
         this.upPath = upPath;
+    }
+
+    public String getUpPath2() {
+        return upPath2;
+    }
+
+    public void setUpPath2(String upPath2) {
+        this.upPath2 = upPath2;
     }
 
     public String getImageType() {
