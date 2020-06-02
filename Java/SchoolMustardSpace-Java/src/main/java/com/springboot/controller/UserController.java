@@ -30,9 +30,12 @@ public class UserController implements UserConstant {
         byte[] secretArr = DesEncryption.encryptMode(user.getPassword().getBytes());
         String str = DesEncryption.byte2Hex(secretArr);
         String msg = userService.login(user.getAccountNumber(), str);
-        int id = userService.selectId(user.getAccountNumber());
+        //int id = userService.selectId(user.getAccountNumber());
+
+        //登录成功返回用户基本信息
         if(msg.equals(MSG_SUCCEED)){
-            return JsonResult.build(STATUS_SUCCEED,msg,id);
+            User user1 = userService.queryOneUser(user.getAccountNumber());
+            return JsonResult.build(STATUS_SUCCEED,msg,user1);
         }
         else return JsonResult.errorMsg(msg);
     }
@@ -43,18 +46,22 @@ public class UserController implements UserConstant {
         String str = DesEncryption.byte2Hex(secretArr);
         user.setPassword(str);
         String msg = userService.register(user);
+
+        //注册成功时返回id
         if(msg.equals(MSG_SUCCEED)){
-            return JsonResult.build(STATUS_SUCCEED,msg,null);
+            int id = userService.selectId(user.getAccountNumber());
+            return JsonResult.build(STATUS_SUCCEED,msg,id);
         }
         else return JsonResult.errorMsg(msg);
     }
 
     @PostMapping("/find/password")
     public JsonResult findPassword(@RequestParam(value = "accountNumber") String accountNumber,
+                               @RequestParam(value = "phoneNumber") String phoneNumber,
                                @RequestParam(value = "newPassword") String newPassword){
         byte[] secretArr = DesEncryption.encryptMode(newPassword.getBytes());
         String str = DesEncryption.byte2Hex(secretArr);
-        String msg = userService.findPassword(accountNumber, str);
+        String msg = userService.findPassword(accountNumber, phoneNumber, str);
         if(msg.equals(MSG_SUCCEED)){
             return JsonResult.build(STATUS_SUCCEED,msg,null);
         }

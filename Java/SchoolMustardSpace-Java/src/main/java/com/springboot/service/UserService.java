@@ -17,7 +17,7 @@ public interface UserService {
 
     String register(User user);
 
-    String findPassword(String accountNumber, String newPassword);
+    String findPassword(String accountNumber, String phoneNumber, String newPassword);
 
     String changePassword(String accountNumber, String password, String newPassword);
 
