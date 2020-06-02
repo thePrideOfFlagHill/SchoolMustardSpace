@@ -1,8 +1,11 @@
 package com.springboot.service.Impl;
 
+import com.springboot.constant.UserConstant;
 import com.springboot.domain.User;
 import com.springboot.mapper.UserMapper;
 import com.springboot.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,7 +20,7 @@ import java.util.ArrayList;
  * @since 2020/4/26
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserConstant {
 
     @Resource
     private UserMapper userMapper;
@@ -27,7 +30,7 @@ public class UserServiceImpl implements UserService {
 
         int count = userMapper.selectUserByAccountNumberAndPassword(accountNumber, password);//查询user表中账号密码相同的记录数
 
-        return count == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
+        return count == 1 ? MSG_SUCCEED : MSG_FAIL;
     }
 
     @Override
@@ -35,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
         int result = userMapper.insertUser(user);
 
-        return result == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
+        return result == 1 ? MSG_SUCCEED : MSG_FAIL;
     }
 
     @Override
@@ -43,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
         int result = userMapper.updateUserPassword(accountNumber, newPassword);
 
-        return result == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
+        return result == 1 ? MSG_SUCCEED : MSG_FAIL;
     }
 
     @Override
@@ -54,11 +57,11 @@ public class UserServiceImpl implements UserService {
         if(count == 1){
             int result = userMapper.updateUserPassword(accountNumber, newPassword);
             if(result == 1){
-                return Constant.MSG_SUCCEED;
+                return MSG_SUCCEED;
             }
         }
 
-        return Constant.MSG_FAIL;
+        return MSG_FAIL;
     }
 
     @Override
@@ -66,7 +69,7 @@ public class UserServiceImpl implements UserService {
 
         int result = userMapper.updateUser(user);
 
-        return result == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
+        return result == 1 ? MSG_SUCCEED : MSG_FAIL;
     }
 
     @Override
@@ -74,7 +77,7 @@ public class UserServiceImpl implements UserService {
 
         int result = userMapper.deleteUserByAccountNumber(accountNumber);
 
-        return result == 1 ? Constant.MSG_SUCCEED : Constant.MSG_FAIL;
+        return result == 1 ? MSG_SUCCEED : MSG_FAIL;
     }
 
     @Override

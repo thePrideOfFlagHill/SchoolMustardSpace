@@ -78,14 +78,9 @@ public class EditionController {
         String edi = edition;
         System.out.println(edi);
         if (!newEdition.equals(edi)){
-            return JsonResult.build( 100, "update" , path);
+            return JsonResult.build( 100, edi , path);
         }
         return JsonResult.build(200 , "updated" , null);
-    }
-
-    @GetMapping("/t")
-    public JsonResult chec(@RequestParam("edition")String newEdition){
-        return JsonResult.build(200 , newEdition , edition);
     }
 
 

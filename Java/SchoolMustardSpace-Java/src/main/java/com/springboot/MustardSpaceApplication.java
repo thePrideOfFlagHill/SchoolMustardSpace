@@ -51,7 +51,7 @@ public class MustardSpaceApplication extends SpringBootServletInitializer {
         //resolveLazily属性启用是为了推迟文件解析，以在在UploadAction中捕获文件大小异常
         resolver.setResolveLazily(true);
         resolver.setMaxInMemorySize(40960);
-        resolver.setMaxUploadSize(8 * 1024 * 1024);//上传文件大小 8M 8*1024*1024
+        resolver.setMaxUploadSize(8 * 1024 * 1024 * 10);//上传文件大小 8M 8*1024*1024
         return resolver;
     }
 

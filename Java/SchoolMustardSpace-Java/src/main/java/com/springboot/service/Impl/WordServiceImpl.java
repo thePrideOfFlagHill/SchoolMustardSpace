@@ -1,5 +1,6 @@
 package com.springboot.service.Impl;
 
+import com.springboot.constant.Constant;
 import com.springboot.domain.Word;
 import com.springboot.mapper.WordMapper;
 import com.springboot.service.WordService;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 
 @Service
-public class WordServiceImpl implements WordService {
+public class WordServiceImpl implements WordService ,Constant {
 
     @Autowired
     private WordMapper wordMapper;
