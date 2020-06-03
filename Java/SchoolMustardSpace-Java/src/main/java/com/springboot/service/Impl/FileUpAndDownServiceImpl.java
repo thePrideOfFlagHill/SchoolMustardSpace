@@ -100,8 +100,15 @@ public class FileUpAndDownServiceImpl implements FileUpAndDownService {
     public Map<String, Object> uploadPicture2(MultipartFile file) throws ServiceException {
         try {
             Map<String, Object> resMap = new HashMap<String, Object>();
+            String[] IMAGE_TYPE = config.getImageType().split(",");
             String path = null;
-            boolean flag = true;
+            boolean flag = false;
+            for (String type : IMAGE_TYPE) {
+                if (StringUtils.endsWithIgnoreCase(file.getOriginalFilename(), type)) {
+                    flag = true;
+                    break;
+                }
+            }
             if (flag) {
                 resMap.put("result", IStatusMessage.SystemStatus.SUCCESS.getMessage());
                 String uuid = UUID.randomUUID().toString().replaceAll("-", "");
@@ -113,6 +120,10 @@ public class FileUpAndDownServiceImpl implements FileUpAndDownService {
                 String oldFileName = file.getOriginalFilename();
                 // 新名称
                 String newFileName = uuid + "." + imageName;
+
+                if (imageName.equals("vnd.android.package-archive")){
+                    imageName = "apk";
+                }
                 // 年月日文件夹
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
                 String basedir = sdf.format(new Date());
