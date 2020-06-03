@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.springboot.domain.User;
+import com.springboot.service.AdminuserService;
 import com.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
@@ -16,9 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 
-public class AuthenticationInterceptor implements HandlerInterceptor {
+public class AuthenticationUserInterceptor implements HandlerInterceptor {
+
     @Autowired
     UserService userService;
+
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object object) throws Exception {
         String token = httpServletRequest.getHeader("token");// 从 http 请求头中取出 token

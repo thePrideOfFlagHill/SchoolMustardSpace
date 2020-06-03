@@ -14,7 +14,8 @@ import org.springframework.web.servlet.config.annotation.*;
 import java.util.List;
 
 @Configuration
-public class InterceptorConfig implements WebMvcConfigurer {
+public class InterceptorUserConfig implements WebMvcConfigurer {
+
     @Override
     public void configurePathMatch(PathMatchConfigurer pathMatchConfigurer) {
 
@@ -42,7 +43,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(authenticationInterceptor())
+        registry.addInterceptor(authenticationUserInterceptor())
                 .addPathPatterns("/**");    // 拦截所有请求，通过判断是否有 @LoginRequired 注解 决定是否需要登录
     }
 
@@ -107,8 +108,13 @@ public class InterceptorConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public AuthenticationInterceptor authenticationInterceptor() {
-        return new AuthenticationInterceptor();// 自己写的拦截器
+    public AuthenticationUserInterceptor authenticationUserInterceptor() {
+        return new AuthenticationUserInterceptor();// 自己写的拦截器
+    }
+
+    @Bean
+    public AuthenticationAdminInterceptor authenticationAdminInterceptor() {
+        return new AuthenticationAdminInterceptor();// 自己写的拦截器
     }
 
 
