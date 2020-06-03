@@ -19,6 +19,7 @@
         <el-table-column fixed="right" label="操作" width="100">
           <template slot-scope="scope">
             <el-button @click="goDetail(scope.row)" type="text" size="small">查看</el-button>
+            <el-button @click="goDel(scope.row['id'])" type="text" size="small">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -116,6 +117,15 @@ export default {
             console.log(error)
           })
       }
+    },
+    // 删除单个评论
+    goDel (id) {
+      var that = this
+      this.$axios
+        .post(this.$store.state.headPort + '/api/task/comment/delete?id=' + id)
+        .then(function (response) {
+          that.$router.go(0)
+        })
     }
   },
   watch: {

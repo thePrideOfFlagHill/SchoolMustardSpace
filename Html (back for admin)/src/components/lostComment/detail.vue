@@ -165,7 +165,7 @@ export default {
     this.$axios
       .get(
         this.$store.state.headPort +
-          '/api/task/query/id/' +
+          '/api/query/lostfound/comment/id/' +
           this.$route.query.id
       )
       .then(function (response) {
