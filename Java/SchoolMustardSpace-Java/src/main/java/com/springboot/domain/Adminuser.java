@@ -10,9 +10,14 @@ package com.springboot.domain;
  */
 public class Adminuser {
     private int id;
+
     private String accountNumber;//管理员账号
+
     private String password;//管理员密码
+
     private int authority;//管理员权限
+
+    private String token;//用于存放token
 
     public int getId() {
         return id;
@@ -44,5 +49,13 @@ public class Adminuser {
 
     public void setAuthority(int authority) {
         this.authority = authority;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

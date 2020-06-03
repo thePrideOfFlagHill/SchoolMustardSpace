@@ -29,6 +29,8 @@ public class User {
 
     private String info;//详细信息
 
+    private String token;//用于存放token
+
     public int getId() {
         return id;
     }
@@ -99,5 +101,13 @@ public class User {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

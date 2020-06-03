@@ -1,13 +1,19 @@
 package com.springboot.controller;
 
+import com.springboot.config.UserLoginToken;
 import com.springboot.constant.UserConstant;
 import com.springboot.domain.User;
+import com.springboot.service.TokenService;
 import com.springboot.service.UserService;
 import com.springboot.utils.encryptiontool.DesEncryption;
 import com.springboot.utils.jsontool.JsonResult;
+import com.springboot.utils.tokentool.TokenUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * UserController
@@ -25,7 +31,10 @@ public class UserController implements UserConstant {
     @Resource
     private UserService userService;
 
-    @PostMapping("/login")
+    @Autowired
+    private TokenService tokenService;
+
+    /*@PostMapping("/login")
     public JsonResult login(@RequestBody User user){
         byte[] secretArr = DesEncryption.encryptMode(user.getPassword().getBytes());
         String str = DesEncryption.byte2Hex(secretArr);
@@ -38,6 +47,46 @@ public class UserController implements UserConstant {
             return JsonResult.build(STATUS_SUCCEED,msg,user1);
         }
         else return JsonResult.errorMsg(msg);
+    }*/
+
+    //增加token
+    @PostMapping("/login")
+    public JsonResult login(@RequestParam(value = "accountNumber") String accountNumber,
+                            @RequestParam(value = "password") String password,
+                            HttpServletResponse response){
+        //对传入的user密码进行加密处理
+        byte[] secretArr = DesEncryption.encryptMode(password.getBytes());
+        String str = DesEncryption.byte2Hex(secretArr);
+        String msg = userService.login(accountNumber, str);
+
+        //从数据库中取出传入的accountNumber对应的实体
+        User tempUser = userService.queryOneUser(accountNumber);
+        if(msg.equals(MSG_FAIL)){
+            return JsonResult.errorMsg(msg);
+        }
+        else{
+            String token = tokenService.getToken(tempUser);
+            Cookie cookie = new Cookie("token", token);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+            tempUser.setToken(token);
+
+            return JsonResult.build(STATUS_SUCCEED, msg, tempUser);
+        }
+
+    }
+
+    /***
+     * 这个请求需要验证token才能访问
+     */
+    @UserLoginToken
+    @GetMapping("/getMessage")
+    public String getMessage() {
+
+        // 取出token中带的用户id 进行操作
+        System.out.println(TokenUtil.getTokenUserId());
+
+        return "你已通过验证";
     }
 
     @PostMapping("/register")
