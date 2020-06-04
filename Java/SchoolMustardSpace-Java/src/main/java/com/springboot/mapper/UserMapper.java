@@ -80,4 +80,7 @@ public interface UserMapper {
 
     @Select("select id from user where account_number = #{accountNumber}")
     int selectId(@Param("accountNumber") String accountNumber);
+
+    @Select("select COUNT(*) from user where account_number = #{accountNumber} and phone_number = #{phoneNumber}")
+    int selectUserByAccountNumberAndPhoneNumber(@Param("accountNumber") String accountNumber, @Param("phoneNumber") String phoneNumber);
 }

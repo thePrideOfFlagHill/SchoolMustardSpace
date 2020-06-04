@@ -42,11 +42,18 @@ public class UserServiceImpl implements UserService, UserConstant {
     }
 
     @Override
-    public String findPassword(String accountNumber, String newPassword) {
+    public String findPassword(String accountNumber, String phoneNumber, String newPassword) {
 
-        int result = userMapper.updateUserPassword(accountNumber, newPassword);
+        int count = userMapper.selectUserByAccountNumberAndPhoneNumber(accountNumber, phoneNumber);
 
-        return result == 1 ? MSG_SUCCEED : MSG_FAIL;
+        if(count == 1){
+            int result = userMapper.updateUserPassword(accountNumber, newPassword);
+            if(result == 1){
+                return MSG_SUCCEED;
+            }
+        }
+
+        return MSG_FAIL;
     }
 
     @Override

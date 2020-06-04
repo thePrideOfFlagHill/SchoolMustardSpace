@@ -131,6 +131,110 @@ public class FileUploadController {
         return result;
     }
 
+    @RequestMapping(value = "/task/setFilesUpload", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseResult setTaskFilesUpload(@RequestParam(value = "files") MultipartFile[] files,
+                                             @RequestParam(value = "id") String id) {
+
+        String tempPath = "";
+
+        ResponseResult result = new ResponseResult();
+        try {
+            for(MultipartFile file : files){
+
+                Map<String, Object> resultMap = upload(file);
+                if (!IStatusMessage.SystemStatus.SUCCESS.getMessage().equals(resultMap.get("result"))) {
+                    result.setCode(IStatusMessage.SystemStatus.PARAM.getCode());
+                    result.setMessage((String) resultMap.get("msg"));
+                    return result;
+                }
+                result.setData(resultMap);
+                tempPath += resultMap.get("path").toString() + ",";
+            }
+
+            //图片上传成功即更新数据库对应的图片地址
+            taskService.updateTaskImageUrl(tempPath,id);
+
+
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            LOGGER.error(">>>>>>图片上传异常，e={}", e.getMessage());
+            result.setCode(IStatusMessage.SystemStatus.ERROR.getCode());
+            result.setMessage(IStatusMessage.SystemStatus.ERROR.getMessage());
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/good/setFilesUpload", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseResult setGoodFilesUpload(@RequestParam(value = "files") MultipartFile[] files,
+                                             @RequestParam(value = "id") String id) {
+
+        String tempPath = "";
+
+        ResponseResult result = new ResponseResult();
+        try {
+            for(MultipartFile file : files){
+
+                Map<String, Object> resultMap = upload(file);
+                if (!IStatusMessage.SystemStatus.SUCCESS.getMessage().equals(resultMap.get("result"))) {
+                    result.setCode(IStatusMessage.SystemStatus.PARAM.getCode());
+                    result.setMessage((String) resultMap.get("msg"));
+                    return result;
+                }
+                result.setData(resultMap);
+                tempPath += resultMap.get("path").toString() + ",";
+            }
+
+            //图片上传成功即更新数据库对应的图片地址
+            taskService.updateTaskImageUrl(tempPath,id);
+
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            LOGGER.error(">>>>>>图片上传异常，e={}", e.getMessage());
+            result.setCode(IStatusMessage.SystemStatus.ERROR.getCode());
+            result.setMessage(IStatusMessage.SystemStatus.ERROR.getMessage());
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/lostfound/setFilesUpload", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseResult setLostFoundFilesUpload(@RequestParam(value = "file") MultipartFile[] files,
+                                                  @RequestParam(value = "id") String id) {
+
+        String tempPath = "";
+
+        ResponseResult result = new ResponseResult();
+        try {
+            for(MultipartFile file : files){
+
+                Map<String, Object> resultMap = upload(file);
+                if (!IStatusMessage.SystemStatus.SUCCESS.getMessage().equals(resultMap.get("result"))) {
+                    result.setCode(IStatusMessage.SystemStatus.PARAM.getCode());
+                    result.setMessage((String) resultMap.get("msg"));
+                    return result;
+                }
+                result.setData(resultMap);
+                tempPath += resultMap.get("path").toString() + ",";
+            }
+
+            //图片上传成功即更新数据库对应的图片地址
+            taskService.updateTaskImageUrl(tempPath,id);
+
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            LOGGER.error(">>>>>>图片上传异常，e={}", e.getMessage());
+            result.setCode(IStatusMessage.SystemStatus.ERROR.getCode());
+            result.setMessage(IStatusMessage.SystemStatus.ERROR.getMessage());
+        }
+        return result;
+    }
+
+    /**
+     * 对于断点续传的一些思考
+     */
+
     private Map<String, Object> upload(MultipartFile file) throws ServiceException {
         Map<String, Object> returnMap = new HashMap<String, Object>();
         try {

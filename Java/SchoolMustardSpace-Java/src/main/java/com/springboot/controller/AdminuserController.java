@@ -1,14 +1,21 @@
 package com.springboot.controller;
 
+import com.springboot.config.AdminLoginToken;
+import com.springboot.config.UserLoginToken;
 import com.springboot.constant.AdminuserConstant;
 import com.springboot.domain.Adminuser;
 import com.springboot.service.AdminuserService;
+import com.springboot.service.TokenService;
 import com.springboot.utils.encryptiontool.DesEncryption;
 import com.springboot.utils.jsontool.JsonResult;
+import com.springboot.utils.tokentool.TokenUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sun.security.krb5.internal.crypto.Des;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
@@ -35,7 +42,10 @@ public class AdminuserController implements AdminuserConstant {
     @Resource
     private AdminuserService adminuserService;
 
-    @PostMapping("/login")
+    @Autowired
+    private TokenService tokenService;
+
+    /*@PostMapping("/login")
     public JsonResult login(@RequestParam(value = "accountNumber") String accountNumber,
                             @RequestParam(value = "password") String password){
         byte[] secretArr = DesEncryption.encryptMode(password.getBytes());
@@ -46,6 +56,44 @@ public class AdminuserController implements AdminuserConstant {
             return JsonResult.build(STATUS_SUCCEED, msg, id);
         }
         else return JsonResult.errorMsg(msg);
+    }*/
+
+    @PostMapping("/login")
+    public JsonResult login(@RequestParam(value = "accountNumber") String accountNumber,
+                            @RequestParam(value = "password") String password,
+                            HttpServletResponse response){
+        byte[] secretArr = DesEncryption.encryptMode(password.getBytes());
+        String str = DesEncryption.byte2Hex(secretArr);
+        String msg = adminuserService.login(accountNumber, str);
+
+        //从数据库中取出传入的accountNumber对应的实体
+        Adminuser adminuser = adminuserService.queryOneAdminuser(accountNumber);
+        if(msg.equals(MSG_FAIL)){
+            return JsonResult.errorMsg(msg);
+        }
+        else{
+            String token = tokenService.getToken(adminuser);
+            Cookie cookie = new Cookie("token", token);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+            adminuser.setToken(token);
+
+            return JsonResult.build(STATUS_SUCCEED, msg, adminuser);
+        }
+
+    }
+
+    /***
+     * 这个请求需要验证token才能访问
+     */
+    @AdminLoginToken
+    @GetMapping("/getMessage")
+    public String getMessage() {
+
+        // 取出token中带的用户id 进行操作
+        System.out.println(TokenUtil.getTokenUserId());
+
+        return "你已通过验证";
     }
 
     @PostMapping("/register")

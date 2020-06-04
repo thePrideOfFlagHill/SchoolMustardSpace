@@ -18,7 +18,7 @@ import java.util.List;
 public interface LostFoundCommentMapper {
 
     //查询全部
-    @Select("select * from lost_and_found_comment")
+    @Select("select * from lost_and_found_comment order by publish_time desc")
     List<Comment> getAllLostFoundComment();
 
     //根据条目id查询具体任务评论
@@ -26,11 +26,11 @@ public interface LostFoundCommentMapper {
     Comment queryLostFoundCommentById(String id);
 
     //按上传者的owner_id查询具体任务评论
-    @Select("SELECT * FROM lost_and_found_comment WHERE user_id =#{user_id}")
+    @Select("SELECT * FROM lost_and_found_comment WHERE user_id =#{user_id} order by publish_time desc")
     List<Comment> queryLostFoundCommentByUserId(String user_id);
 
     //按任务表的table_id查询具体任务评论
-    @Select("SELECT * FROM lost_and_found_comment WHERE table_id =#{table_id}")
+    @Select("SELECT * FROM lost_and_found_comment WHERE table_id =#{table_id} order by publish_time desc")
     List<Comment> queryLostFoundCommentByTableId(String table_id);
 
     //发布插入任务评论

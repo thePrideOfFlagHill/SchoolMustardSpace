@@ -18,7 +18,7 @@ import java.util.List;
 public interface TaskMapper {
 
     //查询全部
-    @Select("select * from task")
+    @Select("select * from task order by start_time desc")
     List<Task> getAllTask();
 
     //根据条目id查询具体任务
@@ -26,19 +26,19 @@ public interface TaskMapper {
     Task queryTaskById(String id);
 
     //按上传者的owner_id查询具体任务
-    @Select("SELECT * FROM task WHERE user_id =#{user_id}")
+    @Select("SELECT * FROM task WHERE user_id =#{user_id} order by start_time desc")
     List<Task> queryTaskByUserId(String user_id);
 
     //模糊查询内容
-    @Select("select * from task where content like concat('%' , #{text} , '%')")
+    @Select("select * from task where content like concat('%' , #{text} , '%') order by start_time desc")
     List<Task> getLikeContent(@Param("text") String text);
 
     //模糊查询标题
-    @Select("select * from task where title like concat('%' , #{text} , '%')")
+    @Select("select * from task where title like concat('%' , #{text} , '%') order by start_time desc")
     List<Task> getLikeTitle(@Param("text") String text);
 
     //模糊查询标签
-    @Select("select * from task where label like concat('%' , #{text} , '%')")
+    @Select("select * from task where label like concat('%' , #{text} , '%') order by start_time desc")
     List<Task> getLikeLabel(@Param("text") String text);
 
     //发布插入任务
