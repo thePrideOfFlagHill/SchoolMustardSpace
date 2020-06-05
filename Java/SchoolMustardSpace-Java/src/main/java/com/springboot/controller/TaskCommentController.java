@@ -138,6 +138,11 @@ public class TaskCommentController implements TaskCommentConstant {
         //发布初始化
         taskComment.setId(uuidResult.setUuidResult());
         taskComment.setPublish_time(dateResult.getCurrentTime());
+
+        String context = taskComment.getContent();
+        taskComment.setContent(WordController.wordSeeker.replaceWords(context));
+
+
         taskComment.setThumb_up(INIT_THUMB);
         taskComment.setComment(INIT_COMMENT);
 

@@ -15,19 +15,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * MustardSpaceApplication
+ * InfectStatisticApplication
  * TODO
  * @description springboot启动类
  * @author 221701412_theTuring
  * @version v 1.0.0
- * @since 2020.5.3
+ * @since 2020.3.8
  */
 
 @SpringBootApplication
 //exclude表示自动配置时不包括Multipart配置
 @EnableAutoConfiguration(exclude = {MultipartAutoConfiguration.class})
 @ServletComponentScan
-public class MustardSpaceApplication extends SpringBootServletInitializer {
+public class MustardSpaceApplication extends SpringBootServletInitializer{
 
     public static void main(String[] args){
 

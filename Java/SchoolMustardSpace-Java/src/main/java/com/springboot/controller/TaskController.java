@@ -158,6 +158,10 @@ public class TaskController implements TaskConstant {
 
         //发布初始化
         task.setId(uuidResult.setUuidResult());
+
+        String context = task.getContent();
+        task.setContent(WordController.wordSeeker.replaceWords(context));
+
         task.setIs_done(INIT_DONE);
         task.setThumb_up(INIT_THUMB);
         task.setCollect(INIT_COLLECT);

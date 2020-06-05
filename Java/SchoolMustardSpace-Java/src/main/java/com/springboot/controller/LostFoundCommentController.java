@@ -139,6 +139,11 @@ public class LostFoundCommentController implements LostFoundCommentConstant {
         //发布初始化
         lostFoundComment.setId(uuidResult.setUuidResult());
         lostFoundComment.setPublish_time(dateResult.getCurrentTime());
+
+        String context = lostFoundComment.getContent();
+        lostFoundComment.setContent(WordController.wordSeeker.replaceWords(context));
+
+
         lostFoundComment.setThumb_up(INIT_THUMB);
         lostFoundComment.setComment(INIT_COMMENT);
 

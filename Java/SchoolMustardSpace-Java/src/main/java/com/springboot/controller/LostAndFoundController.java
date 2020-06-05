@@ -2,6 +2,7 @@ package com.springboot.controller;
 
 import com.springboot.constant.LostAndFoundConstant;
 import com.springboot.domain.LostAndFound;
+import com.springboot.domain.Word;
 import com.springboot.service.LostAndFoundService;
 import com.springboot.utils.datetool.DateResult;
 import com.springboot.utils.jsontool.JsonResult;
@@ -49,7 +50,7 @@ public class LostAndFoundController implements LostAndFoundConstant {
         lostAndFound.setId(uuid);
         lostAndFound.setUserId(Integer.parseInt(a.get("userId")));
         lostAndFound.setTitle(a.get("title").toString());
-        lostAndFound.setContent(a.get("content").toString());
+        lostAndFound.setContent(WordController.wordSeeker.replaceWords(a.get("content").toString()));
         lostAndFound.setImage(a.get("image").toString());
         lostAndFound.setLabel(a.get("label").toString());
         lostAndFound.setLocation(a.get("location").toString());

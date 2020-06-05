@@ -1,8 +1,11 @@
 package com.springboot.utils.sensitivetool;
 
 import com.springboot.domain.Word;
+import com.springboot.service.WordService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -12,6 +15,9 @@ import java.util.Set;
  */
 
 public class Application {
+    @Autowired
+    private WordService wordService;
+
     public static void main(String[] args){
         Set<Word> kws1 = new HashSet<Word>();
         kws1.add(new Word("黄色"));

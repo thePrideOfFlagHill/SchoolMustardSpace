@@ -4,12 +4,15 @@ import com.springboot.constant.Constant;
 import com.springboot.domain.Word;
 import com.springboot.service.WordService;
 import com.springboot.utils.jsontool.JsonResult;
+import com.springboot.utils.sensitivetool.WordSeeker;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author 会飞的大野鸡
@@ -21,8 +24,20 @@ import java.util.Map;
 @CrossOrigin
 @RequestMapping("/api/words")
 public class WordController {
+    public static WordSeeker wordSeeker;
+
     @Autowired
     private WordService wordService;
+
+    @GetMapping("/setWords")
+    public void setWordSeeker(){
+        Set<Word> kws1 = new HashSet<Word>();
+        List<Word> words = wordService.getWords();
+        for (int i = 0 ; i < words.size() ; i++){
+            kws1.add(words.get(i));
+        }
+        wordSeeker = new WordSeeker(kws1);
+    }
 
     @GetMapping("/query/all")
     public JsonResult getWords(){

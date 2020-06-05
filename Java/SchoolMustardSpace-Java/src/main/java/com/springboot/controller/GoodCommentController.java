@@ -138,6 +138,10 @@ public class GoodCommentController implements GoodCommentConstant {
         //发布初始化
         goodComment.setId(uuidResult.setUuidResult());
         goodComment.setPublish_time(dateResult.getCurrentTime());
+
+        String context = goodComment.getContent();
+        goodComment.setContent(WordController.wordSeeker.replaceWords(context));
+
         goodComment.setThumb_up(INIT_THUMB);
         goodComment.setComment(INIT_COMMENT);
 
