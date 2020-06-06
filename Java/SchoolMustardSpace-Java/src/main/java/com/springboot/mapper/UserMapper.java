@@ -15,6 +15,12 @@ import java.util.ArrayList;
  */
 @Mapper
 public interface UserMapper {
+    @Select("select account_number from user where id = #{id}")
+    String getAccountNumber(@Param("id")int id);
+
+    @Select("select name from user where id = #{id}")
+    String getName(@Param("id")int id);
+
     /*
     查询数据库中是否存在与account_number和password一致的记录
      */

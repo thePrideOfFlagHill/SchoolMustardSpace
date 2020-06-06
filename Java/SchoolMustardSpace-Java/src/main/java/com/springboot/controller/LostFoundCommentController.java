@@ -12,6 +12,7 @@ import com.springboot.utils.uuidtool.UuidResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -57,7 +58,26 @@ public class LostFoundCommentController implements LostFoundCommentConstant {
 
         List<Comment> list = this.lostFoundCommentService.select(1,null);
 
-        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
+        List<CommentPlus> list1 = new LinkedList<CommentPlus>();
+        for (int i = 0 ; i < list.size() ; i++){
+            int userId = list.get(i).getUser_id();
+            String name = userService.getById(userId , 2);
+            String accountNumber = userService.getById(userId , 1);
+
+            CommentPlus commentPlus = new CommentPlus();
+            commentPlus.setId(list.get(i).getId());
+            commentPlus.setUser_id(list.get(i).getUser_id());
+            commentPlus.setContent(list.get(i).getContent());
+            commentPlus.setPublish_time(list.get(i).getPublish_time());
+            commentPlus.setComment(list.get(i).getComment());
+            commentPlus.setThumb_up(list.get(i).getThumb_up());
+            commentPlus.setTable_id(list.get(i).getTable_id());
+            commentPlus.setName(name);
+            commentPlus.setAccountNumber(accountNumber);
+            list1.add(commentPlus);
+        }
+
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list1);
     }
 
     /**
@@ -74,7 +94,11 @@ public class LostFoundCommentController implements LostFoundCommentConstant {
         Comment lostFoundComment = this.lostFoundCommentService.queryLostFoundCommentById(id);
 
         CommentPlus commentPlus = new CommentPlus();
-        User user = userService.queryOneUserById(id);
+
+        int userId = lostFoundComment.getUser_id();
+        String name = userService.getById(userId , 2);
+        String accountNumber = userService.getById(userId , 1);
+
 
         commentPlus.setId(lostFoundComment.getId());
         commentPlus.setUser_id(lostFoundComment.getUser_id());
@@ -83,7 +107,8 @@ public class LostFoundCommentController implements LostFoundCommentConstant {
         commentPlus.setComment(lostFoundComment.getComment());
         commentPlus.setThumb_up(lostFoundComment.getThumb_up());
         commentPlus.setTable_id(lostFoundComment.getTable_id());
-        commentPlus.setName(user.getName());
+        commentPlus.setName(name);
+        commentPlus.setAccountNumber(accountNumber);
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,commentPlus);
     }
@@ -101,7 +126,26 @@ public class LostFoundCommentController implements LostFoundCommentConstant {
 
         List<Comment> list = this.lostFoundCommentService.select(2, user_id);
 
-        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
+        List<CommentPlus> list1 = new LinkedList<CommentPlus>();
+        for (int i = 0 ; i < list.size() ; i++){
+            int userId = list.get(i).getUser_id();
+            String name = userService.getById(userId , 2);
+            String accountNumber = userService.getById(userId , 1);
+
+            CommentPlus commentPlus = new CommentPlus();
+            commentPlus.setId(list.get(i).getId());
+            commentPlus.setUser_id(list.get(i).getUser_id());
+            commentPlus.setContent(list.get(i).getContent());
+            commentPlus.setPublish_time(list.get(i).getPublish_time());
+            commentPlus.setComment(list.get(i).getComment());
+            commentPlus.setThumb_up(list.get(i).getThumb_up());
+            commentPlus.setTable_id(list.get(i).getTable_id());
+            commentPlus.setName(name);
+            commentPlus.setAccountNumber(accountNumber);
+            list1.add(commentPlus);
+        }
+
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list1);
     }
 
     /**
@@ -117,7 +161,26 @@ public class LostFoundCommentController implements LostFoundCommentConstant {
 
         List<Comment> list = this.lostFoundCommentService.select(3, table_id);
 
-        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
+        List<CommentPlus> list1 = new LinkedList<CommentPlus>();
+        for (int i = 0 ; i < list.size() ; i++){
+            int userId = list.get(i).getUser_id();
+            String name = userService.getById(userId , 2);
+            String accountNumber = userService.getById(userId , 1);
+
+            CommentPlus commentPlus = new CommentPlus();
+            commentPlus.setId(list.get(i).getId());
+            commentPlus.setUser_id(list.get(i).getUser_id());
+            commentPlus.setContent(list.get(i).getContent());
+            commentPlus.setPublish_time(list.get(i).getPublish_time());
+            commentPlus.setComment(list.get(i).getComment());
+            commentPlus.setThumb_up(list.get(i).getThumb_up());
+            commentPlus.setTable_id(list.get(i).getTable_id());
+            commentPlus.setName(name);
+            commentPlus.setAccountNumber(accountNumber);
+            list1.add(commentPlus);
+        }
+
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list1);
     }
 
     /**
@@ -141,7 +204,7 @@ public class LostFoundCommentController implements LostFoundCommentConstant {
         lostFoundComment.setPublish_time(dateResult.getCurrentTime());
 
         String context = lostFoundComment.getContent();
-        lostFoundComment.setContent(WordController.wordSeeker.replaceWords(context));
+        lostFoundComment.setContent(context);
 
 
         lostFoundComment.setThumb_up(INIT_THUMB);

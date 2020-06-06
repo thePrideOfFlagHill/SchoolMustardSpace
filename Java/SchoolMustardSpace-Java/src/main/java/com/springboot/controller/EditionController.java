@@ -76,7 +76,7 @@ public class EditionController {
     @GetMapping("/checkForNew")
     public JsonResult check(@RequestParam("edition")String newEdition){
         String edi = edition;
-        System.out.println(edi);
+//        System.out.println(edi);
         if (!newEdition.equals(edi)){
             return JsonResult.build( 100, edi , path);
         }

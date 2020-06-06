@@ -12,6 +12,7 @@ import com.springboot.utils.uuidtool.UuidResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -54,8 +55,27 @@ public class GoodCommentController implements GoodCommentConstant {
     public JsonResult queryGoodCommentAll() {
 
         List<Comment> list = this.goodCommentService.select(1,null);
+        List<CommentPlus> list1 = new LinkedList<CommentPlus>();
+        for (int i = 0 ; i < list.size() ; i++){
+            int userId = list.get(i).getUser_id();
+            String name = userService.getById(userId , 2);
+            String accountNumber = userService.getById(userId , 1);
 
-        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
+            CommentPlus commentPlus = new CommentPlus();
+            commentPlus.setId(list.get(i).getId());
+            commentPlus.setUser_id(list.get(i).getUser_id());
+            commentPlus.setContent(list.get(i).getContent());
+            commentPlus.setPublish_time(list.get(i).getPublish_time());
+            commentPlus.setComment(list.get(i).getComment());
+            commentPlus.setThumb_up(list.get(i).getThumb_up());
+            commentPlus.setTable_id(list.get(i).getTable_id());
+            commentPlus.setName(name);
+            commentPlus.setAccountNumber(accountNumber);
+            list1.add(commentPlus);
+
+        }
+
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list1);
 
     }
 
@@ -63,7 +83,7 @@ public class GoodCommentController implements GoodCommentConstant {
      * queryGoodCommentById
      * TODO
      * @description /api/good/comment/query/id/{id} 根据条目id查询任务评论（单个对应）
-     * @author 221701412_theTuring  会飞的大野鸡
+     * @author 221701412_theTuring
      * @version v 1.0.0
      * @since 2020.5.1
      */
@@ -71,9 +91,11 @@ public class GoodCommentController implements GoodCommentConstant {
     public JsonResult queryGoodCommentById(@PathVariable String id) {
 
         Comment goodComment = this.goodCommentService.queryGoodCommentById(id);
+        int userId = goodComment.getUser_id();
+        String name = userService.getById(userId , 2);
+        String accountNumber = userService.getById(userId , 1);
 
         CommentPlus commentPlus = new CommentPlus();
-        User user = userService.queryOneUserById(id);
 
         commentPlus.setId(goodComment.getId());
         commentPlus.setUser_id(goodComment.getUser_id());
@@ -82,7 +104,8 @@ public class GoodCommentController implements GoodCommentConstant {
         commentPlus.setComment(goodComment.getComment());
         commentPlus.setThumb_up(goodComment.getThumb_up());
         commentPlus.setTable_id(goodComment.getTable_id());
-        commentPlus.setName(user.getName());
+        commentPlus.setName(name);
+        commentPlus.setAccountNumber(accountNumber);
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,commentPlus);
     }
@@ -100,7 +123,25 @@ public class GoodCommentController implements GoodCommentConstant {
 
         List<Comment> list = this.goodCommentService.select(2, user_id);
 
-        return JsonResult.build(STATUS_SUCCEED, MSG_SUCCEED,list);
+        List<CommentPlus> list1 = new LinkedList<CommentPlus>();
+        for (int i = 0 ; i < list.size() ; i++){
+            int userId = list.get(i).getUser_id();
+            String name = userService.getById(userId , 2);
+            String accountNumber = userService.getById(userId , 1);
+
+            CommentPlus commentPlus = new CommentPlus();
+            commentPlus.setId(list.get(i).getId());
+            commentPlus.setUser_id(list.get(i).getUser_id());
+            commentPlus.setContent(list.get(i).getContent());
+            commentPlus.setPublish_time(list.get(i).getPublish_time());
+            commentPlus.setComment(list.get(i).getComment());
+            commentPlus.setThumb_up(list.get(i).getThumb_up());
+            commentPlus.setTable_id(list.get(i).getTable_id());
+            commentPlus.setName(name);
+            commentPlus.setAccountNumber(accountNumber);
+            list1.add(commentPlus);
+        }
+        return JsonResult.build(STATUS_SUCCEED, MSG_SUCCEED,list1);
     }
 
     /**
@@ -116,7 +157,27 @@ public class GoodCommentController implements GoodCommentConstant {
 
         List<Comment> list = this.goodCommentService.select(3, table_id);
 
-        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
+        List<CommentPlus> list1 = new LinkedList<CommentPlus>();
+        for (int i = 0 ; i < list.size() ; i++){
+            int userId = list.get(i).getUser_id();
+            String name = userService.getById(userId , 2);
+            String accountNumber = userService.getById(userId , 1);
+
+            CommentPlus commentPlus = new CommentPlus();
+            commentPlus.setId(list.get(i).getId());
+            commentPlus.setUser_id(list.get(i).getUser_id());
+            commentPlus.setContent(list.get(i).getContent());
+            commentPlus.setPublish_time(list.get(i).getPublish_time());
+            commentPlus.setComment(list.get(i).getComment());
+            commentPlus.setThumb_up(list.get(i).getThumb_up());
+            commentPlus.setTable_id(list.get(i).getTable_id());
+            commentPlus.setName(name);
+            commentPlus.setAccountNumber(accountNumber);
+            list1.add(commentPlus);
+
+        }
+
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list1);
     }
 
     /**
@@ -140,7 +201,7 @@ public class GoodCommentController implements GoodCommentConstant {
         goodComment.setPublish_time(dateResult.getCurrentTime());
 
         String context = goodComment.getContent();
-        goodComment.setContent(WordController.wordSeeker.replaceWords(context));
+        goodComment.setContent(context);
 
         goodComment.setThumb_up(INIT_THUMB);
         goodComment.setComment(INIT_COMMENT);

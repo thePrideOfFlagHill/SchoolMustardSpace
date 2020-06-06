@@ -23,8 +23,6 @@ public class FileUpAndDownServiceImpl implements FileUpAndDownService {
     //本地图片url
     private static final String ip = "http://47.100.251.3/space/img";
     private static final String ip2 = "http://47.100.251.3/space/edition";
-//    private static final String ip2 = "http://localhost:8080/space/edition";
-//    private static final String ip2 = "/Users/a/file";
 
 
     @Autowired

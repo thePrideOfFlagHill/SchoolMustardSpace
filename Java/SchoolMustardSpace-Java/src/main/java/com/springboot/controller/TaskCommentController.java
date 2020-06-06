@@ -12,6 +12,7 @@ import com.springboot.utils.uuidtool.UuidResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -56,7 +57,27 @@ public class TaskCommentController implements TaskCommentConstant {
 
         List<Comment> list = this.taskCommentService.select(1, null);
 
-        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
+        List<CommentPlus> list1 = new LinkedList<CommentPlus>();
+        for (int i = 0 ; i < list.size() ; i++){
+            int userId = list.get(i).getUser_id();
+            String name = userService.getById(userId , 2);
+            String accountNumber = userService.getById(userId , 1);
+
+            CommentPlus commentPlus = new CommentPlus();
+            commentPlus.setId(list.get(i).getId());
+            commentPlus.setUser_id(list.get(i).getUser_id());
+            commentPlus.setContent(list.get(i).getContent());
+            commentPlus.setPublish_time(list.get(i).getPublish_time());
+            commentPlus.setComment(list.get(i).getComment());
+            commentPlus.setThumb_up(list.get(i).getThumb_up());
+            commentPlus.setTable_id(list.get(i).getTable_id());
+            commentPlus.setName(name);
+            commentPlus.setAccountNumber(accountNumber);
+            list1.add(commentPlus);
+        }
+
+
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list1);
     }
 
     /**
@@ -72,6 +93,10 @@ public class TaskCommentController implements TaskCommentConstant {
 
         Comment taskComment = this.taskCommentService.queryTaskCommentById(id);
 
+        int userId = taskComment.getUser_id();
+        String name = userService.getById(userId , 2);
+        String accountNumber = userService.getById(userId , 1);
+
         CommentPlus commentPlus = new CommentPlus();
         User user = userService.queryOneUserById(id);
 
@@ -82,7 +107,8 @@ public class TaskCommentController implements TaskCommentConstant {
         commentPlus.setComment(taskComment.getComment());
         commentPlus.setThumb_up(taskComment.getThumb_up());
         commentPlus.setTable_id(taskComment.getTable_id());
-        commentPlus.setName(user.getName());
+        commentPlus.setName(name);
+        commentPlus.setAccountNumber(accountNumber);
 
         return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,commentPlus);
     }
@@ -99,8 +125,26 @@ public class TaskCommentController implements TaskCommentConstant {
     public JsonResult queryTaskCommentByUserId(@PathVariable String user_id) {
 
         List<Comment> list = this.taskCommentService.select(2, user_id);
+        List<CommentPlus> list1 = new LinkedList<CommentPlus>();
+        for (int i = 0 ; i < list.size() ; i++){
+            int userId = list.get(i).getUser_id();
+            String name = userService.getById(userId , 2);
+            String accountNumber = userService.getById(userId , 1);
 
-        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
+            CommentPlus commentPlus = new CommentPlus();
+            commentPlus.setId(list.get(i).getId());
+            commentPlus.setUser_id(list.get(i).getUser_id());
+            commentPlus.setContent(list.get(i).getContent());
+            commentPlus.setPublish_time(list.get(i).getPublish_time());
+            commentPlus.setComment(list.get(i).getComment());
+            commentPlus.setThumb_up(list.get(i).getThumb_up());
+            commentPlus.setTable_id(list.get(i).getTable_id());
+            commentPlus.setName(name);
+            commentPlus.setAccountNumber(accountNumber);
+            list1.add(commentPlus);
+        }
+
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list1);
     }
 
     /**
@@ -115,8 +159,26 @@ public class TaskCommentController implements TaskCommentConstant {
     public JsonResult queryTaskCommentByTableId(@PathVariable String table_id) {
 
         List<Comment> list = this.taskCommentService.select(3, table_id);
+        List<CommentPlus> list1 = new LinkedList<CommentPlus>();
+        for (int i = 0 ; i < list.size() ; i++){
+            int userId = list.get(i).getUser_id();
+            String name = userService.getById(userId , 2);
+            String accountNumber = userService.getById(userId , 1);
 
-        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list);
+            CommentPlus commentPlus = new CommentPlus();
+            commentPlus.setId(list.get(i).getId());
+            commentPlus.setUser_id(list.get(i).getUser_id());
+            commentPlus.setContent(list.get(i).getContent());
+            commentPlus.setPublish_time(list.get(i).getPublish_time());
+            commentPlus.setComment(list.get(i).getComment());
+            commentPlus.setThumb_up(list.get(i).getThumb_up());
+            commentPlus.setTable_id(list.get(i).getTable_id());
+            commentPlus.setName(name);
+            commentPlus.setAccountNumber(accountNumber);
+            list1.add(commentPlus);
+        }
+
+        return JsonResult.build(STATUS_SUCCEED,MSG_SUCCEED,list1);
     }
 
     /**

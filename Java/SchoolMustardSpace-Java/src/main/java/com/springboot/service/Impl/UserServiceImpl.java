@@ -104,4 +104,14 @@ public class UserServiceImpl implements UserService, UserConstant {
     public int selectId(String accountNumber){
         return userMapper.selectId(accountNumber);
     }
+
+    public String getById(int id , int chioce){
+        if (chioce == 1){
+            return userMapper.getAccountNumber(id);
+        }
+        if (chioce == 2){
+            return userMapper.getName(id);
+        }
+        return null;
+    }
 }

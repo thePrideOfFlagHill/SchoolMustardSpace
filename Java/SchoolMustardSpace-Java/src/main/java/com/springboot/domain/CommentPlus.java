@@ -8,6 +8,16 @@ package com.springboot.domain;
 
 public class CommentPlus extends Comment {
     private String name;
+    private String accountNumber;
+
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
 
     public String getName() {
         return name;

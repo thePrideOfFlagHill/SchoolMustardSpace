@@ -32,4 +32,6 @@ public interface UserService {
     User queryOneUserById(String id);
 
     int selectId(String accountNumber);
+
+    String getById(int id , int chioce);
 }

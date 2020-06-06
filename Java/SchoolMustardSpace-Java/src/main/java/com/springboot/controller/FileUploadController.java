@@ -200,7 +200,7 @@ public class FileUploadController {
 
     @RequestMapping(value = "/lostfound/setFilesUpload", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseResult setLostFoundFilesUpload(@RequestParam(value = "file") MultipartFile[] files,
+    public ResponseResult setLostFoundFilesUpload(@RequestParam(value = "files") MultipartFile[] files,
                                                   @RequestParam(value = "id") String id) {
 
         String tempPath = "";

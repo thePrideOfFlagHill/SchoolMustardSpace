@@ -50,7 +50,9 @@ public class LostAndFoundController implements LostAndFoundConstant {
         lostAndFound.setId(uuid);
         lostAndFound.setUserId(Integer.parseInt(a.get("userId")));
         lostAndFound.setTitle(a.get("title").toString());
-        lostAndFound.setContent(WordController.wordSeeker.replaceWords(a.get("content").toString()));
+
+        lostAndFound.setContent(a.get("content").toString());
+
         lostAndFound.setImage(a.get("image").toString());
         lostAndFound.setLabel(a.get("label").toString());
         lostAndFound.setLocation(a.get("location").toString());

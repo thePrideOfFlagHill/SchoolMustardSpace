@@ -55,6 +55,8 @@ public interface LostAndFoundMapper {
     @Update("update lost_and_found set is_done = 1 where id = #{id}")
     public int updateDone(@Param("id") String id);
 
+
+
     //    编辑文章（标题，内容，图片，标签，地址)
 
     //=================================== 改 ======================================

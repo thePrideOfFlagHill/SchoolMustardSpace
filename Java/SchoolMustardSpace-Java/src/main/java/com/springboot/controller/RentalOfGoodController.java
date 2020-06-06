@@ -49,7 +49,7 @@ public class RentalOfGoodController implements RentalOfGoodConstant {
         rentalOfGood.setId(uuid);
         rentalOfGood.setUserId(Integer.parseInt(resMap.get("userId")));
         rentalOfGood.setTitle(resMap.get("title").toString());
-        rentalOfGood.setContent(WordController.wordSeeker.replaceWords(resMap.get("content".toString())));
+        rentalOfGood.setContent(resMap.get("content".toString()));
         rentalOfGood.setImage(resMap.get("image").toString());
         rentalOfGood.setLabel(resMap.get("label").toString());
         rentalOfGood.setLocation(resMap.get("location").toString());

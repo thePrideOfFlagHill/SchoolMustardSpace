@@ -66,7 +66,7 @@ public class LostFoundCommentServiceImpl implements LostFoundCommentService {
             return this.lostFoundCommentMapper.queryLostFoundCommentByUserId(id);
         }
         else if(choice == 3){
-            this.lostFoundCommentMapper.queryLostFoundCommentByTableId(id);
+            return this.lostFoundCommentMapper.queryLostFoundCommentByTableId(id);
         }
         return null;
     }
