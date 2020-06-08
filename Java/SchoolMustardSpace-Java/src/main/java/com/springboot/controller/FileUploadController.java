@@ -187,7 +187,7 @@ public class FileUploadController {
             }
 
             //图片上传成功即更新数据库对应的图片地址
-            taskService.updateTaskImageUrl(tempPath,id);
+            rentalOfGoodService.updateImg(tempPath,id);
 
         } catch (ServiceException e) {
             e.printStackTrace();
@@ -200,7 +200,7 @@ public class FileUploadController {
 
     @RequestMapping(value = "/lostfound/setFilesUpload", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseResult setLostFoundFilesUpload(@RequestParam(value = "file") MultipartFile[] files,
+    public ResponseResult setLostFoundFilesUpload(@RequestParam(value = "files") MultipartFile[] files,
                                                   @RequestParam(value = "id") String id) {
 
         String tempPath = "";
@@ -220,7 +220,7 @@ public class FileUploadController {
             }
 
             //图片上传成功即更新数据库对应的图片地址
-            taskService.updateTaskImageUrl(tempPath,id);
+            lostAndFoundService.updateImg(tempPath,id);
 
         } catch (ServiceException e) {
             e.printStackTrace();
